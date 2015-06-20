@@ -3,8 +3,8 @@ FFFBIK is Fabric Splice tool for full-body IK system, using extended FABRIK
 (Forward And Backward Reaching Inverse Kinematics), based-off a paper written by Andreas Aristidou(2014). Using Fabric Engine 1.15.0, works in many DCC's.
 
 The main purposes of this project is studying Fabric Engine's KL language with building
- custom IK system using FABRIK algorithm, sharing experience with these concept, and leading to providing more
- effcient and flexible rigging solution.
+ custom IK system using FABRIK algorithm, sharing experience with these concept, and leading to provide more
+ efficient and flexible rigging solution.
 
 ## Description
 Now implemented:
