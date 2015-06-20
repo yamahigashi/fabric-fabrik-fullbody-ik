@@ -1,0 +1,193 @@
+/*
+
+*/
+require Math;
+require Characters;
+require FABRIK;
+
+
+
+/// store solvers, resolve these solver by that weight recursive
+object FABRIKResolver {
+    Skeleton      skeleton;
+    IFABRIKSolver solvers[];
+    Size          solverDepths[];
+    Size          maxDepth;
+    Index         subBaseIndices[];
+    Xfo           subBaseXfos[Index][];
+
+    Integer       max_iteration;
+};
+
+
+function FABRIKResolver(){
+    this.solvers.resize( 0 );
+    this.solverDepths.resize( 0 );
+    this.maxDepth = 0;
+    this.subBaseIndices.resize( 0 );
+
+    this.max_iteration = 1;
+}
+
+
+function FABRIKResolver.addSolver!( IFABRIKSolver solver ){
+    this.solvers.push( solver );
+    this.subBaseIndices.push( solver.GetSubBaseIndex() );
+    this.subBaseXfos[ solver.GetSubBaseIndex() ].resize(0);
+    this.calculateSolverDepth();
+}
+
+
+function Boolean FABRIKResolver.isReady(){
+    for (Index i=0; i < this.solvers.size; i++ ){
+        if ( this.solvers[i].IsReady() == false ){
+            return false;
+        }
+    }
+    return true;
+}
+
+function FABRIKResolver.finalize!(){
+    IFABRIKSolver tmpSolvers[];
+    for ( Index i=0; i < this.solvers.size; i++ ){
+        if ( !this.solvers[i].IsReady() ){
+            tmpSolvers.push( this.solvers[i] );
+        }
+    }
+    distinct( this.subBaseIndices );
+
+    finalizePEX<<<tmpSolvers.size>>>( tmpSolvers );
+}
+
+function FABRIKResolver.calculateSolverDepth!(){
+    this.solverDepths.resize( this.solvers.size );
+    for (Index i=0; i < this.solvers.size; i++ ){
+        Size d = 0;   // "implement later"
+        if ( this.solvers[i].type() == FABRIKCloseLoopSolver ){
+            d = 0;
+        } else {
+            d = 10;
+        }
+
+        if ( d > this.maxDepth ){
+            this.maxDepth = d;
+        }
+
+        this.solverDepths[i] = d;
+    }
+}
+
+
+function FABRIKResolver.solve!( io IPose pose, Mat44 effectors[] ){
+    // 
+    if ( !this.isReady() ){
+        this.finalize();
+    }
+
+    Integer iteration_count = 0;
+    while ( (iteration_count < this.max_iteration) ){
+
+        // gather from most far solver
+        for ( Size d=this.maxDepth; d >= 0 && d <= this.maxDepth; d--){
+
+            IFABRIKSolver tmpSolvers[];
+            SubBaseInfo   tmpSubBaseInfos[];
+
+            for ( Index i=0; i < this.solvers.size; i++ ){
+                if ( d == this.solverDepths[i] ){
+                    tmpSolvers.push( this.solvers[i] );
+                }
+            }
+            if ( tmpSolvers.size == 0 ){ continue; }
+
+            tmpSubBaseInfos.resize( tmpSolvers.size );
+
+            solvePEX<<<tmpSolvers.size>>>( pose, tmpSolvers, effectors, tmpSubBaseInfos );
+
+            // gather sub-base xfos
+            for ( Index i=0; i < tmpSubBaseInfos.size; i++ ){
+                this.subBaseXfos[ tmpSubBaseInfos[i].index ].resize(i+1);
+                this.subBaseXfos[ tmpSubBaseInfos[i].index ][i] = tmpSubBaseInfos[i].xfo;
+            }
+
+            this.calcCeteroid( pose );
+            updatePosePEX<<<tmpSolvers.size>>>( pose, tmpSolvers );
+
+            if (d == 0){ break; }
+        }
+
+        for ( Size d=0; d <= this.maxDepth; d++){
+            IFABRIKSolver tmpSolvers[];
+
+            for ( Index i=0; i < this.solvers.size; i++ ){
+                if ( d == this.solverDepths[i] ){
+                    tmpSolvers.push( this.solvers[i] );
+                }
+            }
+
+            offestByCentroidPEX<<<tmpSolvers.size>>>( pose, tmpSolvers, this.subBaseXfos );
+            updatePosePEX<<<tmpSolvers.size>>>( pose, tmpSolvers );
+            if (d == this.maxDepth){ break; }
+        }
+
+        iteration_count++;
+    }
+
+    // solve sub-base centerroids
+
+}
+
+function FABRIKResolver.calcCeteroid!( io IPose pose ){
+    calcCenteroidPEX<<<this.subBaseIndices.size>>>( pose, this.subBaseIndices, this.subBaseXfos );
+}
+
+    
+operator calcCenteroidPEX<<<index>>>( io IPose pose, in Index subBaseIndices[], io Xfo[Index] subBaseXfos[] ){
+    Index k = subBaseIndices[index];
+    Vec3 sum = Vec3();
+    //report( subBaseXfos.size );
+    for (Index i=0; i < subBaseXfos[k].size; i++ ){
+        sum += subBaseXfos[k][i].tr;
+    }
+    sum = ( sum + pose.getBoneXfo( k ).tr ) / ( subBaseXfos[k].size + 1 );
+    subBaseXfos[k].resize( 1 );
+    subBaseXfos[k][0].tr = sum;    // store result on first
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+operator finalizePEX<<<index>>>( io IFABRIKSolver solvers[] ){
+    solvers[index].Finalize();
+}
+
+operator solvePEX<<<index>>>(
+
+                    io IPose pose,
+                    io IFABRIKSolver solvers[],
+                    in Mat44 effectors[],
+                    io SubBaseInfo subBaseInfos[] ){
+    solvers[index].Solve( pose, effectors[index].translation() );
+    subBaseInfos[index].index = solvers[index].GetSubBaseIndex();
+    subBaseInfos[index].xfo   = solvers[index].GetSubBaseXfo();
+}
+
+operator offestByCentroidPEX<<<index>>>(
+                    io IPose pose,
+                    io IFABRIKSolver solvers[],
+                    //io SubBaseInfo centeroidInfos,
+                    io Xfo[Index][] centeroidXfo
+                    ){
+    solvers[index].OffsetByCentroid( pose, centeroidXfo[solvers[index].GetSubBaseIndex()][0] );
+}
+
+operator updatePosePEX<<<index>>>(
+                    io IPose pose,
+                    io IFABRIKSolver solvers[]){
+    solvers[index].UpdatePose( pose );
+}
+
+
+struct SubBaseInfo{
+    Index index;
+    Xfo   xfo;
+};

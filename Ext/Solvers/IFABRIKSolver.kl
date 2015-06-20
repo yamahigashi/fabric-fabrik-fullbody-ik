@@ -1,0 +1,40 @@
+/**
+
+*/
+require FABRIK;
+
+
+
+interface IFABRIKSolver {
+    /// resolve bone
+    Solve!( io IPose pose, in Vec3 effector_position );
+
+    /// update the pose
+    UpdatePose?( io IPose pose );
+
+    //EvaluateBoneTransforms!( io IPose pose, in Vec3 effector_position );
+
+    /// reset to reference pose, bones controled by this solver
+    ResetToReferencePose!();
+
+    /// debug draw
+    DrawSolver!();
+
+    String GetName();
+
+    Boolean IsReady();
+            Finalize!();
+
+            SetSubBase!( in String nodeName );
+    Index   GetSubBaseIndex();
+    Xfo     GetSubBaseXfo();
+
+            OffsetByCentroid!( io IPose pose, Xfo xfo );
+};
+
+/*
+struct SubBaseInfo{
+    Index index;
+    Xfo   xfo;
+};
+*/

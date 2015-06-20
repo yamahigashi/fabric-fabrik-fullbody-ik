@@ -1,0 +1,14 @@
+{
+  "code": [
+    "FABRIKGraph.kl",
+    "Solvers/IFABRIKSolver.kl",
+    "Solvers/FABRIKMultiBoneIKSolver.kl",
+    "Solvers/FABRIKClosedLoopSolver.kl",
+
+    "FABRIKResolver.kl",
+
+    "Components/FABRIKIKComponent.kl",
+    "Components/ArmComponent.kl",
+    "Components/LegComponent.kl"
+  ]
+}
