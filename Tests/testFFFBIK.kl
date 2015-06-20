@@ -110,17 +110,12 @@ operator entry(){
         x.push( "thigh_Lft_Bone" );
         x.push( "thigh_Rgt_Bone" );
         resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
-
-        //x.resize(0);
-        //x.push( "lumbar2_Mid_Bone" );
-        //x.push( "cervical1_Mid_Bone" );
-        //resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
     }  
     FFBIKPose pose = FFBIKPose(skeleton);
     resolver.solve( IPose( pose ), ik_handles );
-    //fbg.drawEdges( ISkeleton(skeleton), IPose(pose), handle );
-    //fbg.drawNodes( ISkeleton(skeleton), IPose(pose), handle );
-    drawSkeleton( ISkeleton(skeleton), IPose(pose), handle.getRootTransform() );
+    fbg.drawEdges( ISkeleton(skeleton), IPose(pose), handle );
+    fbg.drawNodes( ISkeleton(skeleton), IPose(pose), handle );
+    //drawSkeleton( ISkeleton(skeleton), IPose(pose), handle.getRootTransform() );
 
 }
 

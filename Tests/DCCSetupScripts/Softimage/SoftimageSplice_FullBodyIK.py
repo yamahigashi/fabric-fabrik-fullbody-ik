@@ -160,8 +160,6 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
 }
 """)
 
-# ERROR : [Splice] The standard fabric exts folder
-# 'D:\matsumoto\projects\gdl\svn\trunk\softimage\Workgroup\Addons\FabricSpliceSoftimage2013/../../Exts does not exist.
 op = Application.fabricSplice("newSplice", '''
 {
     "portMode": "io",
@@ -174,5 +172,4 @@ splice(op, "addInternalPort", portName="handle",      dataType="DrawingHandle", 
 splice(op, "addInternalPort", portName="fbg",         dataType="FFBIKGraph",     portMode="IO", extension="FABRIK")
 splice(op, "addInternalPort", portName="resolver",    dataType="FABRIKResolver", portMode="IO", extension="FABRIK")
 splice(op, "addInputPort",    portName="ik_handles", dataType="Mat44[]",        portMode="IO", extension="", targets="null1.kine.global,null2.kine.global,null3.kine.global,null4.kine.global,null5.kine.global,null6.kine.global")
-#Application.fabricSplice('setPortData', op, '{"portName":"base_pose"}', base_pose);
 set_kl(op, "initCharacter", klCode)
