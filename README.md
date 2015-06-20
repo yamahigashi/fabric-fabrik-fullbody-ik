@@ -1,11 +1,13 @@
-# FFFBIK (F)abric:Splice (F)ABRIK (f)ull(b)ody (IK)
-FFFBIK is Fabric:Splice tool for full-body IK system, using extended FABRIK (Forward And Backward Reaching Inverse Kinematics),
-based-off a paper written by Andreas Aristidou(2014). Using Fabric Engine 1.15.0, works in many DCC's but the test code is scripted for Softimage.
+# FFFBIK Fabric:Splice FABRIK FullBody IK
+FFFBIK is Fabric:Splice tool for full-body IK system, using extended FABRIK (Forward And Backward Reaching Inverse Kinematics), based-off a paper written by Andreas Aristidou(2014). Using Fabric Engine 1.15.0, works in many DCC's.
+
+The main focus of this project is studying Fabric Engine's KL language with building custom IK system. And leading to providing more flexible rigging solution.
 
 ## Description
 
-## Demo
 
+## Demo
+![](https://raw.githubusercontent.com/yamahigashi/fabric-fabrik-fullbody-ik/gh-pages/images/wip_fffbik2.gif)
 
 ## Requirement
 
@@ -14,8 +16,8 @@ based-off a paper written by Andreas Aristidou(2014). Using Fabric Engine 1.15.0
 ## Install
 
 ## References
-[FABRIK](http://www.andreasaristidou.com/FABRIK.html)
-[Extending FABRIK with model constraints](https://www.youtube.com/watch?v=wjn19jBzJCE)
+- [FABRIK](http://www.andreasaristidou.com/FABRIK.html)
+- [Extending FABRIK with model constraints](https://www.youtube.com/watch?v=wjn19jBzJCE)
 
 ## Licence
 
