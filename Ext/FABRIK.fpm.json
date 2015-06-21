@@ -8,6 +8,7 @@
     "FABRIKResolver.kl",
 
     "Components/FABRIKIKComponent.kl",
+    "Components/SpineComponent.kl",
     "Components/ArmComponent.kl",
     "Components/LegComponent.kl"
   ]

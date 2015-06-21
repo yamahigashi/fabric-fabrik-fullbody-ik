@@ -1,0 +1,30 @@
+require Math;
+require Characters;
+require InlineDrawing;
+
+
+
+function addSpineSolver(
+                io FABRIKResolver resolver,
+                io FFBIKGraph fbg,
+                io Skeleton skeleton,
+                io DrawingHandle handle,
+                in String root,
+                in String bicepLft,
+                in String bicepRgt,
+                in String thighLft,
+                in String thighRgt
+                ){
+
+    String x[];
+    x.push( root );
+    x.push( bicepLft );
+    x.push( bicepRgt );
+    resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
+
+    x.resize(0);
+    x.push( root );
+    x.push( thighLft );
+    x.push( thighRgt );
+    resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
+}
