@@ -40,6 +40,7 @@ object FABRIKCloseLoopSolver : IFABRIKSolver {
     Index      nodeIndices[];   // the bone index on the skeleton
     Scalar     edgeLengths[];   // length for root to end(tip) at full extension
     Vec3       edgeReferencePoses[];   // length for root to end(tip) at full extension
+    Xfo        nodeReferencePoses[];   // length for root to end(tip) at full extension
     Integer    numEdges;       // number of bone count
     Index      subBaseIndex;
     Index      subBaseIndexInternal;
@@ -67,6 +68,7 @@ function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, i
     this.nodeIndices.resize( 0 );  // dedupe later
     this.edgeLengths.resize( this.numEdges );
     this.edgeReferencePoses.resize( this.numEdges );
+    this.nodeReferencePoses.resize( this.numEdges );
     this.name = this.type()+":" + this.skeleton.name +":" + boneNames[0];
     this.graph = graph;
     this.subBaseIndexInternal = 0;
@@ -104,6 +106,7 @@ function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, i
         // update xfos
         this.xfos[i]        = skeleton.getBone( this.nodeIndices[i] ).referencePose;
         this.xfos[endIndex] = skeleton.getBone( this.nodeIndices[endIndex] ).referencePose;
+        this.nodeReferencePoses[i] = this.xfos[i];
 
         // fil edge referencePose
         Vec3 sub = this.xfos[endIndex].tr - this.xfos[i].tr ;
@@ -161,9 +164,11 @@ function FABRIKCloseLoopSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Joint Control in Closed-loop chains
 function FABRIKCloseLoopSolver.Solve!( io IPose pose, Vec3 effector_position ){
+    this.ResetToReferencePose();
 
     // update xfos
-    for (Index i=0; i < this.xfos.size; i++ ){
+    //for (Index i=0; i < this.xfos.size; i++ ){
+    for (Index i=1; i < this.xfos.size; i++ ){
         this.xfos[i] = pose.getBoneXfo( this.nodeIndices[i] );
     }
 
@@ -365,7 +370,9 @@ function Index[] FABRIKCloseLoopSolver.eliminateUnControlledNoisyNode!(){
 }
 
 function FABRIKCloseLoopSolver.ResetToReferencePose!(){
-    report( "implement later" );
+    for ( Index i=0; i < this.numEdges; i++ ){
+        this.xfos[i] = this.nodeReferencePoses[i];
+    }
 }
 
 function FABRIKCloseLoopSolver.DrawSolver!(){

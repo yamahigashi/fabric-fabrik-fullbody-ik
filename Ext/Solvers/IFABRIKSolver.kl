@@ -38,3 +38,35 @@ struct SubBaseInfo{
     Xfo   xfo;
 };
 */
+
+
+inline Boolean IsValidToEvaluate( in Vec3 v ){
+    if ( v.length == 0.0 || v.length.isNaN ){
+        return false;
+    }
+    return true;
+}
+
+inline Vec3 SolveJoint( in Xfo a, in Xfo b, Scalar length ){
+    return SolveJoint( a.tr, b.tr, length );
+}
+
+inline Vec3 SolveJoint( in Mat44 a, in Mat44 b, Scalar length ){
+    return SolveJoint( a.translation(), b.translation(), length );
+}
+
+inline Vec3 SolveJoint( in Vec3 a, in Vec3 b, Scalar length ){
+    Vec3 diff = a - b;
+    if ( diff.length == 0 ) {
+        return b;
+    } else {
+        return b + diff.normalize() * length;
+    }
+}
+
+inline Scalar distance( in Vec3 a, in Vec3 b ){
+    Vec3 diff;
+    diff = a - b;
+    return abs( diff.length );
+}
+

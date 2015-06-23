@@ -139,13 +139,15 @@ function FABRIKResolver.solve!( io IPose pose, Mat44 effectors[] ){
 
 function FABRIKResolver.calcCeteroid!( io IPose pose ){
     calcCenteroidPEX<<<this.subBaseIndices.size>>>( pose, this.subBaseIndices, this.subBaseXfos );
+    for (Index i=0; i < this.subBaseIndices.size; i++ ){
+        pose.setBoneXfo( this.subBaseIndices[i], this.subBaseXfos[this.subBaseIndices[i]][0] );
+    }
 }
 
     
 operator calcCenteroidPEX<<<index>>>( io IPose pose, in Index subBaseIndices[], io Xfo[Index] subBaseXfos[] ){
     Index k = subBaseIndices[index];
     Vec3 sum = Vec3();
-    //report( subBaseXfos.size );
     for (Index i=0; i < subBaseXfos[k].size; i++ ){
         sum += subBaseXfos[k][i].tr;
     }
@@ -174,7 +176,6 @@ operator solvePEX<<<index>>>(
 operator offestByCentroidPEX<<<index>>>(
                     io IPose pose,
                     io IFABRIKSolver solvers[],
-                    //io SubBaseInfo centeroidInfos,
                     io Xfo[Index][] centeroidXfo
                     ){
     solvers[index].OffsetByCentroid( pose, centeroidXfo[solvers[index].GetSubBaseIndex()][0] );
