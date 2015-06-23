@@ -53,9 +53,7 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
   //////////////////////////////////
   // Generate a chain of bones with a random shape.
 
-  //Skeleton skeleton = Skeleton();
 
-    report( "hello" );
 
     if( skeleton.bones.size() == 0 ) {
         Bone bones[];
@@ -125,29 +123,12 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
             report( k + ":    "+ skeleton.getBone( k ).name );
         }
 
-
-        String x[];
         addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "forearm_Lft_Bone", "hand_Lft_Bone");
         addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Rgt_Bone", "forearm_Rgt_Bone", "hand_Rgt_Bone");
         addLegSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "thigh_Lft_Bone", "shin_Lft_Bone", "foot_Lft_Bone");
         addLegSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "thigh_Rgt_Bone", "shin_Rgt_Bone", "foot_Rgt_Bone");
+        addSpineSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "bicep_Rgt_Bone", "thigh_Lft_Bone", "thigh_Rgt_Bone" );
 
-        x.resize(0);
-        x.push( "lumbar2_Mid_Bone" );
-        x.push( "bicep_Lft_Bone" );
-        x.push( "bicep_Rgt_Bone" );
-        resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
-
-        x.resize(0);
-        x.push( "lumbar2_Mid_Bone" );
-        x.push( "thigh_Lft_Bone" );
-        x.push( "thigh_Rgt_Bone" );
-        resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
-
-        //x.resize(0);
-        //x.push( "lumbar2_Mid_Bone" );
-        //x.push( "cervical1_Mid_Bone" );
-        //resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
     }  
     FFBIKPose pose = FFBIKPose(skeleton);
     resolver.solve( IPose( pose ), ik_handles );
