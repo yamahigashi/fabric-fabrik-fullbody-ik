@@ -8,9 +8,10 @@ require FABRIK;
 
 
 /// store solvers, resolve these solver by that weight recursive
-object FABRIKResolver {
+struct FABRIKResolver {
     Skeleton      skeleton;
     IFABRIKSolver solvers[];
+    //Xfo           effectors<>[];
     Size          solverDepths[];
     Size          maxDepth;
     Index         subBaseIndices[];
@@ -163,27 +164,29 @@ operator finalizePEX<<<index>>>( io IFABRIKSolver solvers[] ){
 }
 
 operator solvePEX<<<index>>>(
+                            io IPose pose,
+                            io IFABRIKSolver solvers[],
+                            in Mat44 effectors[],
+                            io SubBaseInfo subBaseInfos[]
+                        ){
 
-                    io IPose pose,
-                    io IFABRIKSolver solvers[],
-                    in Mat44 effectors[],
-                    io SubBaseInfo subBaseInfos[] ){
     solvers[index].Solve( pose, effectors[index].translation() );
     subBaseInfos[index].index = solvers[index].GetSubBaseIndex();
     subBaseInfos[index].xfo   = solvers[index].GetSubBaseXfo();
 }
 
 operator offestByCentroidPEX<<<index>>>(
-                    io IPose pose,
-                    io IFABRIKSolver solvers[],
-                    io Xfo[Index][] centeroidXfo
-                    ){
+                            io IPose pose,
+                            io IFABRIKSolver solvers[],
+                            io Xfo[Index][] centeroidXfo
+                        ){
+
     solvers[index].OffsetByCentroid( pose, centeroidXfo[solvers[index].GetSubBaseIndex()][0] );
 }
 
 operator updatePosePEX<<<index>>>(
-                    io IPose pose,
-                    io IFABRIKSolver solvers[]){
+                            io IPose pose,
+                            io IFABRIKSolver solvers[]){
     solvers[index].UpdatePose( pose );
 }
 

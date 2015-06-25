@@ -21,6 +21,7 @@ function Skeleton.addBone!( in String name, in String parentName, Xfo xfo, in Sc
 
 function Bone Skeleton.boneGenerator( in String name, in String parentName, Xfo xfo, Scalar length ){
     Bone bone;
+
     bone.name = name;
     bone.parentIndex = -1;
     Index parentIndex = this.findBone( parentName );
@@ -29,6 +30,8 @@ function Bone Skeleton.boneGenerator( in String name, in String parentName, Xfo 
     if ( parentIndex < 0 ){
         bone.parentIndex = -1;
         parentXfo = this.bones[ parentIndex ].referencePose;
+    } else {
+        bone.parentIndex = parentIndex;
     }
 
     // compute the angles
