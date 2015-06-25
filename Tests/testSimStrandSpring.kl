@@ -1,0 +1,180 @@
+require Math;
+require Characters;
+require FABRIK;
+
+require InlineDrawing;
+
+
+operator entry(){
+
+    Skeleton skeleton();
+    DrawingHandle handle();
+    FFBIKGraph fbg();
+    FABRIKSolver FABRIKSolvers[];
+    Mat44        ik_handles[];
+    FABRIKResolver resolver();
+
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    //////////////////////////////////
+    // Generate a chain of bones with a random shape.
+
+    //Skeleton skeleton = Skeleton();
+    report( "hello" );
+
+        Bone bones[];
+        bones.resize(0);
+        report( "init skeleton" );
+        skeleton = Skeleton("", bones);
+        skeleton.addBone("root", "", Xfo() );
+
+        skeleton.addBone("skirt_C0_root",  "root",           Xfo( Vec3(0.0,                104.506092174, 7.30032365862),  Quat(-0.906147366115,   0.0,                0.0,                0.422962115187)),    1.0);
+        skeleton.addBone("skirt_C1_root",  "root",           Xfo( Vec3(5.57770826278,      103.819891232, 6.01942332729),  Quat(-0.872128529445,   0.0845432036585,    0.32182101583,      0.358713686125)),    1.0);
+        skeleton.addBone("skirt_C2_root",  "root",           Xfo( Vec3(8.3549948415,       103.947239469, 2.30443215891),  Quat(-0.728615476894,   0.171422441387,     0.594787689226,     0.293191811218)),    1.0);
+        skeleton.addBone("skirt_C3_root",  "root",           Xfo( Vec3(7.70734240999,      103.712371929, -1.54859030682), Quat(-0.50313041712,    0.243531085865,     0.815460298752,     0.1502560972)),      1.0);
+        skeleton.addBone("skirt_C4_root",  "root",           Xfo( Vec3(4.40221494547,      103.712371081, -4.9626648441),  Quat(-0.265679840803,   0.274934193491,     0.920613961142,     0.0793432164197)),   1.0);
+        skeleton.addBone("skirt_C5_root",  "root",           Xfo( Vec3(-1.02712204782e-06, 103.282684191, -6.68602901536), Quat(9.65739983331e-16, -0.286154301957,    -0.95818354999,     3.01978275262e-15)), 1.0);
+        skeleton.addBone("skirt_C6_root",  "root",           Xfo( Vec3(-4.23787812563,     103.914176572, -4.70224817703), Quat(0.0793432341084,   -0.920613942837,    0.274934254784,     0.26567983552)),     1.0);
+        skeleton.addBone("skirt_C7_root",  "root",           Xfo( Vec3(-7.43225522587,     103.914176572, -1.41055352228), Quat(0.150256025606,    -0.815460341526,    0.243530942637,     0.503130438501)),    1.0);
+        skeleton.addBone("skirt_C8_root",  "root",           Xfo( Vec3(-8.07333459527,     104.179505022, 2.26007742308),  Quat(0.293191398102,    -0.594787870658,    0.171422006758,     0.728615597278)),    1.0);
+        skeleton.addBone("skirt_C9_root",  "root",           Xfo( Vec3(-5.39365588897,     104.070167855, 5.82235358495),  Quat(0.358713718725,    -0.321820920374,    0.0845431932325,    0.872128552271)),    1.0);
+        skeleton.addBone("skirt_C0_0_loc", "skirt_C0_root",  Xfo( Vec3(0.0,                102.838726044, 8.69725513458),  Quat(-0.906147366115,   4.42643522131e-16,  2.98503507659e-16,  0.422962115187)),    1.0);
+        skeleton.addBone("skirt_C0_1_loc", "skirt_C0_0_loc", Xfo( Vec3(6.90253292068e-30,  95.1734111662, 15.1193179347),  Quat(-0.906147366115,   -8.38484265922e-17, 1.14013651725e-16,  0.422962115187)),    1.0);
+        skeleton.addBone("skirt_C0_2_loc", "skirt_C0_1_loc", Xfo( Vec3(1.15753690608e-14,  87.3322485895, 21.6887009959),  Quat(-0.906147366115,   -1.34110847685e-17, -3.68901987097e-17, 0.422962115187)),    1.0);
+        skeleton.addBone("skirt_C1_0_loc", "skirt_C1_root",  Xfo( Vec3(6.66680192947,      102.340523005, 7.18427181244),  Quat(-0.872128529445,   0.0845432036585,    0.32182101583,      0.358713686125)),    1.0);
+        skeleton.addBone("skirt_C1_1_loc", "skirt_C1_0_loc", Xfo( Vec3(11.6736514054,      95.539484849,  12.5393868691),  Quat(-0.872128529445,   0.0845432036585,    0.32182101583,      0.358713686125)),    1.0);
+        skeleton.addBone("skirt_C1_2_loc", "skirt_C1_1_loc", Xfo( Vec3(16.7953582387,      88.5824245057, 18.017347699),   Quat(-0.872128529445,   0.0845432036585,    0.32182101583,      0.358713686125)),    1.0);
+        skeleton.addBone("skirt_C2_0_loc", "skirt_C2_root",  Xfo( Vec3(10.0216903687,      102.574317932, 2.56661498547),  Quat(-0.728615476894,   0.171422441387,     0.594787689226,     0.293191811218)),    1.0);
+        skeleton.addBone("skirt_C2_1_loc", "skirt_C2_0_loc", Xfo( Vec3(17.6839282259,      96.2626424233, 3.77193903714),  Quat(-0.728615476894,   0.171422441387,     0.594787689226,     0.293191811218)),    1.0);
+        skeleton.addBone("skirt_C2_2_loc", "skirt_C2_1_loc", Xfo( Vec3(25.5219371424,      89.8061714787, 5.00491248597),  Quat(-0.728615476894,   0.171422441387,     0.594787689226,     0.293191811218)),    1.0);
+        skeleton.addBone("skirt_C3_0_loc", "skirt_C3_root",  Xfo( Vec3(9.33305263519,      102.519538879, -2.36452102661), Quat(-0.50313041712,    0.243531085865,     0.815460298752,     0.1502560972)),      1.0);
+        skeleton.addBone("skirt_C3_1_loc", "skirt_C3_0_loc", Xfo( Vec3(16.8068698289,      97.0357775379, -6.11556899808), Quat(-0.50313041712,    0.243531085865,     0.815460298752,     0.1502560972)),      1.0);
+        skeleton.addBone("skirt_C3_2_loc", "skirt_C3_1_loc", Xfo( Vec3(24.4521361857,      91.4262130274, -9.95266590798), Quat(-0.50313041712,    0.243531085865,     0.815460298752,     0.1502560972)),      1.0);
+        skeleton.addBone("skirt_C4_0_loc", "skirt_C4_root",  Xfo( Vec3(5.3713760376,       102.519538879, -6.50195217133), Quat(-0.265679840803,   0.274934193491,     0.920613961142,     0.0793432164197)),   1.0);
+        skeleton.addBone("skirt_C4_1_loc", "skirt_C4_0_loc", Xfo( Vec3(9.82686430452,      97.0357814352, -13.5784605883), Quat(-0.265679840803,   0.274934193491,     0.920613961142,     0.0793432164197)),   1.0);
+        skeleton.addBone("skirt_C4_2_loc", "skirt_C4_1_loc", Xfo( Vec3(14.3845613511,      91.4262209113, -20.8173039159), Quat(-0.265679840803,   0.274934193491,     0.920613961142,     0.0793432164197)),   1.0);
+        skeleton.addBone("skirt_C5_0_loc", "skirt_C5_root",  Xfo( Vec3(-1.02712204004e-06, 102.089851141, -8.50500583649), Quat(7.20833358594e-16, -0.286154301957,    -0.95818354999,     3.32465720927e-15)), 1.0);
+        skeleton.addBone("skirt_C5_1_loc", "skirt_C5_0_loc", Xfo( Vec3(-1.02712200492e-06, 96.6060897995, -16.8673203683), Quat(1.05324424106e-15, -0.286154301957,    -0.95818354999,     2.99365026497e-15)), 1.0);
+        skeleton.addBone("skirt_C5_2_loc", "skirt_C5_1_loc", Xfo( Vec3(-1.02712197329e-06, 90.996525289,  -25.421466168),  Quat(1.00183663379e-15, -0.286154301957,    -0.95818354999,     3.00900275978e-15)), 1.0);
+        skeleton.addBone("skirt_C6_0_loc", "skirt_C6_root",  Xfo( Vec3(-5.37099981308,     102.519543171, -6.50194883347), Quat(0.0793432341084,   -0.920613942837,    0.274934254784,     0.26567983552)),     1.0);
+        skeleton.addBone("skirt_C6_1_loc", "skirt_C6_0_loc", Xfo( Vec3(-9.82648334369,     97.0357945623, -13.5784640472), Quat(0.0793432341084,   -0.920613942837,    0.274934254784,     0.26567983552)),     1.0);
+        skeleton.addBone("skirt_C6_2_loc", "skirt_C6_1_loc", Xfo( Vec3(-14.3841733948,     91.4262410195, -20.8172962642), Quat(0.0793432341084,   -0.920613942837,    0.274934254784,     0.26567983552)),     1.0);
+        skeleton.addBone("skirt_C7_0_loc", "skirt_C7_root",  Xfo( Vec3(-9.33300018311,     102.519543171, -2.36452198029), Quat(0.150256025606,    -0.815460341526,    0.243530942637,     0.503130438501)),    1.0);
+        skeleton.addBone("skirt_C7_1_loc", "skirt_C7_0_loc", Xfo( Vec3(-16.8068177321,     97.0357960005, -6.11557724876), Quat(0.150256025606,    -0.815460341526,    0.243530942637,     0.503130438501)),    1.0);
+        skeleton.addBone("skirt_C7_2_loc", "skirt_C7_1_loc", Xfo( Vec3(-24.4520746161,     91.4262424577, -9.95266959137), Quat(0.150256025606,    -0.815460341526,    0.243530942637,     0.503130438501)),    1.0);
+        skeleton.addBone("skirt_C8_0_loc", "skirt_C8_root",  Xfo( Vec3(-10.0220003128,     102.574317932, 2.56661593914),  Quat(0.293191398102,    -0.594787870658,    0.171422006758,     0.728615597278)),    1.0);
+        skeleton.addBone("skirt_C8_1_loc", "skirt_C8_0_loc", Xfo( Vec3(-17.6842333535,     96.2626450025, 3.77194455526),  Quat(0.293191398102,    -0.594787870658,    0.171422006758,     0.728615597278)),    1.0);
+        skeleton.addBone("skirt_C8_2_loc", "skirt_C8_1_loc", Xfo( Vec3(-25.5222391495,     89.8061934925, 5.00491675977),  Quat(0.293191398102,    -0.594787870658,    0.171422006758,     0.728615597278)),    1.0);
+        skeleton.addBone("skirt_C9_0_loc", "skirt_C9_root",  Xfo( Vec3(-6.66699981689,     102.340523005, 7.18426895142),  Quat(0.358713718725,    -0.321820920374,    0.0845431932325,    0.872128552271)),    1.0);
+        skeleton.addBone("skirt_C9_1_loc", "skirt_C9_0_loc", Xfo( Vec3(-11.6738556575,     95.5394983505, 12.5393934235),  Quat(0.358713718725,    -0.321820920374,    0.0845431932325,    0.872128552271)),    1.0);
+        skeleton.addBone("skirt_C9_2_loc", "skirt_C9_1_loc", Xfo( Vec3(-16.7955535442,     88.5824475624, 18.0173471022),  Quat(0.358713718725,    -0.321820920374,    0.0845431932325,    0.872128552271)),    1.0);
+
+        fbg = FFBIKGraph( skeleton );
+        // upper body triangle
+        fbg.addEdge( "skirt_C0_root",    "skirt_C0_0_loc" );
+        fbg.addEdge( "skirt_C0_0_loc",   "skirt_C0_1_loc" );
+        fbg.addEdge( "skirt_C0_1_loc",   "skirt_C0_2_loc" );
+        fbg.addEdge( "skirt_C1_root",    "skirt_C1_0_loc" );
+        fbg.addEdge( "skirt_C1_0_loc",   "skirt_C1_1_loc" );
+        fbg.addEdge( "skirt_C1_1_loc",   "skirt_C1_2_loc" );
+        fbg.addEdge( "skirt_C2_root",    "skirt_C2_0_loc" );
+        fbg.addEdge( "skirt_C2_0_loc",   "skirt_C2_1_loc" );
+        fbg.addEdge( "skirt_C2_1_loc",   "skirt_C2_2_loc" );
+        fbg.addEdge( "skirt_C3_root",    "skirt_C3_0_loc" );
+        fbg.addEdge( "skirt_C3_0_loc",   "skirt_C3_1_loc" );
+        fbg.addEdge( "skirt_C3_1_loc",   "skirt_C3_2_loc" );
+        fbg.addEdge( "skirt_C4_root",    "skirt_C4_0_loc" );
+        fbg.addEdge( "skirt_C4_0_loc",   "skirt_C4_1_loc" );
+        fbg.addEdge( "skirt_C4_1_loc",   "skirt_C4_2_loc" );
+        fbg.addEdge( "skirt_C5_root",    "skirt_C5_0_loc" );
+        fbg.addEdge( "skirt_C5_0_loc",   "skirt_C5_1_loc" );
+        fbg.addEdge( "skirt_C5_1_loc",   "skirt_C5_2_loc" );
+        fbg.addEdge( "skirt_C6_root",    "skirt_C6_0_loc" );
+        fbg.addEdge( "skirt_C6_0_loc",   "skirt_C6_1_loc" );
+        fbg.addEdge( "skirt_C6_1_loc",   "skirt_C6_2_loc" );
+        fbg.addEdge( "skirt_C7_root",    "skirt_C7_0_loc" );
+        fbg.addEdge( "skirt_C7_0_loc",   "skirt_C7_1_loc" );
+        fbg.addEdge( "skirt_C7_1_loc",   "skirt_C7_2_loc" );
+        fbg.addEdge( "skirt_C8_root",    "skirt_C8_0_loc" );
+        fbg.addEdge( "skirt_C8_0_loc",   "skirt_C8_1_loc" );
+        fbg.addEdge( "skirt_C8_1_loc",   "skirt_C8_2_loc" );
+        fbg.addEdge( "skirt_C9_root",    "skirt_C9_0_loc" );
+        fbg.addEdge( "skirt_C9_0_loc",   "skirt_C9_1_loc" );
+        fbg.addEdge( "skirt_C9_1_loc",   "skirt_C9_2_loc" );
+        fbg.finalize();
+
+
+        FFBIKPose pose = FFBIKPose(skeleton);
+
+        for (k, v in fbg.nodes ){
+            report( k + ":    "+ skeleton.getBone( k ).name );
+        }
+
+
+        String boneNames[][];
+        boneNames.resize( 10 );
+        boneNames[0].push( "skirt_C0_root" );
+        boneNames[0].push( "skirt_C0_0_loc" );
+        boneNames[0].push( "skirt_C0_1_loc" );
+        boneNames[0].push( "skirt_C0_2_loc" );
+        boneNames[1].push( "skirt_C1_root" );
+        boneNames[1].push( "skirt_C1_0_loc" );
+        boneNames[1].push( "skirt_C1_1_loc" );
+        boneNames[1].push( "skirt_C1_2_loc" );
+        boneNames[2].push( "skirt_C2_root" );
+        boneNames[2].push( "skirt_C2_0_loc" );
+        boneNames[2].push( "skirt_C2_1_loc" );
+        boneNames[2].push( "skirt_C2_2_loc" );
+        boneNames[3].push( "skirt_C3_root" );
+        boneNames[3].push( "skirt_C3_0_loc" );
+        boneNames[3].push( "skirt_C3_1_loc" );
+        boneNames[3].push( "skirt_C3_2_loc" );
+        boneNames[4].push( "skirt_C4_root" );
+        boneNames[4].push( "skirt_C4_0_loc" );
+        boneNames[4].push( "skirt_C4_1_loc" );
+        boneNames[4].push( "skirt_C4_2_loc" );
+        boneNames[5].push( "skirt_C5_root" );
+        boneNames[5].push( "skirt_C5_0_loc" );
+        boneNames[5].push( "skirt_C5_1_loc" );
+        boneNames[5].push( "skirt_C5_2_loc" );
+        boneNames[6].push( "skirt_C6_root" );
+        boneNames[6].push( "skirt_C6_0_loc" );
+        boneNames[6].push( "skirt_C6_1_loc" );
+        boneNames[6].push( "skirt_C6_2_loc" );
+        boneNames[7].push( "skirt_C7_root" );
+        boneNames[7].push( "skirt_C7_0_loc" );
+        boneNames[7].push( "skirt_C7_1_loc" );
+        boneNames[7].push( "skirt_C7_2_loc" );
+        boneNames[8].push( "skirt_C8_root" );
+        boneNames[8].push( "skirt_C8_0_loc" );
+        boneNames[8].push( "skirt_C8_1_loc" );
+        boneNames[8].push( "skirt_C8_2_loc" );
+        boneNames[9].push( "skirt_C9_root" );
+        boneNames[9].push( "skirt_C9_0_loc" );
+        boneNames[9].push( "skirt_C9_1_loc" );
+        boneNames[9].push( "skirt_C9_2_loc" );
+        SimSpringStrand solver = SimSpringStrand( skeleton, handle, boneNames );
+
+    solver.UpdateFrame( 0.0 );
+    solver.UpdateFrame( 1.0 );
+    solver.Solve( IPose(pose), ik_handles ); 
+
+  
+    fbg.drawEdges( ISkeleton(skeleton), IPose(pose), handle );
+    fbg.drawNodes( ISkeleton(skeleton), IPose(pose), handle );
+    //drawSkeleton( ISkeleton(skeleton), IPose(pose), handle.getRootTransform() );
+
+}
+

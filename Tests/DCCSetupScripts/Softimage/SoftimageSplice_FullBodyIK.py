@@ -41,6 +41,41 @@ Application.GetPrim("Null", "", "Scene_Root", "")
 Application.Translate("", -1.5139886508,      0.913547291364, -0.299620258891)
 Application.GetPrim("Null", "", "Scene_Root", "")
 Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+
+
+
 klCode = textwrap.dedent("""
 require Math;
 require Characters;
@@ -48,7 +83,7 @@ require FABRIK;
 
 require InlineDrawing;
 
-operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKGraph fbg, in Mat44 ik_handles[], io FABRIKResolver resolver ) {
+operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKGraph fbg, in Mat44 ik_handles[], io FABRIKResolver resolver, io Mat44 output[] ) {
 
   //////////////////////////////////
   // Generate a chain of bones with a random shape.
@@ -62,58 +97,52 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
         skeleton = Skeleton("", bones);
         skeleton.addBone("root", "", Xfo() );
 
-        skeleton.addBone("bicep_Lft_Bone",     "arm_Lft_Chn",        Xfo( Vec3(2.02090957899,      14.7792167213,  -0.848431284415),  Quat(-0.927651013653,  0.00630325953678, -0.027684353318,   0.372367348689)),   2.63653395236);
-        skeleton.addBone("forearm_Lft_Bone",   "bicep_Lft_Bone",     Xfo( Vec3(4.65319262393,      14.6940251715,  -0.725387986754),  Quat(-0.92390072814,   -0.0835678093192, -0.0636173639348,  0.367935723727)),   2.61546505404);
-        skeleton.addBone("hand_Lft_Bone",      "hand_Lft_Chn",       Xfo( Vec3(7.21095660746,      14.9754557972,  -0.257095710115),  Quat(-0.463212761098,  -0.137349843791,  -0.0866854577564,  0.871237390027)),   1.2025080972);
-        skeleton.addBone("bicep_Rgt_Bone",     "arm_Rgt_Chn",        Xfo( Vec3(-2.02090953805,     14.7792173752,  -0.848431356336),  Quat(-0.0283859377662, 0.373006195942,   -0.927363315646,   0.00760901569113)), 2.63653395236);
-        skeleton.addBone("forearm_Rgt_Bone",   "bicep_Rgt_Bone",     Xfo( Vec3(-4.65288936006,     14.6861769781,  -0.724588782911),  Quat(0.0645539024774,  -0.368472763374,  0.9237013718,      0.082682477348)),   2.61546505404);
-        skeleton.addBone("hand_Rgt_Bone",      "hand_Rgt_Chn",       Xfo( Vec3(-7.21079536001,     14.9612588443,  -0.2533093422),    Quat(0.0806220903861,  -0.85118646362,   0.503458278753,    0.124544948704)),   1.2025080972);
-        skeleton.addBone("thorax1_Mid_Bone",   "thorax_Mid_Chn",     Xfo( Vec3(-3.9534678086e-12,  11.9882806957,  -0.256887428953),  Quat(-0.531701542117,  -0.466147476783,  0.531701542116,    0.466147476783)),   3.37078229482);
-        skeleton.addBone("scapula1_Rgt_Bone",  "scapula_Rgt_Chn",    Xfo( Vec3(-0.0134124436876,   14.603458196,   -1.40226202867),   Quat(0.010630822139,   0.686924770797,   0.723884722442,    0.0633423515584)),  0.729220886867);
-        skeleton.addBone("scapula2_Rgt_Bone",  "scapula1_Rgt_Bone",  Xfo( Vec3(-0.73661686755,     14.6809818663,  -1.45449749259),   Quat(-0.184336363305,  -0.661814747703,  -0.716311850831,   0.122142037173)),   1.42350765373);
-        skeleton.addBone("clavicle_Rgt_Bone",  "clavicle_Rgt_Chn",   Xfo( Vec3(-0.279588742967,    14.8112134967,  0.433742071629),   Quat(0.311993690914,   0.00286614206865, -0.950039763095,   0.00872757690571)), 2.16268133634);
-        skeleton.addBone("scapula1_Lft_Bone",  "scapula_Lft_Chn",    Xfo( Vec3(0.0134124436866,    14.603458196,   -1.40226202867),   Quat(0.723884761637,   0.0633422287663,  0.0106307343362,   0.686924742175)),   0.729220886867);
-        skeleton.addBone("scapula2_Lft_Bone",  "scapula1_Lft_Bone",  Xfo( Vec3(0.736616892959,     14.6809816519,  -1.45449745902),   Quat(0.716311858483,   -0.122142160916,  0.184336266521,    0.661814743542)),   1.42350765373);
-        skeleton.addBone("clavicle_Lft_Bone",  "clavicle_Lft_Chn",   Xfo( Vec3(0.279588742963,     14.8112134967,  0.43374207163),    Quat(0.00286620038887, 0.311993670761,   -0.00872775510217, 0.9500397679)),     2.16268133634);
-        skeleton.addBone("cervical1_Mid_Bone", "cervical_Mid_Chn",   Xfo( Vec3(8.92154308481e-14,  15.3300922258,  -0.698305257947),  Quat(-0.436396161401,  -0.556379717742,  0.436396161401,    0.556379717741)),   0.45995653989);
-        skeleton.addBone("cervical2_Mid_Bone", "cervical1_Mid_Bone", Xfo( Vec3(-3.66097987527e-14, 15.7768056475,  -0.588728173426),  Quat(-0.437297900241,  -0.55567125753,   0.437297900239,    0.555671257532)),   0.459921714248);
-        skeleton.addBone("cervical3_Mid_Bone", "cervical2_Mid_Bone", Xfo( Vec3(1.78695196739e-12,  16.2238382841,  -0.480608771552),  Quat(-0.46426997124,   -0.533341723293,  0.464269971242,    0.533341723291)),   0.459927437779);
-        skeleton.addBone("lumbar1_Mid_Bone",   "lumbar_Mid_Chn",     Xfo( Vec3(4.93247247365e-15,  10.2323828082,  -0.128196598423),  Quat(-0.481105981204,  -0.518205591295,  0.481105981205,    0.518205591294)),   0.591509348722);
-        skeleton.addBone("lumbar2_Mid_Bone",   "lumbar1_Mid_Bone",   Xfo( Vec3(-6.28396045942e-13, 10.8222638723,  -0.0843372807799), Quat(-0.517883088037,  -0.481453120382,  0.517883088038,    0.48145312038)),    0.590862195512);
-        skeleton.addBone("lumbar3_Mid_Bone",   "lumbar2_Mid_Bone",   Xfo( Vec3(-2.06428996055e-12, 11.4115577511,  -0.127358885776),  Quat(-0.552072274071,  -0.441832778552,  0.552072274072,    0.44183277855)),    0.591089670265);
-        skeleton.addBone("head_Mid_Bone",      "head_Mid_Chn",       Xfo( Vec3(-2.31829712283e-13, 16.6824188064,  -0.416801311344),  Quat(0.542376619824,   0.453682270172,   0.542376619824,    0.453682270172)),   1.74543107082);
-        skeleton.addBone("thigh_Rgt_Bone",     "leg_Rgt_Chn",        Xfo( Vec3(-1.09189253003,     9.63678764269,  -0.153153425243),  Quat(-0.403046495643,  0.405149026325,   -0.60960993169,    0.549348268408)),   4.28213777723);
-        skeleton.addBone("shin_Rgt_Bone",      "thigh_Rgt_Bone",     Xfo( Vec3(-1.39823668671,     5.3702192418,   0.0449659362325),  Quat(-0.375533924058,  0.430774283197,   -0.572168595084,   0.58824390147)),    4.47147213308);
-        skeleton.addBone("foot_Rgt_Bone",      "foot_Rgt_Chn",       Xfo( Vec3(-1.5139886508,      0.913547291364, -0.299620258891),  Quat(0.171685501935,   -0.79204168527,   -0.124103767301,   0.572531494472)),   1.71057902684);
-        skeleton.addBone("toes_Rgt_Bone",      "foot_Rgt_Bone",      Xfo( Vec3(-2.00229661668,     0.205246500659, 1.17887422112),    Quat(0.0423869490891,  -0.798690207548,  -0.0318107251374,  0.599404184737)),   0.895697040854);
-        skeleton.addBone("thigh_Lft_Bone",     "leg_Lft_Chn",        Xfo( Vec3(1.09189253003,      9.63678764269,  -0.153153425243),  Quat(-0.609609934903,  0.549348271201,   -0.403046491254,   0.405149022069)),   4.28213777723);
-        skeleton.addBone("shin_Lft_Bone",      "thigh_Lft_Bone",     Xfo( Vec3(1.39823669072,      5.37021924202,  0.0449659347465),  Quat(-0.572168598107,  0.588243904469,   -0.375533919959,   0.430774278661)),   4.47147213308);
-        skeleton.addBone("foot_Lft_Bone",      "foot_Lft_Chn",       Xfo( Vec3(1.5139886508,       0.913547291364, -0.29962025889),   Quat(0.140843108114,   -0.568364962503,  -0.194153520233,   0.787038054275)),   1.71057902684);
-        skeleton.addBone("toes_Lft_Bone",      "foot_Lft_Bone",      Xfo( Vec3(1.99043855347,      0.116908412472, 1.13719656798),    Quat(0.00207783260288, -0.600355063244,  -0.00276785696612, 0.799726090369)),   0.895697040854);
-
+        skeleton.addBone("GlobalSRT",   "Biped_Nulls", Xfo( Vec3(0.0,                0.0,            0.0),              Quat(0.0,               0.0,                0.0,                1.0)),             0.0);
+        skeleton.addBone("UpperBody",   "GlobalSRT",   Xfo( Vec3(0.0,                12.2661892594,  -0.654324640582),  Quat(-0.0112288597746,  0.0,                0.0,                0.999936954367)),  0.0);
+        skeleton.addBone("SpineStart1", "UpperBody",   Xfo( Vec3(0.0,                12.8474815885,  -0.723259864691),  Quat(-0.0527451954048,  6.79523711605e-16,  2.48282297499e-16,  0.998608003354)),  0.0);
+        skeleton.addBone("Vertebrae4",  "SpineStart1", Xfo( Vec3(-9.3677232495e-31,  14.0160906498,  -0.755619144199),  Quat(0.0317507633696,   1.21400827759e-15,  -1.33486971476e-15, 0.999495817413)),  0.0);
+        skeleton.addBone("Chest",       "Vertebrae4",  Xfo( Vec3(-5.34638152562e-30, 14.5993929147,  -0.706732986485),  Quat(-0.0112288597746,  5.66993775628e-31,  8.32001735975e-31,  0.999936954367)),  0.0);
+        skeleton.addBone("LShoulder",   "Chest",       Xfo( Vec3(0.545846772228,     16.8771170017,  -0.513789144856),  Quat(-0.706417695192,   -0.0389174896638,   -0.0312096132635,   0.706035005476)),  0.0);
+        skeleton.addBone("LBicep",      "LShoulder",   Xfo( Vec3(1.90512094987,      16.8920261192,  -0.378481940292),  Quat(-0.715975660079,   0.0421541604979,    0.0288108890372,    0.696255566298)),  0.0);
+        skeleton.addBone("LThigh",      "UpperBody",   Xfo( Vec3(0.995733296199,     11.0781917979,  -0.335466042446),  Quat(-0.532110496038,   0.454639947624,     -0.490685593649,    0.519026575636)),  0.0);
+        skeleton.addBone("LShin",       "LThigh",      Xfo( Vec3(1.56874195804,      5.66121486923,  -0.0613571557273), Quat(-0.50748133935,    0.481976920797,     -0.462729820641,    0.544097464725)),  0.0);
+        skeleton.addBone("LFootBone1",  "LShin",       Xfo( Vec3(2.05604300044,      1.14681057235,  -0.310701027798),  Quat(-0.674760484424,   0.211419697899,     -0.674760484424,    0.211419697899)),  0.0);
+        skeleton.addBone("Neck",        "Chest",       Xfo( Vec3(-1.05098059909e-09, 16.9182283127,  -0.364639733917),  Quat(-0.0360926604749,  -4.32694865484e-09, -5.70897876621e-10, 0.99934844767)),   0.0);
+        skeleton.addBone("RThigh",      "UpperBody",   Xfo( Vec3(-0.995733296199,    11.0781917979,  -0.335466042446),  Quat(-0.490685593649,   0.519026575636,     -0.532110496038,    0.454639947624)),  0.0);
+        skeleton.addBone("LFootBone2",  "LFootBone1",  Xfo( Vec3(2.05604300044,      0.61760894757,  0.450884441283),   Quat(-0.688534849771,   0.160996151046,     -0.688534849771,    0.160996151046)),  0.0);
+        skeleton.addBone("RShoulder",   "Chest",       Xfo( Vec3(-0.545846771806,    16.8771170026,  -0.513789154342),  Quat(0.70603500584,     0.03120960654,      -0.0389174841141,   0.706417695431)),  0.0);
+        skeleton.addBone("RBicep",      "RShoulder",   Xfo( Vec3(-1.90512095178,     16.8920261223,  -0.378481973401),  Quat(-0.0421541659596,  0.715975659863,     0.696255565908,     0.0288108958289)), 0.0);
+        skeleton.addBone("LForearm",    "LBicep",      Xfo( Vec3(4.88948677107,      16.8312962889,  -0.678350535737),  Quat(-0.717094865852,   -0.0131556999517,   -0.0249393344485,   0.696404990307)),  0.0);
+        skeleton.addBone("RFootBone1",  "RShin",       Xfo( Vec3(-2.05604300044,     1.14681057235,  -0.310701027798),  Quat(-0.674760484424,   0.211419697899,     -0.674760484424,    0.211419697899)),  0.0);
+        skeleton.addBone("RFootBone2",  "RFootBone1",  Xfo( Vec3(-2.05604300044,     0.617608947569, 0.450884441283),   Quat(-0.688534849771,   0.160996151046,     -0.688534849771,    0.160996151046)),  0.0);
+        skeleton.addBone("RShin",       "RThigh",      Xfo( Vec3(-1.56874195804,     5.66121486923,  -0.0613571557273), Quat(-0.462729820641,   0.544097464725,     -0.50748133935,     0.481976920797)),  0.0);
+        skeleton.addBone("RForearm",    "RBicep",      Xfo( Vec3(-4.88948676787,     16.831296297,   -0.678350620703),  Quat(-0.0131556944913,  -0.717094866058,    -0.696404990442,    0.0249393276485)), 0.0);
+        skeleton.addBone("Head",        "Neck",        Xfo( Vec3(-5.80146677849e-10, 18.4182283119,  -0.436966459513),  Quat(-0.0120525440086,  -5.27179780071e-09, -4.55345641655e-10, 0.999927365454)),  0.0);
+        skeleton.addBone("LHand",       "LForearm",    Xfo( Vec3(7.88471079473,      16.7836924274,  -0.516077462863),  Quat(0.000877373200168, 0.0349317417593,    -0.0251334107165,   0.999073228197)),  0.0);
+        skeleton.addBone("RHand",       "RForearm",    Xfo( Vec3(-7.88471079766,     16.7836924355,  -0.516077551539),  Quat(-0.0251334101996,  0.999073228014,     0.000877372859551,  0.0349317473689)), 0.0);
 
         fbg = FFBIKGraph( skeleton );
         // upper body triangle
-        fbg.addEdge( "lumbar2_Mid_Bone", "bicep_Lft_Bone" );
-        fbg.addEdge( "lumbar2_Mid_Bone", "bicep_Rgt_Bone" );
-        fbg.addEdge( "bicep_Lft_Bone",   "bicep_Rgt_Bone" );
-        fbg.addEdge( "bicep_Lft_Bone",   "cervical1_Mid_Bone" );
-        fbg.addEdge( "bicep_Rgt_Bone",   "cervical1_Mid_Bone" );
+        fbg.addEdge( "Chest", "LBicep" );
+        fbg.addEdge( "Chest", "RBicep" );
+        fbg.addEdge( "LBicep",   "RBicep" );
+        fbg.addEdge( "LBicep",   "Head" );
+        fbg.addEdge( "RBicep",   "Head" );
         // lower body 
-        fbg.addEdge( "lumbar2_Mid_Bone", "thigh_Lft_Bone" );
-        fbg.addEdge( "lumbar2_Mid_Bone", "thigh_Rgt_Bone" );
-        fbg.addEdge( "thigh_Lft_Bone",   "thigh_Rgt_Bone" );
+        fbg.addEdge( "Chest", "LThigh" );
+        fbg.addEdge( "Chest", "RThigh" );
+        fbg.addEdge( "LThigh",   "RThigh" );
         // leg
-        fbg.addEdge( "thigh_Lft_Bone",   "shin_Lft_Bone" );
-        fbg.addEdge( "shin_Lft_Bone",    "foot_Lft_Bone" );
-        fbg.addEdge( "thigh_Rgt_Bone",   "shin_Rgt_Bone" );
-        fbg.addEdge( "shin_Rgt_Bone",    "foot_Rgt_Bone" );
+        fbg.addEdge( "LThigh",   "LShin" );
+        fbg.addEdge( "LShin",    "LFootBone1" );
+        fbg.addEdge( "RThigh",   "RShin" );
+        fbg.addEdge( "RShin",    "RFootBone1" );
         // arm
-        fbg.addEdge( "bicep_Lft_Bone",   "forearm_Lft_Bone" );
-        fbg.addEdge( "forearm_Lft_Bone", "hand_Lft_Bone" );
-        fbg.addEdge( "bicep_Rgt_Bone",   "forearm_Rgt_Bone" );
-        fbg.addEdge( "forearm_Rgt_Bone", "hand_Rgt_Bone" );
-        fbg.addEdge( "lumbar2_Mid_Bone", "cervical1_Mid_Bone" );
+        fbg.addEdge( "LBicep",   "LForearm" );
+        fbg.addEdge( "LForearm", "LHand" );
+        fbg.addEdge( "RBicep",   "RForearm" );
+        fbg.addEdge( "RForearm", "RHand" );
+        fbg.addEdge( "Chest", "Head" );
         fbg.finalize();
 
 
@@ -123,11 +152,15 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
             report( k + ":    "+ skeleton.getBone( k ).name );
         }
 
-        addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "forearm_Lft_Bone", "hand_Lft_Bone");
-        addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Rgt_Bone", "forearm_Rgt_Bone", "hand_Rgt_Bone");
-        addLegSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "thigh_Lft_Bone", "shin_Lft_Bone", "foot_Lft_Bone");
-        addLegSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "thigh_Rgt_Bone", "shin_Rgt_Bone", "foot_Rgt_Bone");
-        addSpineSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "bicep_Rgt_Bone", "thigh_Lft_Bone", "thigh_Rgt_Bone" );
+        for ( Index i=0; i < skeleton.bones.size; i++){
+            report(i +":    "+ skeleton.getBone( i ).name );
+        }
+
+        addArmSolver( resolver, fbg, skeleton, handle, "Chest", "LBicep", "LForearm", "LHand");
+        addArmSolver( resolver, fbg, skeleton, handle, "Chest", "RBicep", "RForearm", "RHand");
+        addLegSolver( resolver, fbg, skeleton, handle, "Chest", "LThigh", "LShin", "LFootBone1");
+        addLegSolver( resolver, fbg, skeleton, handle, "Chest", "RThigh", "RShin", "RFootBone1");
+        addSpineSolver( resolver, fbg, skeleton, handle, "Chest", "LBicep", "RBicep", "LThigh", "RThigh" );
 
     }  
     FFBIKPose pose = FFBIKPose(skeleton);
@@ -136,8 +169,21 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
     fbg.drawNodes( ISkeleton(skeleton), IPose(pose), handle );
     //drawSkeleton( ISkeleton(skeleton), IPose(pose), handle.getRootTransform() );
 
+    for (Index i=0; i < output.size; i++ ){
+        output[i] = pose.getBoneXfo(i).toMat44();
+    }
+
 }
 """)
+
+
+
+
+
+
+#xsi_man = XSIUtils.ResolvePath( Application.GetInstallationPath2(3) + "\\Data\\XSI_SAMPLES\\Models\\Characters\\XSI_Man.emdl")
+bip_man = XSIUtils.ResolvePath( Application.GetInstallationPath2(3) + "\\Data\\XSI_SAMPLES\\Models\\Characters\\Biped_Nulls.emdl")
+Application.ImportModel(bip_man, "", "", "", "", "", "")
 
 op = Application.fabricSplice("newSplice", '''
 {
@@ -146,9 +192,18 @@ op = Application.fabricSplice("newSplice", '''
     "targets": "null.kine.global"
 }
 ''')
+
+
+
+
+
+b = "null6.kine.global,Biped_Nulls.GlobalSRT.kine.global,Biped_Nulls.UpperBody.kine.global,Biped_Nulls.SpineStart1.kine.global,Biped_Nulls.Vertebrae4.kine.global,Biped_Nulls.Chest.kine.global,Biped_Nulls.LShoulder.kine.global,Biped_Nulls.LBicep.kine.global,Biped_Nulls.LThigh.kine.global,Biped_Nulls.LShin.kine.global,Biped_Nulls.LFootBone1.kine.global,Biped_Nulls.Neck.kine.global,Biped_Nulls.RThigh.kine.global,Biped_Nulls.LFootBone2.kine.global,Biped_Nulls.RShoulder.kine.global,Biped_Nulls.RBicep.kine.global,Biped_Nulls.LForearm.kine.global,Biped_Nulls.RFootBone1.kine.global,Biped_Nulls.RFootBone2.kine.global,Biped_Nulls.RShin.kine.global,Biped_Nulls.RForearm.kine.global,Biped_Nulls.Head.kine.global,Biped_Nulls.LHand.kine.global,Biped_Nulls.RHand.kine.global"
+b = "null6.kine.global,null7.kine.global,null8.kine.global,null9.kine.global,null10.kine.global,null11.kine.global,null12.kine.global,null13.kine.global,null14.kine.global,null15.kine.global,null16.kine.global,null17.kine.global,null18.kine.global,null19.kine.global,null20.kine.global,null21.kine.global,null22.kine.global,null23.kine.global,null24.kine.global,null25.kine.global,null26.kine.global,null27.kine.global,null28.kine.global,null29.kine.global"
+
 splice(op, "addInternalPort", portName="skeleton",    dataType="Skeleton",       portMode="IO", extension="Characters")
 splice(op, "addInternalPort", portName="handle",      dataType="DrawingHandle",  portMode="IO", extension="InlineDrawing")
 splice(op, "addInternalPort", portName="fbg",         dataType="FFBIKGraph",     portMode="IO", extension="FABRIK")
 splice(op, "addInternalPort", portName="resolver",    dataType="FABRIKResolver", portMode="IO", extension="FABRIK")
 splice(op, "addInputPort",    portName="ik_handles", dataType="Mat44[]",        portMode="IO", extension="", targets="null1.kine.global,null2.kine.global,null3.kine.global,null4.kine.global,null5.kine.global,null6.kine.global")
+splice(op, "addOutputPort",   portName="output",     dataType="Mat44[]",        extension="",targets=b)
 set_kl(op, "initCharacter", klCode)

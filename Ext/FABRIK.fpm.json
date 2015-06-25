@@ -4,6 +4,7 @@
     "Solvers/IFABRIKSolver.kl",
     "Solvers/FABRIKMultiBoneIKSolver.kl",
     "Solvers/FABRIKClosedLoopSolver.kl",
+    "Solvers/SimStrandSpringSolver.kl",
 
     "FABRIKResolver.kl",
 
