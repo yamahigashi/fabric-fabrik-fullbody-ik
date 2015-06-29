@@ -51,6 +51,8 @@ object SimSpringStrand: IFABRIKSolver {
     Scalar        framePrev;
     Scalar        deltaTime;
 
+    Index         effectorIndex;
+    Index         effectorCount;
 };
 
 
@@ -70,6 +72,7 @@ function SimSpringStrand( Ref<Skeleton> skeleton, io DrawingHandle handle, in St
     this.nodeIndices.resize( boneNames.size );
     this.rootNodeIndices.resize( boneNames.size );
     this.positionPrev.resize( boneNames.size );
+    this.effectorIndex = 0;
     this.name = this.type() +":" + this.skeleton.name +":" + boneNames[boneNames.size-1];
 
     for (Index j=0; j < boneNames.size; j++ ){
@@ -117,7 +120,7 @@ function SimSpringStrand( Ref<Skeleton> skeleton, io DrawingHandle handle, in St
 
 ////////////////////////////////////////////////////////////////////////////////////////
 /// implement interface ISimSpringStrand
-function SimSpringStrand.Solve!( io IPose pose, io Mat44 rootControllers[] ){
+function SimSpringStrand.Solve!( io IPose pose, in Mat44 rootControllers[] ){
 
     for ( Index i=0; i < this.numberOfStrands; i++ ) {
         pose.setBoneXfo( this.rootNodeIndices[ i ], Xfo( rootControllers[i] ));
@@ -157,6 +160,14 @@ inline function Xfo getReferenceLocalPose( io Skeleton skeleton, Index index ){
     return skeleton.getReferenceLocalPose( index );
 }
 
+
+function SimSpringStrand.SetEffectorIndex!( io Index id ){
+    this.effectorIndex = id;
+}
+
+function Index SimSpringStrand.GetEffectorCount(){
+    return this.effectorCount;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ///
