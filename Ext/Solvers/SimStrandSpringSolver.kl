@@ -247,6 +247,11 @@ function SimSpringStrand.UpdatePose?( io IPose pose ){
 
 
 
+function Index SimSpringStrand.GetRootNodeIndex(){
+    return this.nodeIndices[0][0];
+}
+
+
 function SimSpringStrand.SetSubBase!( in String nodeName ){
 }
 
