@@ -45,6 +45,9 @@ object FABRIKSolver : IFABRIKSolver {
 
     Boolean       fullExtension;
     Vec3          effectorPosition;
+    Index         effectorIndex;
+    Index         upvectorIndex;
+    Index         effectorCount; // = 2; // ik effector + upvector
 
 };
 
@@ -56,6 +59,7 @@ function FABRIKSolver( Ref<Skeleton> skeleton, io DrawingHandle handle, in Strin
     this.handle = handle;
     this.precision = 0.005f;
     this.max_iteration = 150;
+    this.effectorCount = 2;
 
     this.num_bones = boneNames.size();
     this.bones.resize( this.num_bones );
@@ -101,8 +105,24 @@ function FABRIKSolver( Ref<Skeleton> skeleton, io DrawingHandle handle, in Strin
 
 }
 
+
+function FABRIKSolver.SetEffectorIndex!( io Index id ){
+    this.effectorIndex = id;
+    this.upvectorIndex = id+1;
+}
+
+function Index FABRIKSolver.GetEffectorCount(){
+    return this.effectorCount;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 /// implement interface IFABRIKSolver
+function FABRIKSolver.Solve!( io IPose pose, in Mat44 effectors[] ){
+    this.effectorPosition = effectors[this.effectorIndex].translation();
+    this.ResetToReferencePose();
+    this.alignByUpvector( pose, effectors[this.upvectorIndex].translation() );
+    this.EvaluateBoneTransforms( pose, this.effectorPosition, 0 );
+}
 function FABRIKSolver.Solve!( io IPose pose, in Vec3 effector_position ){
     this.effectorPosition = effector_position;
     this.ResetToReferencePose();
@@ -117,70 +137,10 @@ function FABRIKSolver.alignByUpvector!( io IPose pose, in Vec3 upvPosition ){
 
     Xfo subbaseSpaceXfos[];
     for( Index i=this.subBaseIndexInternal+1; i < this.num_bones; i++ ){
-        //subbaseSpaceXfos.push( this.xfos[i] - subBasePosition ); 
-        //subbaseSpaceXfos.push( this.skeleton.getReferenceLocalPose( i ));
-
-        // TODO: imlement binding upv
-        if (this.name == "FABRIKSolver::RFootBone1"){
-            this.xfos[i].tr = Vec3( -2.8, 6.6, 10 );
-        }
-        if (this.name == "FABRIKSolver::LFootBone1"){
-            this.xfos[i].tr = Vec3(  2.8, 6.6, 10 );
-        }
-        if (this.name == "FABRIKSolver::LHand"){
-            this.xfos[i].tr = Vec3( 4, 16, -10 );
-        }
-        if (this.name == "FABRIKSolver::RHand"){
-            this.xfos[i].tr = Vec3( -4, 16, -10 );
-        }
-
+        this.xfos[i].tr = upvPosition;
     }
 
     return;
-
-    /*
-    // start with the X and Z axis
-    Vec3 rootEff, xAxis, yAxis, zAxis;
-    rootEff = this.xfos[ this.num_bones-1 ].tr - this.xfos[ this.subBaseIndexInternal ].tr;
-    xAxis = rootEff;
-    yAxis = this.xfos[ this.subBaseIndexInternal ].tr.linearInterpolate( this.xfos[ this.num_bones-1 ].tr, 0.0);
-    yAxis -= upvPosition;
-    //yAxis = rotateVectorAlongAxis(yAxis, rollAxis, values.roll);
-    zAxis = xAxis.cross( yAxis );
-    xAxis.normalize();
-    zAxis.normalize();
-
-    Quat rot;
-    rot.setFromAxisAndAngle( zAxis, -HALF_PI );
-
-    Xfo x = Xfo( rootEff, rot );
-    drawXfo( this.handle.getRootTransform(), "debug-postsolve-x"+this.name, x );
-    Xfo y = Xfo( yAxis, rot );
-    drawXfo( this.handle.getRootTransform(), "debug-postsolve-y"+this.name, y );
-    Xfo z = Xfo( zAxis, rot );
-    drawXfo( this.handle.getRootTransform(), "debug-postsolve-z"+this.name, z );
-
-    //return;
-    // x axis point its tip
-    Vec3 new_dir = upvPosition - this.xfos[ this.subBaseIndexInternal ].tr;
-    new_dir.setUnit();
-    Vec3 dir = pose.getBoneXfo( this.subBaseIndexInternal + 1 ).tr - pose.getBoneXfo( this.subBaseIndexInternal ).tr;
-    dir.setUnit();
-
-    report( "new: " + new_dir);
-    report( "old: " + dir);
-    //Quat rot = Quat( Euler( 0, -HALF_PI, 0 , RotationOrder( 'xyz' )) );
-    this.xfos[ this.subBaseIndexInternal ].ori.setFromDirectionAndUpvector( dir, Vec3( 0, 0, 1 ) );
-    this.xfos[ this.subBaseIndexInternal ].ori *= rot;
-
-    pose.setBoneXfo( this.subBaseIndexInternal, this.xfos[ this.subBaseIndexInternal ] );
-
-    for( Index i=this.subBaseIndexInternal+1; i < subbaseSpaceXfos.size; i++ ){
-        //subbaseSpaceXfos.push( this.xfos[i] - subBasePosition );
-        this.xfos[i] = this.xfos[ i-1 ] * subbaseSpaceXfos[i];
-        pose.setBoneXfo( this.nodeIndices[i], this.xfos[ i ] );
-    }
-    */
 }
 
 

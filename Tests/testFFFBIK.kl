@@ -16,6 +16,10 @@ operator entry(){
     ik_handles.push( Mat44() );
     ik_handles.push( Mat44() );
     ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
+    ik_handles.push( Mat44() );
     //////////////////////////////////
     // Generate a chain of bones with a random shape.
 

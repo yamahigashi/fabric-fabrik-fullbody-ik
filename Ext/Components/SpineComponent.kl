@@ -20,11 +20,11 @@ function addSpineSolver(
     x.push( root );
     x.push( bicepLft );
     x.push( bicepRgt );
-    resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
+    resolver.addSolver( IFABRIKSolver(FABRIKCloseLoopSolver( skeleton, fbg, handle, x )) );
 
     x.resize(0);
     x.push( root );
     x.push( thighLft );
     x.push( thighRgt );
-    resolver.addSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x ) );
+    resolver.addSolver( IFABRIKSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x )) );
 }

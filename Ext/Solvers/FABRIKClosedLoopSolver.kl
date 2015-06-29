@@ -28,6 +28,8 @@ object FABRIKCloseLoopSolver : IFABRIKSolver {
     Skeleton   skeleton;        // sleketon
     FFBIKGraph graph;         // graph
     DrawingHandle handle;
+    Index      effectorIndex;
+    Index      effectorCount;
 
     Scalar     precision;       // precision
     Integer    max_iteration;   // max iteration
@@ -61,6 +63,7 @@ function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, i
     this.handle = handle;
     this.precision = 0.0001f;
     this.max_iteration = 15;
+    this.effectorCount = 2;
 
     this.numEdges = boneNames.size();
     this.xfos.resize( this.numEdges );
@@ -166,7 +169,14 @@ function FABRIKCloseLoopSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Joint Control in Closed-loop chains
+function FABRIKCloseLoopSolver.Solve!( io IPose pose, in Mat44 effectors[] ){
+    this.Solve( pose );
+
+}
 function FABRIKCloseLoopSolver.Solve!( io IPose pose, Vec3 effector_position ){
+    this.Solve( pose );
+}
+function FABRIKCloseLoopSolver.Solve!( io IPose pose ){
     this.ResetToReferencePose();
 
     // update xfos
@@ -186,6 +196,15 @@ function FABRIKCloseLoopSolver.Solve!( io IPose pose, Vec3 effector_position ){
 
     //this.UpdatePose( pose );
 
+}
+
+
+function FABRIKCloseLoopSolver.SetEffectorIndex!( io Index id ){
+    this.effectorIndex = id;
+}
+
+function Index FABRIKCloseLoopSolver.GetEffectorCount(){
+    return this.effectorCount;
 }
 
 function FABRIKCloseLoopSolver.solveClosePart!( io IPose pose ){
