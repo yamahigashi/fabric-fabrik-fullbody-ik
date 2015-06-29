@@ -27,6 +27,7 @@ interface IFABRIKSolver {
 
             SetSubBase!( in String nodeName );
     Index   GetSubBaseIndex();
+    Index   GetRootNodeIndex();
     Xfo     GetSubBaseXfo();
 
             OffsetByCentroid!( io IPose pose, Xfo xfo );

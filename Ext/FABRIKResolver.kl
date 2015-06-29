@@ -7,10 +7,18 @@ require FABRIK;
 
 
 
+/*---------------------------------------------------------------------------------------
+//
+//
+//
+//
+---------------------------------------------------------------------------------------*/
 /// store solvers, resolve these solver by that weight recursive
 struct FABRIKResolver {
     Skeleton      skeleton;
     IFABRIKSolver solvers[];
+    Ref<FFBIKGraph>    graph;
+    //FFBIKGraph    graph;
     //Xfo           effectors<>[];
     Size          solverDepths[];
     Size          maxDepth;
@@ -21,11 +29,13 @@ struct FABRIKResolver {
 };
 
 
-function FABRIKResolver(){
+function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
     this.solvers.resize( 0 );
     this.solverDepths.resize( 0 );
-    this.maxDepth = 0;
     this.subBaseIndices.resize( 0 );
+    this.graph    = graph;
+    this.maxDepth = 0;
+    this.skeleton = skeleton;
 
     this.max_iteration = 1;
 }
@@ -48,6 +58,7 @@ function Boolean FABRIKResolver.isReady(){
     return true;
 }
 
+
 function FABRIKResolver.finalize!(){
     IFABRIKSolver tmpSolvers[];
     for ( Index i=0; i < this.solvers.size; i++ ){
@@ -60,15 +71,27 @@ function FABRIKResolver.finalize!(){
     finalizePEX<<<tmpSolvers.size>>>( tmpSolvers );
 }
 
+
 function FABRIKResolver.calculateSolverDepth!(){
     this.solverDepths.resize( this.solvers.size );
     for (Index i=0; i < this.solvers.size; i++ ){
-        Size d = 0;   // "implement later"
+        Size d = 0;
+
+        //*
         if ( this.solvers[i].type() == FABRIKCloseLoopSolver ){
             d = 0;
         } else {
             d = 10;
         }
+        /*/
+        Integer cost = this.graph.searchSmallerDistance( this.solvers[i].GetSubBaseIndex() );
+        cost += this.graph.searchSmallerDistance( this.solvers[i].GetRootNodeIndex() );
+        d = cost;
+
+        if ( cost < 0 ){
+            d = 0;
+        }
+        // */
 
         if ( d > this.maxDepth ){
             this.maxDepth = d;
@@ -133,9 +156,6 @@ function FABRIKResolver.solve!( io IPose pose, Mat44 effectors[] ){
 
         iteration_count++;
     }
-
-    // solve sub-base centerroids
-
 }
 
 function FABRIKResolver.calcCeteroid!( io IPose pose ){

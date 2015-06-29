@@ -1,5 +1,6 @@
 {
   "code": [
+    "FFFBIKUtil.kl",
     "FABRIKGraph.kl",
     "Solvers/IFABRIKSolver.kl",
     "Solvers/FABRIKMultiBoneIKSolver.kl",

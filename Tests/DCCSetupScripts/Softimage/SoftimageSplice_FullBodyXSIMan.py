@@ -1,26 +1,62 @@
+
+import textwrap
+
+def splice(operator, command, *args, **kwargs):
+    return Application.fabricSplice(command, operator, str(kwargs), *args)
+
+
+def set_kl(operator, op_name, code):
+    splice(operator, "addKLOperator", opName=op_name)
+    splice(operator, "setKLOperatorCode", code, opName=op_name)
+
+
+def draw_bones_traditional(points):
+    assert len(points) >= 3
+    start = points[0]
+    mid   = points[1]
+    end   = points[2]
+    Application.Create3DSkeleton(
+            start[0], start[1], start[2],
+            mid[0],   mid[1], mid[2],
+            end[0],   end[1], end[2],
+        "", "")
+
+    for p in points[3:]:
+        x = p[0]
+        y = p[1]
+        z = p[2]
+        Application.AppendBone("eff", x, y, z, False)
+
+
+
+
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.Translate("", 7.21095660746,      14.9754557972,  -0.257095710115)
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.Translate("", -7.21079536001,     14.9612588443,  -0.2533093422)
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.Translate("", 1.5139886508,       0.913547291364, -0.29962025889)
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.Translate("", -1.5139886508,      0.913547291364, -0.299620258891)
+Application.GetPrim("Null", "", "Scene_Root", "")
+Application.GetPrim("Null", "", "Scene_Root", "")
+
+
+
+klCode = textwrap.dedent("""
 require Math;
 require Characters;
 require FABRIK;
 
 require InlineDrawing;
 
+operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKGraph fbg, in Mat44 ik_handles[], io FABRIKResolver resolver   ) {
 
-operator entry(){
+  //////////////////////////////////
+  // Generate a chain of bones with a random shape.
 
-    Skeleton skeleton();
-    DrawingHandle handle();
-    FABRIKSolver FABRIKSolvers[];
-    Mat44        ik_handles[];
 
-    ik_handles.push( Mat44() );
-    ik_handles.push( Mat44() );
-    ik_handles.push( Mat44() );
-    ik_handles.push( Mat44() );
-    //////////////////////////////////
-    // Generate a chain of bones with a random shape.
-
-    //Skeleton skeleton = Skeleton();
-    report( "hello" );
 
     if( skeleton.bones.size() == 0 ) {
         Bone bones[];
@@ -58,9 +94,8 @@ operator entry(){
         skeleton.addBone("foot_Lft_Bone",      "foot_Lft_Chn",       Xfo( Vec3(1.5139886508,       0.913547291364, -0.29962025889),   Quat(0.140843108114,   -0.568364962503,  -0.194153520233,   0.787038054275)),   1.71057902684);
         skeleton.addBone("toes_Lft_Bone",      "foot_Lft_Bone",      Xfo( Vec3(1.99043855347,      0.116908412472, 1.13719656798),    Quat(0.00207783260288, -0.600355063244,  -0.00276785696612, 0.799726090369)),   0.895697040854);
 
-    FFBIKGraph fbg = FFBIKGraph( skeleton );
-    FABRIKResolver resolver( skeleton, fbg );
 
+        fbg = FFBIKGraph( skeleton );
         // upper body triangle
         fbg.addEdge( "lumbar2_Mid_Bone", "bicep_Lft_Bone" );
         fbg.addEdge( "lumbar2_Mid_Bone", "bicep_Rgt_Bone" );
@@ -83,21 +118,54 @@ operator entry(){
         fbg.addEdge( "forearm_Rgt_Bone", "hand_Rgt_Bone" );
         fbg.addEdge( "lumbar2_Mid_Bone", "cervical1_Mid_Bone" );
         fbg.finalize();
-        fbg.setRootNode( "lumbar2_Mid_Bone" );
         fbg.reportNodes();
+        fbg.setRootNode( "lumbar2_Mid_Bone" );
 
 
         FFBIKPose pose = FFBIKPose(skeleton);
+
+        for ( Index i=0; i < skeleton.bones.size; i++){
+            report(i +":    "+ skeleton.getBone( i ).name );
+        }
+
+        resolver = FABRIKResolver( skeleton, fbg );
+
         addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "forearm_Lft_Bone", "hand_Lft_Bone");
         addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Rgt_Bone", "forearm_Rgt_Bone", "hand_Rgt_Bone");
         addLegSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "thigh_Lft_Bone", "shin_Lft_Bone", "foot_Lft_Bone");
         addLegSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "thigh_Rgt_Bone", "shin_Rgt_Bone", "foot_Rgt_Bone");
         addSpineSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "bicep_Rgt_Bone", "thigh_Lft_Bone", "thigh_Rgt_Bone" );
+
+    }  
+    FFBIKPose pose = FFBIKPose(skeleton);
     resolver.solve( IPose( pose ), ik_handles );
     fbg.drawEdges( ISkeleton(skeleton), IPose(pose), handle );
     fbg.drawNodes( ISkeleton(skeleton), IPose(pose), handle );
-    }  
     //drawSkeleton( ISkeleton(skeleton), IPose(pose), handle.getRootTransform() );
 
-}
 
+}
+""")
+
+#xsi_man = XSIUtils.ResolvePath( Application.GetInstallationPath2(3) + "\\Data\\XSI_SAMPLES\\Models\\Characters\\XSI_Man.emdl")
+bip_man = XSIUtils.ResolvePath( Application.GetInstallationPath2(3) + "\\Data\\XSI_SAMPLES\\Models\\Characters\\Biped_Nulls.emdl")
+#Application.ImportModel(bip_man, "", "", "", "", "", "")
+
+op = Application.fabricSplice("newSplice", '''
+{
+    "portMode": "io",
+    "portName": "result",
+    "targets": "null.kine.global"
+}
+''')
+
+
+b = "XSI_Man.Man.kine.global,XSI_Man.bicep_Lft_Bone.kine.global,XSI_Man.forearm_Lft_Bone.kine.global,XSI_Man.hand_Lft_Bone.kine.global,XSI_Man.bicep_Rgt_Bone.kine.global,XSI_Man.forearm_Rgt_Bone.kine.global,XSI_Man.hand_Rgt_Bone.kine.global,XSI_Man.thorax1_Mid_Bone.kine.global,XSI_Man.scapula1_Rgt_Bone.kine.global,XSI_Man.scapula2_Rgt_Bone.kine.global,XSI_Man.clavicle_Rgt_Bone.kine.global,XSI_Man.scapula1_Lft_Bone.kine.global,XSI_Man.scapula2_Lft_Bone.kine.global,XSI_Man.clavicle_Lft_Bone.kine.global,XSI_Man.cervical1_Mid_Bone.kine.global,XSI_Man.cervical2_Mid_Bone.kine.global,XSI_Man.cervical3_Mid_Bone.kine.global,XSI_Man.lumbar1_Mid_Bone.kine.global,XSI_Man.lumbar2_Mid_Bone.kine.global,XSI_Man.lumbar3_Mid_Bone.kine.global,XSI_Man.head_Mid_Bone.kine.global,XSI_Man.thigh_Rgt_Bone.kine.global,XSI_Man.shin_Rgt_Bone.kine.global,XSI_Man.foot_Rgt_Bone.kine.global,XSI_Man.toes_Rgt_Bone.kine.global,XSI_Man.thigh_Lft_Bone.kine.global,XSI_Man.shin_Lft_Bone.kine.global,XSI_Man.foot_Lft_Bone.kine.global,XSI_Man.toes_Lft_Bone.kine.global"
+
+splice(op, "addInternalPort", portName="skeleton",    dataType="Skeleton",       portMode="IO", extension="Characters")
+splice(op, "addInternalPort", portName="handle",      dataType="DrawingHandle",  portMode="IO", extension="InlineDrawing")
+splice(op, "addInternalPort", portName="fbg",         dataType="FFBIKGraph",     portMode="IO", extension="FABRIK")
+splice(op, "addInternalPort", portName="resolver",    dataType="FABRIKResolver", portMode="IO", extension="FABRIK")
+splice(op, "addInputPort",    portName="ik_handles", dataType="Mat44[]",        portMode="IO", extension="", targets="null1.kine.global,null2.kine.global,null3.kine.global,null4.kine.global,null5.kine.global,null6.kine.global")
+#splice(op, "addOutputPort",   portName="output",     dataType="Mat44[]",        extension="",targets=b)
+set_kl(op, "initCharacter", klCode)
