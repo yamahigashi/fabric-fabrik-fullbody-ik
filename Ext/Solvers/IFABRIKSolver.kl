@@ -8,6 +8,10 @@ require FABRIK;
 interface IFABRIKSolver {
     /// resolve bone
     Solve!( io IPose pose, in Vec3 effector_position );
+    Solve!( io IPose pose, in Mat44 effectors[] );
+
+    SetEffectorIndex!( io Index id );
+    Index GetEffectorCount();
 
     /// update the pose
     UpdatePose?( io IPose pose );

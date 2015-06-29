@@ -26,6 +26,8 @@ struct FABRIKResolver {
     Xfo           subBaseXfos[Index][];
 
     Integer       max_iteration;
+
+    Index         effectorCounter;
 };
 
 
@@ -38,14 +40,18 @@ function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
     this.skeleton = skeleton;
 
     this.max_iteration = 1;
+    this.effectorCounter = 0;
 }
 
 
-function FABRIKResolver.addSolver!( IFABRIKSolver solver ){
+function FABRIKResolver.addSolver!( io IFABRIKSolver solver ){
     this.solvers.push( solver );
     this.subBaseIndices.push( solver.GetSubBaseIndex() );
     this.subBaseXfos[ solver.GetSubBaseIndex() ].resize(0);
     this.calculateSolverDepth();
+
+    solver.SetEffectorIndex( this.effectorCounter );
+    this.effectorCounter += solver.GetEffectorCount();
 }
 
 
@@ -190,7 +196,8 @@ operator solvePEX<<<index>>>(
                             io SubBaseInfo subBaseInfos[]
                         ){
 
-    solvers[index].Solve( pose, effectors[index].translation() );
+    //solvers[index].Solve( pose, effectors[index].translation() );
+    solvers[index].Solve( pose, effectors );
     subBaseInfos[index].index = solvers[index].GetSubBaseIndex();
     subBaseInfos[index].xfo   = solvers[index].GetSubBaseXfo();
 }
