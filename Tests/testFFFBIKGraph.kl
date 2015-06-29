@@ -9,8 +9,10 @@ operator entry(){
 
     Skeleton skeleton();
     DrawingHandle handle();
+    FFBIKGraph fbg();
     FABRIKSolver FABRIKSolvers[];
     Mat44        ik_handles[];
+    FABRIKResolver resolver();
 
     ik_handles.push( Mat44() );
     ik_handles.push( Mat44() );
@@ -58,9 +60,8 @@ operator entry(){
         skeleton.addBone("foot_Lft_Bone",      "foot_Lft_Chn",       Xfo( Vec3(1.5139886508,       0.913547291364, -0.29962025889),   Quat(0.140843108114,   -0.568364962503,  -0.194153520233,   0.787038054275)),   1.71057902684);
         skeleton.addBone("toes_Lft_Bone",      "foot_Lft_Bone",      Xfo( Vec3(1.99043855347,      0.116908412472, 1.13719656798),    Quat(0.00207783260288, -0.600355063244,  -0.00276785696612, 0.799726090369)),   0.895697040854);
 
-    FFBIKGraph fbg = FFBIKGraph( skeleton );
-    FABRIKResolver resolver( skeleton, fbg );
 
+        fbg = FFBIKGraph( skeleton );
         // upper body triangle
         fbg.addEdge( "lumbar2_Mid_Bone", "bicep_Lft_Bone" );
         fbg.addEdge( "lumbar2_Mid_Bone", "bicep_Rgt_Bone" );
@@ -83,21 +84,10 @@ operator entry(){
         fbg.addEdge( "forearm_Rgt_Bone", "hand_Rgt_Bone" );
         fbg.addEdge( "lumbar2_Mid_Bone", "cervical1_Mid_Bone" );
         fbg.finalize();
-        fbg.setRootNode( "lumbar2_Mid_Bone" );
-        fbg.reportNodes();
 
+        report( fbg.searchSmallerDistance( "lumbar2_Mid_Bone", "foot_Lft_Bone" ) );
 
-        FFBIKPose pose = FFBIKPose(skeleton);
-        addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "forearm_Lft_Bone", "hand_Lft_Bone");
-        addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Rgt_Bone", "forearm_Rgt_Bone", "hand_Rgt_Bone");
-        addLegSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "thigh_Lft_Bone", "shin_Lft_Bone", "foot_Lft_Bone");
-        addLegSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "thigh_Rgt_Bone", "shin_Rgt_Bone", "foot_Rgt_Bone");
-        addSpineSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "bicep_Rgt_Bone", "thigh_Lft_Bone", "thigh_Rgt_Bone" );
-    resolver.solve( IPose( pose ), ik_handles );
-    fbg.drawEdges( ISkeleton(skeleton), IPose(pose), handle );
-    fbg.drawNodes( ISkeleton(skeleton), IPose(pose), handle );
     }  
-    //drawSkeleton( ISkeleton(skeleton), IPose(pose), handle.getRootTransform() );
 
 }
 

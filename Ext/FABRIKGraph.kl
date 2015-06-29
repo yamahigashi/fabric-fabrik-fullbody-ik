@@ -5,53 +5,6 @@ require Math;
 require Characters;
 
 
-function Bone Skeleton.getBone( in String name ){
-    Index i = this.findBone( name );
-    return this.getBone( i );
-}
-
-function Skeleton.addBone!( in String name, in String parentName, Xfo xfo ){
-    Scalar length = 0.0;
-    this.addBone( name, parentName, xfo, length );
-}
-function Skeleton.addBone!( in String name, in String parentName, Xfo xfo, in Scalar length ){
-    Bone bone = this.boneGenerator( name, parentName, xfo, length );
-    this.addBone( bone );
-}
-
-function Bone Skeleton.boneGenerator( in String name, in String parentName, Xfo xfo, Scalar length ){
-    Bone bone;
-
-    bone.name = name;
-    bone.parentIndex = -1;
-    Index parentIndex = this.findBone( parentName );
-
-    Xfo parentXfo();
-    if ( parentIndex < 0 ){
-        bone.parentIndex = -1;
-        parentXfo = this.bones[ parentIndex ].referencePose;
-    } else {
-        bone.parentIndex = parentIndex;
-    }
-
-    // compute the angles
-    //Scalar random = 0.5 - mathRandomScalar(12, i);
-    //Scalar xAngle = sin(random * 0.4 + Scalar(i) * 0.03) * 0.5;
-    //Scalar zAngle = cos(0.11 + Scalar(i) * 0.01) * 0.1;
-
-    //Xfo xfo;
-    //xfo.tr = Vec3(boneLength, 0.0, 0.0);
-    //xfo.ori.setFromEulerAngles(Vec3(xAngle, 0.0f, zAngle));
-    //bone.referencePose = parentXfo * xfo;
-    bone.referencePose = xfo;
-    bone.length = length;
-    bone.radius = 0.1;
-    bone.setFlag(BONEFLAG_DEFORMER);
-
-    return bone;
-}
-
-
 /*---------------------------------------------------------------------------------------
 //
 // bone 間の接続を表現する隣接リスト使ったグラフ...
@@ -74,24 +27,35 @@ function String FFBIKEdge.getName(){
     return "FFBIKEdge:" + this.a + "to" + this.b;
 }
 
+
+
+/*---------------------------------------------------------------------------------------
+//
+//
+//
+//
+---------------------------------------------------------------------------------------*/
 object FFBIKGraph {
-    Skeleton skeleton;
-    Index nodes[Index][];
-    Index controlledNodes[];
-    FFBIKEdge edges[];
+    private Skeleton skeleton;
+    private Index nodes[Index][];
+    private Index controlledNodes[];
+    private FFBIKEdge edges[];
+    private Index root;
 
     // for debug draw
-    Points points;
-    Lines lines;
+    private Points points;
+    private Lines lines;
 };
 
+
 // constructor
-function FFBIKGraph( Ref <Skeleton> skeleton ){
+function FFBIKGraph( Ref<Skeleton> skeleton ){
     //this.lines = Lines();
     this.skeleton = skeleton;
     this.points = Points();
     this.lines = Lines();
     this.controlledNodes.resize(0);
+    this.root = -1;
 }
 
 
@@ -99,6 +63,7 @@ function FFBIKGraph.finalize!(){
     this.distinctNodes();
     this.points.resize( this.getNodeCount() );
     this.lines.clear();
+    //this.setRootNode( this.nodes[0][0] );
 }
 
 function FFBIKGraph.addEdge!( in String a, in String b ){
@@ -121,19 +86,40 @@ function FFBIKGraph.addNode!( String boneName, Boolean isControlled ){
     this.markAsControlled( id );
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////
 function FFBIKGraph.registerControllBone!( String boneName ){
     Index id = this.skeleton.findBone( boneName );
     this.controlledNodes.push(id);
 }
 
+
 function FFBIKGraph.markAsControlled!( in Index id ){
     this.controlledNodes.push(id);
 }
+
 
 function Boolean FFBIKGraph.isControlledNode( in Index id ){
     return isExistsIn( id, this.controlledNodes );
 }
 
+
+function FFBIKGraph.setRootNode!( in String boneName ){
+    Index id = this.skeleton.findBone( boneName );
+    this.setRootNode( id );
+}
+
+
+function FFBIKGraph.setRootNode!( in Index id ){
+    if ( this.root != -1 ){
+        setError( "this FFBIKGraph's root is already defined!!!  as "+ this. root );
+        return;
+    }
+    this.root = id;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////
 function Index[] FFBIKGraph.searchNoisy( io Index id, io Index array[] ){
     Index results[];
     Index counter[] = this.nodes[ id ];
@@ -159,11 +145,89 @@ function FFBIKGraph.addNode( Bone bone ){
 }
 */
 
-function FFBIKGraph.search( Bone start, Bone end ){
-    //result;
-    //return [];
+
+/*-------------------------------------------------------------------------------------*/
+/// used for search temporary
+object OneNode {
+    Index   index;
+    Boolean done;
+    Integer cost;
+
+    Index   to[];
+};
+
+function OneNode( Index id, Index to[] ){
+    this.index = id;
+    this.done  = false;
+    this.cost  = -1; //Integer( BIGSCALAR_POSITIVE );  //TODO: is this good?
+    this.to    = to;
 }
 
+function Integer FFBIKGraph.searchSmallerDistance?( Index end ){
+    return this.searchSmallerDistance( this.root, end );
+}
+
+/// Dijkstra's Algorithm
+function Integer FFBIKGraph.searchSmallerDistance( String start, String end ){
+    return this.searchSmallerDistance(
+                        this.skeleton.findBone( start ),
+                        this.skeleton.findBone( end   )
+                    );
+}
+function Integer FFBIKGraph.searchSmallerDistance( Index start, Index end ){
+
+    // initialize set start node's cost 0, others -1;
+    OneNode tmpNodes[Index];
+    for ( k, v in this.nodes ){
+        OneNode node = OneNode( k, this.nodes[k] );
+        if ( k == start ){
+            node.cost = 0;
+        }
+        tmpNodes[k] =  node;
+    }
+
+    //
+    while( true ){
+        OneNode doneNode = null;
+        //for (Index i=0; i < tmpNodes.size; i++ ){
+        for ( k, v in tmpNodes ){
+            if( v.done == true || v.cost < 0 ){
+                continue;
+            }
+
+            if( doneNode == null || v.cost < doneNode.cost ){
+                doneNode = v;
+            }
+        }
+
+        if( doneNode === null ){
+            break;
+        }
+
+        // flag done
+        doneNode.done = true;
+
+        // update node info
+        for (Index i=0; i < doneNode.to.size; i++ ){
+            Index to   = doneNode.to[i];
+            Index cost = doneNode.cost++;
+
+            if ( tmpNodes[to].cost < 0 || cost < tmpNodes[to].cost ){
+                tmpNodes[to].cost = cost;
+            }
+        }
+
+        if ( doneNode.index == end ){
+            return doneNode.cost;
+        }
+
+    }
+
+    return -1;
+}
+
+
+/*-------------------------------------------------------------------------------------*/
 function FFBIKGraph.distinctNodes!(){
     for( k,v in this.nodes){
         distinct( this.nodes[k] );
@@ -208,7 +272,7 @@ function FFBIKEdge FFBIKGraph.getEdge( in Index index_a, in Index index_b){
             return this.edges[i];
         }
     }
-    setError("edge not found");
+    setError("edge not found: ["+ index_a +":"+ index_b +"]");
     return null;
 }
 
@@ -229,6 +293,15 @@ function FFBIKEdge FFBIKGraph.getEdge( in String aName, in String bName ){
     }
     setError("edge not found");
     return null;
+}
+
+
+/// for debugging
+function FFBIKGraph.reportNodes(){
+    for (k, v in this.nodes ){
+        report( k + ":    "+ this.skeleton.getBone( k ).name );
+    }
+    //report( this.searchSmallerDistance( 18, 25 ) );
 }
 
 // Generates a set of inline shapes nested under the provided rootTransform. 
@@ -353,86 +426,3 @@ function FFBIKPose.test!(){
 }
 
 
-/*---------------------------------------------------------------------------------------
-//
-//         utility
-//
----------------------------------------------------------------------------------------*/
-// FIXME: O(n^2) need more efficient algorithm 
-function distinct(io Bone array[]) {
-    distinct( array, array.size );
-}
-function distinct(io Bone array[], Size length) {
-    Index i, j;
-    Index newLength = 1;  // new length of modified array
-
-    for( i=1; i< length; i++ ){
-
-        for( j=0; j< newLength ; j++){
-            if(array[i] == array[j])
-                break;
-        }
-
-        /* if none of the values in index[0..j] of array is not same as array[i],
-           then copy the current value to corresponding new position in array */
-        if( j == newLength ){
-            array[newLength++] = array[i];
-        }
-    }
-    array.resize( newLength );
-}
-
-function UInt32 Bone.hash(){
-    return this.name.hash() ^ this.parentIndex.hash();
-}
-
-
-function Boolean ==(Bone lhs, Bone rhs) {
-    if ( lhs.name        != rhs.name )      { return false; }
-    if ( lhs.parentIndex != rhs.parentIndex){ return false; }
-    //if ( lhs.length      != rhs.length )    { return false; }
-    //if ( lhs.radius      != rhs.radius)     { return false; }
-    return true;
-}
-/*---------------------------------------------------------------------------------------
-*/
-function distinct(io Index array[]) {
-    distinct( array, array.size );
-}
-function distinct(io Index array[], Size length) {
-    Index i, j;
-    Index newLength = 1;  // new length of modified array
-
-    for( i=1; i< length; i++ ){
-
-        for( j=0; j< newLength ; j++){
-            if(array[i] == array[j])
-                break;
-        }
-
-        /* if none of the values in index[0..j] of array is not same as array[i],
-           then copy the current value to corresponding new position in array */
-        if( j == newLength ){
-            array[newLength++] = array[i];
-        }
-    }
-    array.resize( newLength );
-}
-
-/*---------------------------------------------------------------------------------------
-*/
-inline function Boolean isExistsIn( in Index id, in Index array[] ){
-    for (Index i=0; i < array.size; i++ ){
-        if (id == array[i] ){
-            return true;
-        }
-    }
-    return false;
-}
-
-/*---------------------------------------------------------------------------------------
-//
-//         entry point for checking compilation
-//
----------------------------------------------------------------------------------------*/
-//operator entry(){ report("load done"); }

@@ -119,6 +119,8 @@ function FABRIKSolver.alignByUpvector!( io IPose pose, in Vec3 upvPosition ){
     for( Index i=this.subBaseIndexInternal+1; i < this.num_bones; i++ ){
         //subbaseSpaceXfos.push( this.xfos[i] - subBasePosition ); 
         //subbaseSpaceXfos.push( this.skeleton.getReferenceLocalPose( i ));
+
+        // TODO: imlement binding upv
         if (this.name == "FABRIKSolver::RFootBone1"){
             this.xfos[i].tr = Vec3( -2.8, 6.6, 10 );
         }
@@ -215,6 +217,10 @@ function FABRIKSolver.SetSubBase!( in String nodeName ){
     if( !hit ){
         setError( "no node found for setting sub-base: " + nodeName );
     }
+}
+
+function Index FABRIKSolver.GetRootNodeIndex(){
+    return this.nodeIndices[0];
 }
 
 function Index FABRIKSolver.GetSubBaseIndex(){

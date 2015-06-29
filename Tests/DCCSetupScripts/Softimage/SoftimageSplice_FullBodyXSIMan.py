@@ -51,7 +51,7 @@ require FABRIK;
 
 require InlineDrawing;
 
-operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKGraph fbg, in Mat44 ik_handles[], io FABRIKResolver resolver, io Mat44 output[] ) {
+operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKGraph fbg, in Mat44 ik_handles[], io FABRIKResolver resolver   ) {
 
   //////////////////////////////////
   // Generate a chain of bones with a random shape.
@@ -118,17 +118,17 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
         fbg.addEdge( "forearm_Rgt_Bone", "hand_Rgt_Bone" );
         fbg.addEdge( "lumbar2_Mid_Bone", "cervical1_Mid_Bone" );
         fbg.finalize();
+        fbg.reportNodes();
+        fbg.setRootNode( "lumbar2_Mid_Bone" );
 
 
         FFBIKPose pose = FFBIKPose(skeleton);
 
-        for (k, v in fbg.nodes ){
-            report( k + ":    "+ skeleton.getBone( k ).name );
-        }
-
         for ( Index i=0; i < skeleton.bones.size; i++){
             report(i +":    "+ skeleton.getBone( i ).name );
         }
+
+        resolver = FABRIKResolver( skeleton, fbg );
 
         addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Lft_Bone", "forearm_Lft_Bone", "hand_Lft_Bone");
         addArmSolver( resolver, fbg, skeleton, handle, "lumbar2_Mid_Bone", "bicep_Rgt_Bone", "forearm_Rgt_Bone", "hand_Rgt_Bone");
@@ -143,16 +143,13 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
     fbg.drawNodes( ISkeleton(skeleton), IPose(pose), handle );
     //drawSkeleton( ISkeleton(skeleton), IPose(pose), handle.getRootTransform() );
 
-    for (Index i=0; i < output.size; i++ ){
-        output[i] = pose.getBoneXfo(i).toMat44();
-    }
 
 }
 """)
 
 #xsi_man = XSIUtils.ResolvePath( Application.GetInstallationPath2(3) + "\\Data\\XSI_SAMPLES\\Models\\Characters\\XSI_Man.emdl")
 bip_man = XSIUtils.ResolvePath( Application.GetInstallationPath2(3) + "\\Data\\XSI_SAMPLES\\Models\\Characters\\Biped_Nulls.emdl")
-Application.ImportModel(bip_man, "", "", "", "", "", "")
+#Application.ImportModel(bip_man, "", "", "", "", "", "")
 
 op = Application.fabricSplice("newSplice", '''
 {
@@ -170,5 +167,5 @@ splice(op, "addInternalPort", portName="handle",      dataType="DrawingHandle", 
 splice(op, "addInternalPort", portName="fbg",         dataType="FFBIKGraph",     portMode="IO", extension="FABRIK")
 splice(op, "addInternalPort", portName="resolver",    dataType="FABRIKResolver", portMode="IO", extension="FABRIK")
 splice(op, "addInputPort",    portName="ik_handles", dataType="Mat44[]",        portMode="IO", extension="", targets="null1.kine.global,null2.kine.global,null3.kine.global,null4.kine.global,null5.kine.global,null6.kine.global")
-splice(op, "addOutputPort",   portName="output",     dataType="Mat44[]",        extension="",targets=b)
+#splice(op, "addOutputPort",   portName="output",     dataType="Mat44[]",        extension="",targets=b)
 set_kl(op, "initCharacter", klCode)

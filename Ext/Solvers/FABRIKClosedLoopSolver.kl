@@ -144,6 +144,9 @@ function FABRIKCloseLoopSolver.SetSubBase!( in String nodeName ){
     this.subBaseIndex = this.skeleton.findBone( nodeName );
 }
 
+function Index FABRIKCloseLoopSolver.GetRootNodeIndex(){
+    return this.nodeIndices[0];
+}
 function Index FABRIKCloseLoopSolver.GetSubBaseIndex(){
     return this.subBaseIndex;
 }

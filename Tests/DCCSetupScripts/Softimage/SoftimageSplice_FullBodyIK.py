@@ -143,19 +143,17 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
         fbg.addEdge( "RBicep",   "RForearm" );
         fbg.addEdge( "RForearm", "RHand" );
         fbg.addEdge( "Chest", "Head" );
+        fbg.setRootNode( "Chest" );
         fbg.finalize();
+        fbg.reportNodes();
 
 
         FFBIKPose pose = FFBIKPose(skeleton);
-
-        for (k, v in fbg.nodes ){
-            report( k + ":    "+ skeleton.getBone( k ).name );
-        }
-
         for ( Index i=0; i < skeleton.bones.size; i++){
             report(i +":    "+ skeleton.getBone( i ).name );
         }
 
+        resolver = FABRIKResolver( skeleton, fbg );
         addArmSolver( resolver, fbg, skeleton, handle, "Chest", "LBicep", "LForearm", "LHand");
         addArmSolver( resolver, fbg, skeleton, handle, "Chest", "RBicep", "RForearm", "RHand");
         addLegSolver( resolver, fbg, skeleton, handle, "Chest", "LThigh", "LShin", "LFootBone1");
@@ -169,9 +167,11 @@ operator initCharacter( io Skeleton skeleton, io DrawingHandle handle, io FFBIKG
     fbg.drawNodes( ISkeleton(skeleton), IPose(pose), handle );
     //drawSkeleton( ISkeleton(skeleton), IPose(pose), handle.getRootTransform() );
 
+    /*
     for (Index i=0; i < output.size; i++ ){
         output[i] = pose.getBoneXfo(i).toMat44();
     }
+    */
 
 }
 """)
