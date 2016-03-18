@@ -1,0 +1,77 @@
+/**
+
+*/
+require FABRIK;
+
+
+
+interface IFABRIKSolver {
+    /// resolve bone
+    Solve!( io IPose pose, in Vec3 effector_position );
+    Solve!( io IPose pose, in Mat44 effectors[] );
+
+    SetEffectorIndex!( io Index id );
+    Index GetEffectorCount();
+
+    /// update the pose
+    UpdatePose?( io IPose pose );
+
+    //EvaluateBoneTransforms!( io IPose pose, in Vec3 effector_position );
+
+    /// reset to reference pose, bones controled by this solver
+    ResetToReferencePose!();
+
+    /// debug draw
+    DrawSolver!();
+
+    String GetName();
+
+    Boolean IsReady();
+            Finalize!();
+
+            SetSubBase!( in String nodeName );
+    Index   GetSubBaseIndex();
+    Index   GetRootNodeIndex();
+    Xfo     GetSubBaseXfo();
+
+            OffsetByCentroid!( io IPose pose, Xfo xfo );
+};
+
+/*
+struct SubBaseInfo{
+    Index index;
+    Xfo   xfo;
+};
+*/
+
+
+inline Boolean IsValidToEvaluate( in Vec3 v ){
+    if ( v.length == 0.0 || v.length.isNaN ){
+        return false;
+    }
+    return true;
+}
+
+inline Vec3 SolveJoint( in Xfo a, in Xfo b, Scalar length ){
+    return SolveJoint( a.tr, b.tr, length );
+}
+
+inline Vec3 SolveJoint( in Mat44 a, in Mat44 b, Scalar length ){
+    return SolveJoint( a.translation(), b.translation(), length );
+}
+
+inline Vec3 SolveJoint( in Vec3 a, in Vec3 b, Scalar length ){
+    Vec3 diff = a - b;
+    if ( diff.length == 0 ) {
+        return b;
+    } else {
+        return b + diff.normalize() * length;
+    }
+}
+
+inline Scalar distance( in Vec3 a, in Vec3 b ){
+    Vec3 diff;
+    diff = a - b;
+    return abs( diff.length );
+}
+

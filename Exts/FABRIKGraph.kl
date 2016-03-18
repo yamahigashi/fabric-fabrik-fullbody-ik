@@ -318,6 +318,7 @@ function FFBIKGraph.drawEdges!(in ISkeleton skeleton, io IPose pose, io DrawingH
     InlineMaterial mat  = shader.getOrCreateMaterial('mat');
     InlineTransform edgeTransform = handle.getRootTransform().getChild( this.getInlineEdgeName() );
 
+    /*
     if(edgeTransform == null){
         mat.setUniform('u_normalIsTangent',  0);
         mat.setUniform('u_shadingAmount', 0.5);
@@ -347,6 +348,7 @@ function FFBIKGraph.drawEdges!(in ISkeleton skeleton, io IPose pose, io DrawingH
 
     this.lines.incrementVersion();
     positions.incrementVersion();
+    */
 
 }
 
@@ -354,19 +356,21 @@ function FFBIKGraph.drawEdges!(in ISkeleton skeleton, io IPose pose, io DrawingH
 // Generates a set of inline shapes nested under the provided rootTransform. 
 function FFBIKGraph.drawNodes!(in ISkeleton skeleton, io IPose pose, io DrawingHandle handle ){
     //Points points();
-    GeometryAttributes attributes = this.points.getOrCreateSizesAttribute();
+    // GeometryAttributes attributes = this.points.getOrCreateSizesAttribute();
+    Ref<ScalarAttribute> attributes = this.points.getOrCreateSizesAttribute();
  
-    InlineDrawing draw = handle.getDrawing();
-    InlineShader shader = draw.registerShader(OGLFlatShader());
-    InlineShader surfaceShader = draw.registerShader(OGLSurfaceShader());
-    InlineMaterial mat  = shader.getOrCreateMaterial('mat');
-    InlineMaterial pointsMaterial = shader.getOrCreateMaterial("points");
-    pointsMaterial.setUniform('u_color', Color(1.0, 0.0, 0.0));
+    InlineDrawing  draw = handle.getDrawing();
 
     InlineTransform transform = handle.getRootTransform().getChild(
                                                     this.getInlineNodeName() );
 
+    /*
     if( transform == null){
+        InlineShader   shader = draw.registerShader(OGLFlatShader());
+        InlineShader   surfaceShader = draw.registerShader(OGLSurfaceShader());
+        InlineMaterial mat  = shader.getOrCreateMaterial('mat');
+        InlineMaterial pointsMaterial = shader.getOrCreateMaterial("points");
+        pointsMaterial.setUniform('u_color', Color(1.0, 0.0, 0.0));
 
         // initialize points
         this.points.clear();
@@ -394,6 +398,7 @@ function FFBIKGraph.drawNodes!(in ISkeleton skeleton, io IPose pose, io DrawingH
         }
     }
     this.points.incrementPositionsVersion();
+    */
 
 }
 
