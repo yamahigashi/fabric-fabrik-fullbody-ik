@@ -1,0 +1,2549 @@
+{
+  "objectType" : "Graph",
+  "metadata" : {
+    "timeline_timerFps" : "1000",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -0.5965214967727661,\n    \"y\" : 0.09652107954025269,\n    \"z\" : -0.7973642945289612,\n    \"t\" : -15.35098266601563\n    },\n  \"row1\" : {\n    \"x\" : -3.056113371258107e-07,\n    \"y\" : 0.9926083087921143,\n    \"z\" : 0.120306983590126,\n    \"t\" : 10.64533424377441\n    },\n  \"row2\" : {\n    \"x\" : 0.8031580448150635,\n    \"y\" : 0.07168849557638168,\n    \"z\" : -0.5922183394432068,\n    \"t\" : -9.73994255065918\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "timeline_start" : "1",
+    "uiGraphZoom" : "{\n  \"value\" : 0.3609396815299988\n  }",
+    "timeline_loopMode" : "1",
+    "timeline_simMode" : "0",
+    "camera_focalDistance" : "13.22305583953857",
+    "timeline_current" : "1",
+    "timeline_end" : "50",
+    "uiGraphPan" : "{\n  \"x\" : 263.5274353027344,\n  \"y\" : 38.07994842529297\n  }"
+    },
+  "title" : "",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "resolver",
+      "execPortType" : "Out",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "this",
+      "execPortType" : "Out",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "R_hand",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "R_elbow",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "L_hand",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "L_elbow",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "L_foot",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "L_knee",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "R_foot",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "R_knee",
+      "execPortType" : "In",
+      "typeSpec" : "Vec3"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "nodes" : [
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-432.4220581054688,\"y\":-109.0456008911133}"
+        },
+      "name" : "FABRIKResolver_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "skeleton"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "graph"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Func",
+        "metadata" : {
+          "uiTooltip" : "Supported types:\n  skeleton: Skeleton\n  graph: Ref<FFBIKGraph>\n  result: FABRIKResolver\n"
+          },
+        "title" : "FABRIKResolver",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "skeleton",
+            "execPortType" : "In",
+            "typeSpec" : "Skeleton"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "graph",
+            "execPortType" : "In",
+            "typeSpec" : "Ref<FFBIKGraph>"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "In",
+            "name" : "result",
+            "execPortType" : "Out",
+            "typeSpec" : "FABRIKResolver"
+            }
+          ],
+        "extDeps" : {
+          "FABRIK" : "*"
+          },
+        "origPresetGUID" : "E52E0E0ABC4D7C331619FD24286408A2",
+        "code" : "require FABRIK;
+
+dfgEntry {
+  // Ref<FFBIKGraph> graph_ref = graph;
+  result = FABRIKResolver(skeleton, graph);
+}
+"
+        }
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-148.3229827880859,\"y\":-106.9358520507813}"
+        },
+      "name" : "EmptyDrawingHandle_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "handle"
+          }
+        ],
+      "executable" : "Fabric.Exts.InlineDrawing.DrawingHandle.EmptyDrawingHandle",
+      "presetGUID" : "2440020BA6A1CAB1CEB690A198F99C70"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":495.485107421875,\"y\":-36.33805084228516}"
+        },
+      "name" : "AddSpineSolver_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "resolver"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "handle"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "lumbar2_Mid_Bone"
+            },
+          "name" : "root"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "bicep_Lft_Bone"
+            },
+          "name" : "bicepLft"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "bicep_Rgt_Bone"
+            },
+          "name" : "bicepRgt"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "thigh_Lft_Bone"
+            },
+          "name" : "thighLft"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "thigh_Rgt_Bone"
+            },
+          "name" : "thighRgt"
+          }
+        ],
+      "executable" : "FFFBIK.Component.AddSpineSolver",
+      "presetGUID" : "A26F0BCC15347C62964F4C99F0C13D79"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":348.5303649902344,\"y\":-32.97336196899414}"
+        },
+      "name" : "AddLegSolver_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "resolver"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "handle"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "lumbar2_Mid_Bone"
+            },
+          "name" : "root"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "thigh_Rgt_Bone"
+            },
+          "name" : "bone1"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "shin_Rgt_Bone"
+            },
+          "name" : "bone2"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "foot_Rgt_Bone"
+            },
+          "name" : "bone3"
+          }
+        ],
+      "executable" : "FFFBIK.Component.AddLegSolver",
+      "presetGUID" : "5DD1456BDC3D29B90A38182F845E58AD"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":196.789306640625,\"y\":-37.01662826538086}"
+        },
+      "name" : "AddLegSolver_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "resolver"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "handle"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "lumbar2_Mid_Bone"
+            },
+          "name" : "root"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "thigh_Lft_Bone"
+            },
+          "name" : "bone1"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "shin_Lft_Bone"
+            },
+          "name" : "bone2"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "foot_Lft_Bone"
+            },
+          "name" : "bone3"
+          }
+        ],
+      "executable" : "FFFBIK.Component.AddLegSolver",
+      "presetGUID" : "5DD1456BDC3D29B90A38182F845E58AD"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":38.87092208862305,\"y\":-35.01130676269531}"
+        },
+      "name" : "AddArmSolver_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "resolver"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "handle"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "lumbar2_Mid_Bone"
+            },
+          "name" : "root"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "bicep_Lft_Bone"
+            },
+          "name" : "bone1"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "forearm_Lft_Bone"
+            },
+          "name" : "bone2"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "hand_Lft_Bone"
+            },
+          "name" : "bone3"
+          }
+        ],
+      "executable" : "FFFBIK.Component.AddArmSolver",
+      "presetGUID" : "3CFC783113E128CA8EDECA1AC045B1DB"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-125.9903717041016,\"y\":-34.84011840820313}"
+        },
+      "name" : "AddArmSolver_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "resolver"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "handle"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "lumbar2_Mid_Bone"
+            },
+          "name" : "root"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "bicep_Rgt_Bone"
+            },
+          "name" : "bone1"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "forearm_Rgt_Bone"
+            },
+          "name" : "bone2"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "String" : "hand_Rgt_Bone"
+            },
+          "name" : "bone3"
+          }
+        ],
+      "executable" : "FFFBIK.Component.AddArmSolver",
+      "presetGUID" : "3CFC783113E128CA8EDECA1AC045B1DB"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-1114.061889648438,\"y\":20.09033966064453}"
+        },
+      "name" : "Skeleton_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "name"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "bones"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "Fabric.Exts.Characters.Skeleton.Skeleton",
+      "presetGUID" : "1FC5E2980D8FBBB630825640C129BED6"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-969.2740478515625,\"y\":-85.96102142333984}"
+        },
+      "name" : "AddBones",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "skeleton"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Func",
+        "title" : "AddBones",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "IO",
+            "name" : "skeleton",
+            "execPortType" : "IO",
+            "typeSpec" : "Skeleton"
+            }
+          ],
+        "extDeps" : {
+          "FABRIK" : "*"
+          },
+        "code" : "dfgEntry {
+  skeleton.addBone(\"root\", \"\", Xfo() );
+  skeleton.addBone(\"bicep_Lft_Bone\",     \"arm_Lft_Chn\",        Xfo( Vec3(2.02090957899,      14.7792167213,  -0.848431284415),  Quat(-0.927651013653,  0.00630325953678, -0.027684353318,   0.372367348689)),   2.63653395236);
+  skeleton.addBone(\"forearm_Lft_Bone\",   \"bicep_Lft_Bone\",     Xfo( Vec3(4.65319262393,      14.6940251715,  -0.725387986754),  Quat(-0.92390072814,   -0.0835678093192, -0.0636173639348,  0.367935723727)),   2.61546505404);
+  skeleton.addBone(\"hand_Lft_Bone\",      \"hand_Lft_Chn\",       Xfo( Vec3(7.21095660746,      14.9754557972,  -0.257095710115),  Quat(-0.463212761098,  -0.137349843791,  -0.0866854577564,  0.871237390027)),   1.2025080972);
+  skeleton.addBone(\"bicep_Rgt_Bone\",     \"arm_Rgt_Chn\",        Xfo( Vec3(-2.02090953805,     14.7792173752,  -0.848431356336),  Quat(-0.0283859377662, 0.373006195942,   -0.927363315646,   0.00760901569113)), 2.63653395236);
+  skeleton.addBone(\"forearm_Rgt_Bone\",   \"bicep_Rgt_Bone\",     Xfo( Vec3(-4.65288936006,     14.6861769781,  -0.724588782911),  Quat(0.0645539024774,  -0.368472763374,  0.9237013718,      0.082682477348)),   2.61546505404);
+  skeleton.addBone(\"hand_Rgt_Bone\",      \"hand_Rgt_Chn\",       Xfo( Vec3(-7.21079536001,     14.9612588443,  -0.2533093422),    Quat(0.0806220903861,  -0.85118646362,   0.503458278753,    0.124544948704)),   1.2025080972);
+  skeleton.addBone(\"thorax1_Mid_Bone\",   \"thorax_Mid_Chn\",     Xfo( Vec3(-3.9534678086e-12,  11.9882806957,  -0.256887428953),  Quat(-0.531701542117,  -0.466147476783,  0.531701542116,    0.466147476783)),   3.37078229482);
+  skeleton.addBone(\"scapula1_Rgt_Bone\",  \"scapula_Rgt_Chn\",    Xfo( Vec3(-0.0134124436876,   14.603458196,   -1.40226202867),   Quat(0.010630822139,   0.686924770797,   0.723884722442,    0.0633423515584)),  0.729220886867);
+  skeleton.addBone(\"scapula2_Rgt_Bone\",  \"scapula1_Rgt_Bone\",  Xfo( Vec3(-0.73661686755,     14.6809818663,  -1.45449749259),   Quat(-0.184336363305,  -0.661814747703,  -0.716311850831,   0.122142037173)),   1.42350765373);
+  skeleton.addBone(\"clavicle_Rgt_Bone\",  \"clavicle_Rgt_Chn\",   Xfo( Vec3(-0.279588742967,    14.8112134967,  0.433742071629),   Quat(0.311993690914,   0.00286614206865, -0.950039763095,   0.00872757690571)), 2.16268133634);
+  skeleton.addBone(\"scapula1_Lft_Bone\",  \"scapula_Lft_Chn\",    Xfo( Vec3(0.0134124436866,    14.603458196,   -1.40226202867),   Quat(0.723884761637,   0.0633422287663,  0.0106307343362,   0.686924742175)),   0.729220886867);
+  skeleton.addBone(\"scapula2_Lft_Bone\",  \"scapula1_Lft_Bone\",  Xfo( Vec3(0.736616892959,     14.6809816519,  -1.45449745902),   Quat(0.716311858483,   -0.122142160916,  0.184336266521,    0.661814743542)),   1.42350765373);
+  skeleton.addBone(\"clavicle_Lft_Bone\",  \"clavicle_Lft_Chn\",   Xfo( Vec3(0.279588742963,     14.8112134967,  0.43374207163),    Quat(0.00286620038887, 0.311993670761,   -0.00872775510217, 0.9500397679)),     2.16268133634);
+  skeleton.addBone(\"cervical1_Mid_Bone\", \"cervical_Mid_Chn\",   Xfo( Vec3(8.92154308481e-14,  15.3300922258,  -0.698305257947),  Quat(-0.436396161401,  -0.556379717742,  0.436396161401,    0.556379717741)),   0.45995653989);
+  skeleton.addBone(\"cervical2_Mid_Bone\", \"cervical1_Mid_Bone\", Xfo( Vec3(-3.66097987527e-14, 15.7768056475,  -0.588728173426),  Quat(-0.437297900241,  -0.55567125753,   0.437297900239,    0.555671257532)),   0.459921714248);
+  skeleton.addBone(\"cervical3_Mid_Bone\", \"cervical2_Mid_Bone\", Xfo( Vec3(1.78695196739e-12,  16.2238382841,  -0.480608771552),  Quat(-0.46426997124,   -0.533341723293,  0.464269971242,    0.533341723291)),   0.459927437779);
+  skeleton.addBone(\"lumbar1_Mid_Bone\",   \"lumbar_Mid_Chn\",     Xfo( Vec3(4.93247247365e-15,  10.2323828082,  -0.128196598423),  Quat(-0.481105981204,  -0.518205591295,  0.481105981205,    0.518205591294)),   0.591509348722);
+  skeleton.addBone(\"lumbar2_Mid_Bone\",   \"lumbar1_Mid_Bone\",   Xfo( Vec3(-6.28396045942e-13, 10.8222638723,  -0.0843372807799), Quat(-0.517883088037,  -0.481453120382,  0.517883088038,    0.48145312038)),    0.590862195512);
+  skeleton.addBone(\"lumbar3_Mid_Bone\",   \"lumbar2_Mid_Bone\",   Xfo( Vec3(-2.06428996055e-12, 11.4115577511,  -0.127358885776),  Quat(-0.552072274071,  -0.441832778552,  0.552072274072,    0.44183277855)),    0.591089670265);
+  skeleton.addBone(\"head_Mid_Bone\",      \"head_Mid_Chn\",       Xfo( Vec3(-2.31829712283e-13, 16.6824188064,  -0.416801311344),  Quat(0.542376619824,   0.453682270172,   0.542376619824,    0.453682270172)),   1.74543107082);
+  skeleton.addBone(\"thigh_Rgt_Bone\",     \"leg_Rgt_Chn\",        Xfo( Vec3(-1.09189253003,     9.63678764269,  -0.153153425243),  Quat(-0.403046495643,  0.405149026325,   -0.60960993169,    0.549348268408)),   4.28213777723);
+  skeleton.addBone(\"shin_Rgt_Bone\",      \"thigh_Rgt_Bone\",     Xfo( Vec3(-1.39823668671,     5.3702192418,   0.0449659362325),  Quat(-0.375533924058,  0.430774283197,   -0.572168595084,   0.58824390147)),    4.47147213308);
+  skeleton.addBone(\"foot_Rgt_Bone\",      \"foot_Rgt_Chn\",       Xfo( Vec3(-1.5139886508,      0.913547291364, -0.299620258891),  Quat(0.171685501935,   -0.79204168527,   -0.124103767301,   0.572531494472)),   1.71057902684);
+  skeleton.addBone(\"toes_Rgt_Bone\",      \"foot_Rgt_Bone\",      Xfo( Vec3(-2.00229661668,     0.205246500659, 1.17887422112),    Quat(0.0423869490891,  -0.798690207548,  -0.0318107251374,  0.599404184737)),   0.895697040854);
+  skeleton.addBone(\"thigh_Lft_Bone\",     \"leg_Lft_Chn\",        Xfo( Vec3(1.09189253003,      9.63678764269,  -0.153153425243),  Quat(-0.609609934903,  0.549348271201,   -0.403046491254,   0.405149022069)),   4.28213777723);
+  skeleton.addBone(\"shin_Lft_Bone\",      \"thigh_Lft_Bone\",     Xfo( Vec3(1.39823669072,      5.37021924202,  0.0449659347465),  Quat(-0.572168598107,  0.588243904469,   -0.375533919959,   0.430774278661)),   4.47147213308);
+  skeleton.addBone(\"foot_Lft_Bone\",      \"foot_Lft_Chn\",       Xfo( Vec3(1.5139886508,       0.913547291364, -0.29962025889),   Quat(0.140843108114,   -0.568364962503,  -0.194153520233,   0.787038054275)),   1.71057902684);
+  skeleton.addBone(\"toes_Lft_Bone\",      \"foot_Lft_Bone\",      Xfo( Vec3(1.99043855347,      0.116908412472, 1.13719656798),    Quat(0.00207783260288, -0.600355063244,  -0.00276785696612, 0.799726090369)),   0.895697040854);
+}
+"
+        }
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-791.0858154296875,\"y\":16.15998077392578}"
+        },
+      "name" : "FFBIKGraph_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "skeleton"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "FFFBIK.Graph.FFBIKGraph",
+      "presetGUID" : "CCE5895ED27727523DAF60B856991C8A"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-635.88037109375,\"y\":39.01256942749023}"
+        },
+      "name" : "AddGraph",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "graph"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Func",
+        "title" : "AddGraph",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "IO",
+            "name" : "graph",
+            "execPortType" : "IO",
+            "typeSpec" : "FFBIKGraph"
+            }
+          ],
+        "extDeps" : {
+          "FABRIK" : "*"
+          },
+        "code" : "
+dfgEntry {
+  // upper body triangle
+  graph.addEdge( \"lumbar2_Mid_Bone\", \"bicep_Lft_Bone\" );
+  graph.addEdge( \"lumbar2_Mid_Bone\", \"bicep_Rgt_Bone\" );
+  graph.addEdge( \"bicep_Lft_Bone\",   \"bicep_Rgt_Bone\" );
+  graph.addEdge( \"bicep_Lft_Bone\",   \"cervical1_Mid_Bone\" );
+  graph.addEdge( \"bicep_Rgt_Bone\",   \"cervical1_Mid_Bone\" );
+  // lower body 
+  graph.addEdge( \"lumbar2_Mid_Bone\", \"thigh_Lft_Bone\" );
+  graph.addEdge( \"lumbar2_Mid_Bone\", \"thigh_Rgt_Bone\" );
+  graph.addEdge( \"thigh_Lft_Bone\",   \"thigh_Rgt_Bone\" );
+  // leg
+  graph.addEdge( \"thigh_Lft_Bone\",   \"shin_Lft_Bone\" );
+  graph.addEdge( \"shin_Lft_Bone\",    \"foot_Lft_Bone\" );
+  graph.addEdge( \"thigh_Rgt_Bone\",   \"shin_Rgt_Bone\" );
+  graph.addEdge( \"shin_Rgt_Bone\",    \"foot_Rgt_Bone\" );
+  // arm
+  graph.addEdge( \"bicep_Lft_Bone\",   \"forearm_Lft_Bone\" );
+  graph.addEdge( \"forearm_Lft_Bone\", \"hand_Lft_Bone\" );
+  graph.addEdge( \"bicep_Rgt_Bone\",   \"forearm_Rgt_Bone\" );
+  graph.addEdge( \"forearm_Rgt_Bone\", \"hand_Rgt_Bone\" );
+  graph.addEdge( \"lumbar2_Mid_Bone\", \"cervical1_Mid_Bone\" );
+  graph.finalize();
+  graph.setRootNode( \"lumbar2_Mid_Bone\" );
+  // graph.reportNodes();
+}"
+        }
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":780.3545532226563,\"y\":249.0148162841797}"
+        },
+      "name" : "Solve_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "this"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "pose"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "effectors"
+          }
+        ],
+      "executable" : "FFFBIK.Manager.Solve",
+      "presetGUID" : "A441257C5627A1F1DCE304876718E8B1"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-906.8129272460938,\"y\":160.9590759277344}"
+        },
+      "name" : "FFBIKPose_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "skeleton"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "FFFBIK.Graph.FFBIKPose",
+      "presetGUID" : "C7819C1AC978B180DFF5AD7A91258968"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-560.2289428710938,\"y\":319.5362243652344}"
+        },
+      "name" : "DrawGraph",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "graph"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "pose"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "handle"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Graph",
+        "metadata" : {
+          "uiGraphZoom" : "{\n  \"value\" : 1.0\n  }",
+          "uiGraphPan" : "{\n  \"x\" : -542.0892333984375,\n  \"y\" : -706.5089111328125\n  }"
+          },
+        "title" : "DrawGraph",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "name" : "graph",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "name" : "pose",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "In",
+            "name" : "handle",
+            "execPortType" : "Out",
+            "typeSpec" : "DrawingHandle"
+            }
+          ],
+        "extDeps" : {},
+        "nodes" : [
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":760.9998168945313,\"y\":878.9534301757813}"
+              },
+            "name" : "DrawEdges_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "pose"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "handle"
+                }
+              ],
+            "executable" : "FFFBIK.DebugDraw.DrawEdges",
+            "presetGUID" : "D64BFD1F9673EDFED2676D85BBD745C5"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":531.3722534179688,\"y\":1035.484741210938}"
+              },
+            "name" : "EmptyDrawingHandle_6",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "handle"
+                }
+              ],
+            "executable" : "Fabric.Exts.InlineDrawing.DrawingHandle.EmptyDrawingHandle",
+            "presetGUID" : "2440020BA6A1CAB1CEB690A198F99C70"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":1038.806274414063,\"y\":922.0643920898438}"
+              },
+            "name" : "DrawNodes_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "pose"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "handle"
+                }
+              ],
+            "executable" : "FFFBIK.DebugDraw.DrawNodes",
+            "presetGUID" : "2EED9E9B07B8561CE355408C6508C5A1"
+            }
+          ],
+        "connections" : {
+          "graph" : [
+            "DrawEdges_1.this"
+            ],
+          "pose" : [
+            "DrawEdges_1.pose",
+            "DrawNodes_1.pose"
+            ],
+          "DrawEdges_1.this" : [
+            "DrawNodes_1.this"
+            ],
+          "EmptyDrawingHandle_6.handle" : [
+            "DrawEdges_1.handle",
+            "DrawNodes_1.handle"
+            ],
+          "DrawNodes_1.handle" : [
+            "handle"
+            ]
+          }
+        }
+      },
+    {
+      "objectType" : "User",
+      "metadata" : {
+        "uiTitle" : "AddSkeletonGraph",
+        "uiGraphPos" : "{\"x\":-1171.901733398438,\"y\":-171.4197845458984}",
+        "uiGraphSize" : "{\"w\":978.5157470703125,\"h\":455.1803283691406}"
+        },
+      "name" : "backDrop",
+      "ports" : []
+      },
+    {
+      "objectType" : "User",
+      "metadata" : {
+        "uiTitle" : "AddSolvers",
+        "uiGraphPos" : "{\"x\":-154.9771423339844,\"y\":-168.7658843994141}",
+        "uiGraphSize" : "{\"w\":873.3880004882813,\"h\":433.8731079101563}"
+        },
+      "name" : "backDrop_2",
+      "ports" : []
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-569.7344360351563,\"y\":450.8752136230469}"
+        },
+      "name" : "IKHandlers",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "array"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "R_hand"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "R_elbow"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "L_hand"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "L_elbow"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "L_foot"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "L_knee"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "R_foot"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "R_knee"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Graph",
+        "title" : "IKHandlers",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "In",
+            "name" : "array",
+            "execPortType" : "Out"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "R_hand",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "R_elbow",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "L_hand",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "L_elbow",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "L_foot",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "L_knee",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "R_foot",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "R_knee",
+            "execPortType" : "In"
+            }
+          ],
+        "extDeps" : {},
+        "nodes" : [
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-477.2184448242188,\"y\":521.5635986328125}"
+              },
+            "name" : "Push_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-447.3269348144531,\"y\":1293.012939453125}"
+              },
+            "name" : "Push_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-445.2394714355469,\"y\":1161.956665039063}"
+              },
+            "name" : "Push_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-440.9502258300781,\"y\":1405.797485351563}"
+              },
+            "name" : "Push_5",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-444.0456237792969,\"y\":1033.878051757813}"
+              },
+            "name" : "Push_6",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-459.4544372558594,\"y\":891.5684814453125}"
+              },
+            "name" : "Push_7",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-470.1196594238281,\"y\":775.3489990234375}"
+              },
+            "name" : "Push_8",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-476.0411376953125,\"y\":649.6422119140625}"
+              },
+            "name" : "Push_10",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-725.0477294921875,\"y\":504.289794921875}"
+              },
+            "name" : "Xfo_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "ori"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "Vec3" : {
+                    "x" : 15,
+                    "y" : 10,
+                    "z" : 0
+                    }
+                  },
+                "name" : "tr"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "sc"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.Xfo",
+            "presetGUID" : "A0F6CD63A2069530481F214C62A069AA"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-597.9949340820313,\"y\":521.5350952148438}"
+              },
+            "name" : "ToMat44_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-726.5269775390625,\"y\":642.0736694335938}"
+              },
+            "name" : "Xfo_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "ori"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "Vec3" : {
+                    "x" : 15,
+                    "y" : 0,
+                    "z" : 0
+                    }
+                  },
+                "name" : "tr"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "sc"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.Xfo",
+            "presetGUID" : "A0F6CD63A2069530481F214C62A069AA"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-606.4152221679688,\"y\":655.9317016601563}"
+              },
+            "name" : "ToMat44_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-737.4569091796875,\"y\":756.0211791992188}",
+              "uiCollapsedState" : "0"
+              },
+            "name" : "Xfo_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "ori"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "Vec3" : {
+                    "x" : 3,
+                    "y" : 0,
+                    "z" : 0
+                    }
+                  },
+                "name" : "tr"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "sc"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.Xfo",
+            "presetGUID" : "A0F6CD63A2069530481F214C62A069AA"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-605.533447265625,\"y\":772.0263671875}"
+              },
+            "name" : "ToMat44_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-729.2237548828125,\"y\":906.7314453125}"
+              },
+            "name" : "Xfo_4",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "ori"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "Vec3" : {
+                    "x" : 6.300000190734863,
+                    "y" : 0,
+                    "z" : 0
+                    }
+                  },
+                "name" : "tr"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "sc"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.Xfo",
+            "presetGUID" : "A0F6CD63A2069530481F214C62A069AA"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-611.5830688476563,\"y\":910.3969116210938}"
+              },
+            "name" : "ToMat44_4",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-717.3093872070313,\"y\":1039.638671875}"
+              },
+            "name" : "Xfo_5",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "ori"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "tr"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "sc"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.Xfo",
+            "presetGUID" : "A0F6CD63A2069530481F214C62A069AA"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-599.19384765625,\"y\":1038.643432617188}"
+              },
+            "name" : "ToMat44_5",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-721.7489013671875,\"y\":1158.503295898438}"
+              },
+            "name" : "Xfo_6",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "ori"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "Vec3" : {
+                    "x" : 0,
+                    "y" : 9.899999618530273,
+                    "z" : 0
+                    }
+                  },
+                "name" : "tr"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "sc"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.Xfo",
+            "presetGUID" : "A0F6CD63A2069530481F214C62A069AA"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-590.4871215820313,\"y\":1153.685791015625}"
+              },
+            "name" : "ToMat44_6",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-716.2387084960938,\"y\":1282.51416015625}"
+              },
+            "name" : "Xfo_7",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "ori"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "Vec3" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 10
+                    }
+                  },
+                "name" : "tr"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "sc"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.Xfo",
+            "presetGUID" : "A0F6CD63A2069530481F214C62A069AA"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-582.067626953125,\"y\":1288.060668945313}"
+              },
+            "name" : "ToMat44_7",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-702.1871948242188,\"y\":1413.582153320313}"
+              },
+            "name" : "Xfo_8",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "ori"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "tr"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "sc"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.Xfo",
+            "presetGUID" : "A0F6CD63A2069530481F214C62A069AA"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-579.851806640625,\"y\":1412.625}"
+              },
+            "name" : "ToMat44_8",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            }
+          ],
+        "connections" : {
+          "R_hand" : [
+            "Xfo_1.tr"
+            ],
+          "R_elbow" : [
+            "Xfo_2.tr"
+            ],
+          "L_hand" : [
+            "Xfo_3.tr"
+            ],
+          "L_elbow" : [
+            "Xfo_4.tr"
+            ],
+          "L_foot" : [
+            "Xfo_5.tr"
+            ],
+          "L_knee" : [
+            "Xfo_6.tr"
+            ],
+          "R_foot" : [
+            "Xfo_7.tr"
+            ],
+          "R_knee" : [
+            "Xfo_8.tr"
+            ],
+          "Push_1.array" : [
+            "Push_10.array"
+            ],
+          "Push_2.array" : [
+            "Push_5.array"
+            ],
+          "Push_3.array" : [
+            "Push_2.array"
+            ],
+          "Push_5.array" : [
+            "array"
+            ],
+          "Push_6.array" : [
+            "Push_3.array"
+            ],
+          "Push_7.array" : [
+            "Push_6.array"
+            ],
+          "Push_8.array" : [
+            "Push_7.array"
+            ],
+          "Push_10.array" : [
+            "Push_8.array"
+            ],
+          "Xfo_1.result" : [
+            "ToMat44_1.this"
+            ],
+          "ToMat44_1.result" : [
+            "Push_1.element"
+            ],
+          "Xfo_2.result" : [
+            "ToMat44_2.this"
+            ],
+          "ToMat44_2.result" : [
+            "Push_10.element"
+            ],
+          "Xfo_3.result" : [
+            "ToMat44_3.this"
+            ],
+          "ToMat44_3.result" : [
+            "Push_8.element"
+            ],
+          "Xfo_4.result" : [
+            "ToMat44_4.this"
+            ],
+          "ToMat44_4.result" : [
+            "Push_7.element"
+            ],
+          "Xfo_5.result" : [
+            "ToMat44_5.this"
+            ],
+          "ToMat44_5.result" : [
+            "Push_6.element"
+            ],
+          "Xfo_6.result" : [
+            "ToMat44_6.this"
+            ],
+          "ToMat44_6.result" : [
+            "Push_3.element"
+            ],
+          "Xfo_7.result" : [
+            "ToMat44_7.this"
+            ],
+          "ToMat44_7.result" : [
+            "Push_2.element"
+            ],
+          "Xfo_8.result" : [
+            "ToMat44_8.this"
+            ],
+          "ToMat44_8.result" : [
+            "Push_5.element"
+            ]
+          }
+        }
+      }
+    ],
+  "connections" : {
+    "R_hand" : [
+      "IKHandlers.R_hand"
+      ],
+    "R_elbow" : [
+      "IKHandlers.R_elbow"
+      ],
+    "L_hand" : [
+      "IKHandlers.L_hand"
+      ],
+    "L_elbow" : [
+      "IKHandlers.L_elbow"
+      ],
+    "L_foot" : [
+      "IKHandlers.L_foot"
+      ],
+    "L_knee" : [
+      "IKHandlers.L_knee"
+      ],
+    "R_foot" : [
+      "IKHandlers.R_foot"
+      ],
+    "R_knee" : [
+      "IKHandlers.R_knee"
+      ],
+    "FABRIKResolver_1.result" : [
+      "AddArmSolver_1.resolver"
+      ],
+    "EmptyDrawingHandle_1.handle" : [
+      "AddArmSolver_1.handle"
+      ],
+    "AddSpineSolver_1.resolver" : [
+      "resolver",
+      "Solve_1.this"
+      ],
+    "AddLegSolver_2.resolver" : [
+      "AddSpineSolver_1.resolver"
+      ],
+    "AddLegSolver_2.handle" : [
+      "AddSpineSolver_1.handle"
+      ],
+    "AddLegSolver_1.resolver" : [
+      "AddLegSolver_2.resolver"
+      ],
+    "AddLegSolver_1.handle" : [
+      "AddLegSolver_2.handle"
+      ],
+    "AddArmSolver_2.resolver" : [
+      "AddLegSolver_1.resolver"
+      ],
+    "AddArmSolver_2.handle" : [
+      "AddLegSolver_1.handle"
+      ],
+    "AddArmSolver_1.resolver" : [
+      "AddArmSolver_2.resolver"
+      ],
+    "AddArmSolver_1.handle" : [
+      "AddArmSolver_2.handle"
+      ],
+    "Skeleton_1.result" : [
+      "AddBones.skeleton",
+      "FFBIKPose_2.skeleton"
+      ],
+    "AddBones.skeleton" : [
+      "FFBIKGraph_1.skeleton",
+      "FABRIKResolver_1.skeleton"
+      ],
+    "FFBIKGraph_1.result" : [
+      "AddGraph.graph",
+      "DrawGraph.graph"
+      ],
+    "AddGraph.graph" : [
+      "FABRIKResolver_1.graph"
+      ],
+    "Solve_1.this" : [
+      "this"
+      ],
+    "FFBIKPose_2.result" : [
+      "DrawGraph.pose",
+      "Solve_1.pose"
+      ],
+    "IKHandlers.array" : [
+      "Solve_1.effectors"
+      ]
+    },
+  "requiredPresets" : {
+    "Fabric.Exts.InlineDrawing.DrawingHandle.EmptyDrawingHandle" : {
+      "objectType" : "Graph",
+      "title" : "EmptyDrawingHandle",
+      "cacheRule" : "never",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "handle",
+          "execPortType" : "Out",
+          "typeSpec" : "DrawingHandle"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "2440020BA6A1CAB1CEB690A198F99C70",
+      "nodes" : [
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\": 894, \"y\": 100}"
+            },
+          "name" : "Clear",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "IO",
+              "name" : "this"
+              }
+            ],
+          "executable" : "Fabric.Exts.InlineDrawing.DrawingHandle.Clear",
+          "presetGUID" : "39E8D81FA7C7C4A825877F16EFE3564F",
+          "cacheRule" : "never"
+          },
+        {
+          "objectType" : "Var",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\":567.0,\"y\":56.0}",
+            "uiCollapsedState" : "0"
+            },
+          "name" : "handleVar",
+          "ports" : [
+            {
+              "objectType" : "VarPort",
+              "nodePortType" : "IO",
+              "name" : "value"
+              }
+            ],
+          "dataType" : "DrawingHandle",
+          "extDep" : "InlineDrawing:*"
+          },
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\":287.0,\"y\":56.0}"
+            },
+          "name" : "CreateDrawingHandle",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "Out",
+              "name" : "handle"
+              }
+            ],
+          "definition" : {
+            "objectType" : "Func",
+            "title" : "Create DrawingHandle",
+            "ports" : [
+              {
+                "objectType" : "Port",
+                "nodePortType" : "In",
+                "name" : "handle",
+                "execPortType" : "Out",
+                "typeSpec" : "DrawingHandle"
+                }
+              ],
+            "extDeps" : {
+              "InlineDrawing" : "*"
+              },
+            "code" : "dfgEntry {
+  handle = DrawingHandle();
+}
+"
+            }
+          }
+        ],
+      "connections" : {
+        "Clear.this" : [
+          "handle"
+          ],
+        "handleVar.value" : [
+          "Clear.this"
+          ],
+        "CreateDrawingHandle.handle" : [
+          "handleVar.value"
+          ]
+        }
+      },
+    "Fabric.Exts.InlineDrawing.DrawingHandle.Clear" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/InlineDrawing/DrawingHandle.html",
+        "uiTooltip" : "removes all contents from the DrawingHandle\n\n Supported by DrawingHandle"
+        },
+      "title" : "Clear",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "DrawingHandle"
+          }
+        ],
+      "extDeps" : {
+        "InlineDrawing" : "*"
+        },
+      "presetGUID" : "39E8D81FA7C7C4A825877F16EFE3564F",
+      "code" : "require InlineDrawing;
+
+dfgEntry {
+  this.clear();
+}
+"
+      },
+    "FFFBIK.Component.AddSpineSolver" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  resolver: FABRIKResolver\n  handle: DrawingHandle\n  root: String\n  bicepLft: String\n  bicepRgt: String\n  thighLft: String\n  thighRgt: String\n"
+        },
+      "title" : "AddSpineSolver",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "resolver",
+          "execPortType" : "IO",
+          "typeSpec" : "FABRIKResolver"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "handle",
+          "execPortType" : "IO",
+          "typeSpec" : "DrawingHandle"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "root",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bicepLft",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bicepRgt",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "thighLft",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "thighRgt",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "A26F0BCC15347C62964F4C99F0C13D79",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  addSpineSolver(resolver, handle, root, bicepLft, bicepRgt, thighLft, thighRgt);
+}
+"
+      },
+    "FFFBIK.Component.AddLegSolver" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  resolver: FABRIKResolver\n  handle: DrawingHandle\n  root: String\n  bone1: String\n  bone2: String\n  bone3: String\n"
+        },
+      "title" : "AddLegSolver",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "resolver",
+          "execPortType" : "IO",
+          "typeSpec" : "FABRIKResolver"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "handle",
+          "execPortType" : "IO",
+          "typeSpec" : "DrawingHandle"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "root",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bone1",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bone2",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bone3",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "5DD1456BDC3D29B90A38182F845E58AD",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  addLegSolver(resolver, handle, root, bone1, bone2, bone3);
+}
+"
+      },
+    "FFFBIK.Component.AddArmSolver" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  resolver: FABRIKResolver\n  handle: DrawingHandle\n  root: String\n  bone1: String\n  bone2: String\n  bone3: String\n"
+        },
+      "title" : "AddArmSolver",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "resolver",
+          "execPortType" : "IO",
+          "typeSpec" : "FABRIKResolver"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "handle",
+          "execPortType" : "IO",
+          "typeSpec" : "DrawingHandle"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "root",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bone1",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bone2",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bone3",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "3CFC783113E128CA8EDECA1AC045B1DB",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  addArmSolver(resolver, handle, root, bone1, bone2, bone3);
+}
+"
+      },
+    "Fabric.Exts.Characters.Skeleton.Skeleton" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/Characters/Skeleton.html",
+        "uiTooltip" : "Constructs a skeleton using the given name and bones array.\n\n Supported by Skeleton"
+        },
+      "title" : "Skeleton",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "name",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "bones",
+          "execPortType" : "In",
+          "typeSpec" : "Bone[]"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "Skeleton"
+          }
+        ],
+      "extDeps" : {
+        "Characters" : "*"
+        },
+      "presetGUID" : "1FC5E2980D8FBBB630825640C129BED6",
+      "code" : "require Characters;
+
+dfgEntry {
+  result = Skeleton(name, bones);
+}
+"
+      },
+    "FFFBIK.Graph.FFBIKGraph" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  skeleton: Ref<Skeleton>\n  result: FFBIKGraph\n"
+        },
+      "title" : "FFBIKGraph",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "skeleton",
+          "execPortType" : "In",
+          "typeSpec" : "Skeleton"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "FFBIKGraph"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "CCE5895ED27727523DAF60B856991C8A",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  Ref<Skeleton> skeleton_ref = skeleton;
+  result = FFBIKGraph(skeleton_ref);
+}
+"
+      },
+    "FFFBIK.Manager.Solve" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  this: FABRIKResolver\n  pose: IPose\n  effectors: Mat44[]\n"
+        },
+      "title" : "Solve",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "FABRIKResolver"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "pose",
+          "execPortType" : "IO",
+          "typeSpec" : "IPose"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+            },
+          "nodePortType" : "Out",
+          "name" : "effectors",
+          "execPortType" : "In",
+          "typeSpec" : "Mat44[]"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "A441257C5627A1F1DCE304876718E8B1",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  this.solve(pose, effectors);
+}
+"
+      },
+    "FFFBIK.Graph.FFBIKPose" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  skeleton: Skeleton\n  result: FFBIKPose\n"
+        },
+      "title" : "FFBIKPose",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "skeleton",
+          "execPortType" : "In",
+          "typeSpec" : "Skeleton"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "FFBIKPose"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "C7819C1AC978B180DFF5AD7A91258968",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  result = FFBIKPose(skeleton);
+}
+"
+      },
+    "FFFBIK.DebugDraw.DrawEdges" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n  pose: IPose\n  handle: DrawingHandle\n"
+        },
+      "title" : "DrawEdges",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "FFBIKGraph"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "pose",
+          "execPortType" : "IO",
+          "typeSpec" : "IPose"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "handle",
+          "execPortType" : "IO",
+          "typeSpec" : "DrawingHandle"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "D64BFD1F9673EDFED2676D85BBD745C5",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  this.drawEdges(pose, handle);
+}
+"
+      },
+    "FFFBIK.DebugDraw.DrawNodes" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n  pose: IPose\n  handle: DrawingHandle\n"
+        },
+      "title" : "DrawNodes",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "FFBIKGraph"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "pose",
+          "execPortType" : "IO",
+          "typeSpec" : "IPose"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "handle",
+          "execPortType" : "IO",
+          "typeSpec" : "DrawingHandle"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "2EED9E9B07B8561CE355408C6508C5A1",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  this.drawNodes(pose, handle);
+}
+"
+      },
+    "Fabric.Core.Array.Push" : {
+      "objectType" : "Func",
+      "title" : "Push[]",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "array",
+          "execPortType" : "IO",
+          "typeSpec" : "$TYPE$[]"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "element",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "572880BF96ACC34D6987BE3333715F52",
+      "code" : "
+dfgEntry {
+	array.push(element);
+}
+"
+      },
+    "Fabric.Exts.Math.Xfo.Xfo" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 99,\n  \"g\" : 129,\n  \"b\" : 92\n  }",
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/Math/Xfo.html",
+        "uiTooltip" : "Constructor from the orientation, translation and scaling\n\n Supported by Xfo"
+        },
+      "title" : "Xfo",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 0,\n  \"g\" : 191,\n  \"b\" : 232\n  }"
+            },
+          "nodePortType" : "Out",
+          "name" : "ori",
+          "execPortType" : "In",
+          "typeSpec" : "Quat"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 255,\n  \"g\" : 242,\n  \"b\" : 0\n  }"
+            },
+          "nodePortType" : "Out",
+          "name" : "tr",
+          "execPortType" : "In",
+          "typeSpec" : "Vec3"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 255,\n  \"g\" : 242,\n  \"b\" : 0\n  }"
+            },
+          "nodePortType" : "Out",
+          "defaultValues" : {
+            "Vec3" : {
+              "x" : 1,
+              "y" : 1,
+              "z" : 1
+              }
+            },
+          "name" : "sc",
+          "execPortType" : "In",
+          "typeSpec" : "Vec3"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+            },
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "Xfo"
+          }
+        ],
+      "extDeps" : {
+        "Math" : "*"
+        },
+      "presetGUID" : "A0F6CD63A2069530481F214C62A069AA",
+      "code" : "require Math;
+
+dfgEntry {
+  result = Xfo(ori, tr, sc);
+}
+"
+      },
+    "Fabric.Exts.Math.Xfo.ToMat44" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 99,\n  \"g\" : 129,\n  \"b\" : 92\n  }",
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/Math/Xfo.html",
+        "uiTooltip" : "Returns this xfo as a Mat44\n\n Supported by Xfo"
+        },
+      "title" : "ToMat44",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+            },
+          "nodePortType" : "Out",
+          "name" : "this",
+          "execPortType" : "In",
+          "typeSpec" : "Xfo"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+            },
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "Mat44"
+          }
+        ],
+      "extDeps" : {
+        "Math" : "*"
+        },
+      "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A",
+      "code" : "require Math;
+
+dfgEntry {
+  result = this.toMat44();
+}
+"
+      }
+    },
+  "bindingLoadDiags" : [
+    {
+      "desc" : "Unable to decode value for argument 'this': KL compile failed: extension 'FABRIK' has been disabled",
+      "diagIndex" : 1
+      }
+    ],
+  "args" : [
+    {
+      "type" : "FABRIKResolver",
+      "value" : null,
+      "ext" : "FABRIK"
+      },
+    {
+      "type" : "FABRIKResolver",
+      "value" : null,
+      "ext" : "FABRIK"
+      },
+    {
+      "type" : "Vec3",
+      "value" : {
+        "x" : -1.399999976158142,
+        "y" : 12.69999980926514,
+        "z" : 5.099999904632568
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Vec3",
+      "value" : {
+        "x" : 9.300000190734863,
+        "y" : 5.400000095367432,
+        "z" : 3
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Vec3",
+      "value" : {
+        "x" : 2.400000095367432,
+        "y" : 15.69999980926514,
+        "z" : -4.300000190734863
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Vec3",
+      "value" : {
+        "x" : 14.39999961853027,
+        "y" : 0,
+        "z" : -0.300000011920929
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Vec3",
+      "value" : {
+        "x" : 0,
+        "y" : 2,
+        "z" : -2
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Vec3",
+      "value" : {
+        "x" : -2.599999904632568,
+        "y" : 5,
+        "z" : -2
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Vec3",
+      "value" : {
+        "x" : 0,
+        "y" : 1,
+        "z" : 2
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Vec3",
+      "value" : {
+        "x" : -5,
+        "y" : 15,
+        "z" : 0
+        },
+      "ext" : "Math"
+      }
+    ]
+  }
