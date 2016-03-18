@@ -1,0 +1,59 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/Characters/Skeleton.html",
+    "uiTooltip" : "Supported types:\n  this: Skeleton\n  name: String\n  parentName: String\n  xfo: Xfo\n  length: Scalar\n"
+    },
+  "title" : "AddBone",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "Skeleton"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "name",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "parentName",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
+      "nodePortType" : "Out",
+      "name" : "xfo",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "length",
+      "execPortType" : "In",
+      "typeSpec" : "Scalar"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "875CC91CD5E83960BB00DB6822643A86",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.addBone(name, parentName, xfo, length);
+}
+"
+  }

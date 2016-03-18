@@ -1,0 +1,48 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n  id: Index\n  array: Index[]\n  result: Index[]\n"
+    },
+  "title" : "SearchNoisy",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "this",
+      "execPortType" : "In",
+      "typeSpec" : "FFBIKGraph"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "id",
+      "execPortType" : "IO",
+      "typeSpec" : "Index"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "array",
+      "execPortType" : "IO",
+      "typeSpec" : "Index[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "Index[]"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "D26C7B722EBFFDE20EB4490E9A2712D9",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  result = this.searchNoisy(id, array);
+}
+"
+  }

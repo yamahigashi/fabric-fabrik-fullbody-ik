@@ -1,0 +1,34 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: FABRIKSolver\n  result: Boolean\n"
+    },
+  "title" : "IsReady",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "this",
+      "execPortType" : "In",
+      "typeSpec" : "FABRIKSolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "Boolean"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "0510BAD32BA4BA53A99A4384E647FA51",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  result = this.IsReady();
+}
+"
+  }

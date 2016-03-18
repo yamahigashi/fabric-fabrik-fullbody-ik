@@ -1,0 +1,27 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n"
+    },
+  "title" : "Finalize",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "FFBIKGraph"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "99E49872E466499DFFFE77CEFE4CC1C5",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.finalize();
+}
+"
+  }

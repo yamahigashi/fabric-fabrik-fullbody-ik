@@ -1,0 +1,42 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  skeleton: Skeleton\n  graph: Ref<FFBIKGraph>\n  result: FABRIKResolver\n"
+    },
+  "title" : "FABRIKResolver",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "skeleton",
+      "execPortType" : "In",
+      "typeSpec" : "Skeleton"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "graph",
+      "execPortType" : "In",
+      "typeSpec" : "FFBIKGraph"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "FABRIKResolver"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "E52E0E0ABC4D7C331619FD24286408A2",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  Ref<FFBIKGraph> graph_ref = graph;
+  result = FABRIKResolver(skeleton, graph_ref);
+}
+"
+  }

@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n  a: String\n  b: String\n"
+    },
+  "title" : "AddEdge",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "FFBIKGraph"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "a",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "b",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "956B98ED1E83A775F4A5687F5385BCA1",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.addEdge(a, b);
+}
+"
+  }

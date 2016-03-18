@@ -1,0 +1,49 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  skeleton: Ref<Skeleton>\n  handle: DrawingHandle\n  boneNames: String[]\n  result: FABRIKSolver\n"
+    },
+  "title" : "FABRIKSolver",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "skeleton",
+      "execPortType" : "In",
+      "typeSpec" : "Skeleton"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "handle",
+      "execPortType" : "IO",
+      "typeSpec" : "DrawingHandle"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "boneNames",
+      "execPortType" : "In",
+      "typeSpec" : "String[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "FABRIKSolver"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "5C803DC30F99CEB379981BC7D377E549",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  Ref<Skeleton> skeleton_ref = skeleton;
+  result = FABRIKSolver(skeleton_ref, handle, boneNames);
+}
+"
+  }

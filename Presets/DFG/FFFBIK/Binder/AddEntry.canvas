@@ -1,0 +1,34 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: Binder\n  boneName: String\n"
+    },
+  "title" : "AddEntry",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "Binder"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "boneName",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "FE6C745C774DAFACFB1BA74020D0071A",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.AddEntry(boneName);
+}
+"
+  }

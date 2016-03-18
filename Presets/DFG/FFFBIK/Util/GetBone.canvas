@@ -1,0 +1,42 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/Characters/Skeleton.html",
+    "uiTooltip" : "Supported types:\n  this: Skeleton\n  name: String\n  result: Bone\n"
+    },
+  "title" : "GetBone",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "this",
+      "execPortType" : "In",
+      "typeSpec" : "Skeleton"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "name",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "Bone"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "997F7EC4FAA4E68C596ADD29E30A33D3",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  result = this.getBone(name);
+}
+"
+  }

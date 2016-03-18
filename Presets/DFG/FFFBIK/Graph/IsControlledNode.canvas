@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n  id: Index\n  result: Boolean\n"
+    },
+  "title" : "IsControlledNode",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "this",
+      "execPortType" : "In",
+      "typeSpec" : "FFBIKGraph"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "id",
+      "execPortType" : "In",
+      "typeSpec" : "Index"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "Boolean"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "3EC20D046DFE7931F09DEF98D5F17C85",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  result = this.isControlledNode(id);
+}
+"
+  }

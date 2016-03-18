@@ -11,6 +11,8 @@ require Characters;
 // 普通に skeleton 継承した方がいいかもしれない
 //
 ---------------------------------------------------------------------------------------*/
+/// \dfgPresetFolder Graph
+/// \internal
 object FFBIKEdge {
     Index a;
     Index b;
@@ -18,11 +20,13 @@ object FFBIKEdge {
     Vec3 referencePose;  // diff vector a to b
 };
 
+/// \internal
 function FFBIKEdge( in Index _a, in Index _b ){
     this.a = _a;
     this.b = _b;
 }
 
+/// \internal
 function String FFBIKEdge.getName(){
     return "FFBIKEdge:" + this.a + "to" + this.b;
 }
@@ -35,6 +39,7 @@ function String FFBIKEdge.getName(){
 //
 //
 ---------------------------------------------------------------------------------------*/
+/// \dfgPresetFolder Graph
 object FFBIKGraph {
     private Skeleton skeleton;
     private Index nodes[Index][];
@@ -49,6 +54,7 @@ object FFBIKGraph {
 
 
 // constructor
+/// \dfgPresetFolder Graph
 function FFBIKGraph( Ref<Skeleton> skeleton ){
     //this.lines = Lines();
     this.skeleton = skeleton;
@@ -59,6 +65,7 @@ function FFBIKGraph( Ref<Skeleton> skeleton ){
 }
 
 
+/// \dfgPresetFolder Graph
 function FFBIKGraph.finalize!(){
     this.distinctNodes();
     this.points.resize( this.getNodeCount() );
@@ -66,6 +73,7 @@ function FFBIKGraph.finalize!(){
     //this.setRootNode( this.nodes[0][0] );
 }
 
+/// \dfgPresetFolder Graph
 function FFBIKGraph.addEdge!( in String a, in String b ){
     Index ba = this.skeleton.findBone( a );
     Index bb = this.skeleton.findBone( b );
@@ -75,11 +83,13 @@ function FFBIKGraph.addEdge!( in String a, in String b ){
     this.edges.push( edge );
 }
 
+/// \dfgPresetFolder Graph
 function FFBIKGraph.addNode( String boneName ){
     Index id = this.skeleton.findBone( boneName );
     this.nodes[ id ];
 }
 
+/// \dfgPresetFolder Graph
 function FFBIKGraph.addNode!( String boneName, Boolean isControlled ){
     Index id = this.skeleton.findBone( boneName );
     this.nodes[ id ];
@@ -88,28 +98,33 @@ function FFBIKGraph.addNode!( String boneName, Boolean isControlled ){
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
+/// \dfgPresetFolder Graph
 function FFBIKGraph.registerControllBone!( String boneName ){
     Index id = this.skeleton.findBone( boneName );
     this.controlledNodes.push(id);
 }
 
 
+/// \dfgPresetFolder Graph
 function FFBIKGraph.markAsControlled!( in Index id ){
     this.controlledNodes.push(id);
 }
 
 
+/// \dfgPresetFolder Graph
 function Boolean FFBIKGraph.isControlledNode( in Index id ){
     return isExistsIn( id, this.controlledNodes );
 }
 
 
+/// \dfgPresetFolder Graph
 function FFBIKGraph.setRootNode!( in String boneName ){
     Index id = this.skeleton.findBone( boneName );
     this.setRootNode( id );
 }
 
 
+/// \dfgPresetFolder Graph
 function FFBIKGraph.setRootNode!( in Index id ){
     if ( this.root != -1 ){
         setError( "this FFBIKGraph's root is already defined!!!  as "+ this. root );
@@ -120,12 +135,13 @@ function FFBIKGraph.setRootNode!( in Index id ){
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
+/// \dfgPresetFolder Graph
 function Index[] FFBIKGraph.searchNoisy( io Index id, io Index array[] ){
     Index results[];
     Index counter[] = this.nodes[ id ];
-    for (Index i=0; i < counter.size; i++ ){
+    for (Index i=0; i < counter.size(); i++ ){
         Boolean hit = false;
-        for (Index j=0; j < array.size; j++ ){
+        for (Index j=0; j < array.size(); j++ ){
             if (counter[i] == array[j] ){
                 hit = true;
             }
@@ -148,6 +164,7 @@ function FFBIKGraph.addNode( Bone bone ){
 
 /*-------------------------------------------------------------------------------------*/
 /// used for search temporary
+/// \internal
 object OneNode {
     Index   index;
     Boolean done;
@@ -163,17 +180,22 @@ function OneNode( Index id, Index to[] ){
     this.to    = to;
 }
 
+/// \dfgPresetFolder Graph
+/// \internal
 function Integer FFBIKGraph.searchSmallerDistance?( Index end ){
     return this.searchSmallerDistance( this.root, end );
 }
 
 /// Dijkstra's Algorithm
+/// \dfgPresetFolder Graph
+/// \internal
 function Integer FFBIKGraph.searchSmallerDistance( String start, String end ){
     return this.searchSmallerDistance(
                         this.skeleton.findBone( start ),
                         this.skeleton.findBone( end   )
                     );
 }
+/// \internal
 function Integer FFBIKGraph.searchSmallerDistance( Index start, Index end ){
 
     // initialize set start node's cost 0, others -1;
@@ -189,7 +211,7 @@ function Integer FFBIKGraph.searchSmallerDistance( Index start, Index end ){
     //
     while( true ){
         OneNode doneNode = null;
-        //for (Index i=0; i < tmpNodes.size; i++ ){
+        //for (Index i=0; i < tmpNodes.size(); i++ ){
         for ( k, v in tmpNodes ){
             if( v.done == true || v.cost < 0 ){
                 continue;
@@ -208,7 +230,7 @@ function Integer FFBIKGraph.searchSmallerDistance( Index start, Index end ){
         doneNode.done = true;
 
         // update node info
-        for (Index i=0; i < doneNode.to.size; i++ ){
+        for (Index i=0; i < doneNode.to.size(); i++ ){
             Index to   = doneNode.to[i];
             Index cost = doneNode.cost++;
 
@@ -228,26 +250,32 @@ function Integer FFBIKGraph.searchSmallerDistance( Index start, Index end ){
 
 
 /*-------------------------------------------------------------------------------------*/
+/// \internal
 function FFBIKGraph.distinctNodes!(){
     for( k,v in this.nodes){
         distinct( this.nodes[k] );
     }
 }
+/// \internal
 function String FFBIKGraph.getName(){
     return "hello";
 }
 
+/// \internal
 function String FFBIKGraph.getInlineEdgeName(){
     return this.getName() + ":InlineEdges";
 }
+/// \internal
 function String FFBIKGraph.getInlineNodeName(){
     return this.getName() + ":InlineNodes";
 }
 
+/// \internal
 function Size FFBIKGraph.getEdgeCount(){
-    return this.edges.size;
+    return this.edges.size();
 }
 
+/// \internal
 function Size FFBIKGraph.getNodeCount(){
     Size s=0;
     for (k, v in this.nodes){
@@ -257,6 +285,7 @@ function Size FFBIKGraph.getNodeCount(){
 }
 
 
+/// \internal
 function FFBIKEdge FFBIKGraph.getEdge( in Index index_a, in Index index_b){
     for ( Index i=0; i< this.getEdgeCount(); i++ ){
 
@@ -276,6 +305,7 @@ function FFBIKEdge FFBIKGraph.getEdge( in Index index_a, in Index index_b){
     return null;
 }
 
+/// \internal
 function FFBIKEdge FFBIKGraph.getEdge( in String aName, in String bName ){
     for ( Index i=0; i< this.getEdgeCount(); i++ ){
 
@@ -297,6 +327,7 @@ function FFBIKEdge FFBIKGraph.getEdge( in String aName, in String bName ){
 
 
 /// for debugging
+/// \dfgPresetFolder DebugDraw
 function FFBIKGraph.reportNodes(){
     for (k, v in this.nodes ){
         report( k + ":    "+ this.skeleton.getBone( k ).name );
@@ -305,7 +336,8 @@ function FFBIKGraph.reportNodes(){
 }
 
 // Generates a set of inline shapes nested under the provided rootTransform. 
-function FFBIKGraph.drawEdges!(in ISkeleton skeleton, io IPose pose, io DrawingHandle handle ) {
+/// \dfgPresetFolder DebugDraw
+function FFBIKGraph.drawEdges!( io IPose pose, io DrawingHandle handle ) {
     GeometryAttributes attributes = this.lines.getAttributes();
     Vec3Attribute positions       = attributes.getOrCreateAttribute('positions', Vec3Attribute);
     Vec3Attribute normals         = attributes.getOrCreateAttribute('normals', Vec3Attribute);
@@ -315,10 +347,10 @@ function FFBIKGraph.drawEdges!(in ISkeleton skeleton, io IPose pose, io DrawingH
   
     InlineDrawing draw = handle.getDrawing();
     InlineShader shader = draw.registerShader(OGLLinesShader());
-    InlineMaterial mat  = shader.getOrCreateMaterial('mat');
+    Ref<InlineMaterial> mat  = shader.getOrCreateMaterial('mat');
     InlineTransform edgeTransform = handle.getRootTransform().getChild( this.getInlineEdgeName() );
 
-    /*
+    //*
     if(edgeTransform == null){
         mat.setUniform('u_normalIsTangent',  0);
         mat.setUniform('u_shadingAmount', 0.5);
@@ -338,7 +370,10 @@ function FFBIKGraph.drawEdges!(in ISkeleton skeleton, io IPose pose, io DrawingH
         }
 
         InlineShape shape = draw.registerShape( InlineLinesShape('lines', this.lines) );
-        InlineInstance instance = mat.addInstance(SimpleInlineInstance(this.getInlineEdgeName(), edgeTransform, shape));
+        // InlineInstance instance = mat.addInstance(SimpleInlineInstance(this.getInlineEdgeName(), edgeTransform, shape));
+        // InlineInstance instance = mat.addInstance(SimpleInlineInstance(this.getInlineEdgeName(), edgeTransform, shape));
+        mat.addInstance(SimpleInlineInstance(this.getInlineEdgeName(), edgeTransform, shape));
+
     } else {
         for(Integer i=0; i< this.getEdgeCount(); i++){
             this.lines.setPosition( i*2,   pose.getBoneXfo( this.edges[i].a ).tr );
@@ -348,23 +383,25 @@ function FFBIKGraph.drawEdges!(in ISkeleton skeleton, io IPose pose, io DrawingH
 
     this.lines.incrementVersion();
     positions.incrementVersion();
-    */
+    // */
 
 }
 
 
 // Generates a set of inline shapes nested under the provided rootTransform. 
-function FFBIKGraph.drawNodes!(in ISkeleton skeleton, io IPose pose, io DrawingHandle handle ){
+/// \dfgPresetFolder DebugDraw
+function FFBIKGraph.drawNodes!( io IPose pose, io DrawingHandle handle ){
     //Points points();
+    report("--------------------------------------------------");
     // GeometryAttributes attributes = this.points.getOrCreateSizesAttribute();
-    Ref<ScalarAttribute> attributes = this.points.getOrCreateSizesAttribute();
+    // Ref<ScalarAttribute> attributes = this.points.getOrCreateSizesAttribute();
  
     InlineDrawing  draw = handle.getDrawing();
 
     InlineTransform transform = handle.getRootTransform().getChild(
                                                     this.getInlineNodeName() );
 
-    /*
+    //*
     if( transform == null){
         InlineShader   shader = draw.registerShader(OGLFlatShader());
         InlineShader   surfaceShader = draw.registerShader(OGLSurfaceShader());
@@ -378,7 +415,10 @@ function FFBIKGraph.drawNodes!(in ISkeleton skeleton, io IPose pose, io DrawingH
         transform = StaticInlineTransform( this.getInlineNodeName(), Xfo() );
         handle.getRootTransform().addChild( transform );
         InlineShape shape = draw.registerShape( InlinePointsShape( this.getInlineNodeName(), this.points));
-        InlineInstance instance = mat.addInstance(InlineInstance( this.getInlineNodeName(), transform, shape, pointsMaterial));
+        // InlineInstance instance = mat.addInstance(InlineInstance( this.getInlineNodeName(), transform, shape, pointsMaterial));
+        InlineInstance instance = SimpleInlineInstance(InlineInstance( this.getInlineNodeName(), transform, shape, pointsMaterial));
+        instance.setInstanceUniform(InlineUniform('u_diffuseColor', Color(1.0, 0.0, 0.0)));
+        // instance.setInstanceUniform(InlineUniform('u_diffuseColor', bone.color));
 
         Index i=0;
         for( k,v in this.nodes ){
@@ -389,7 +429,7 @@ function FFBIKGraph.drawNodes!(in ISkeleton skeleton, io IPose pose, io DrawingH
         // update points
         Index i=0;
         for( k,v in this.nodes ){
-            if ( i >= this.points.size ){
+            if ( i >= this.points.size() ){
                 setError( "hogeeeeeeeeeeeeeeeee" );
             } else {
                 this.points.setPosition( i, pose.getBoneXfo( k ).tr );
@@ -398,8 +438,7 @@ function FFBIKGraph.drawNodes!(in ISkeleton skeleton, io IPose pose, io DrawingH
         }
     }
     this.points.incrementPositionsVersion();
-    */
-
+    // */
 }
 
 
@@ -408,9 +447,11 @@ function FFBIKGraph.drawNodes!(in ISkeleton skeleton, io IPose pose, io DrawingH
 //         custom pose
 //
 ---------------------------------------------------------------------------------------*/
+/// \dfgPresetFolder Graph
 object FFBIKPose : Pose {
 };
 
+/// \dfgPresetFolder Graph
 function FFBIKPose( Skeleton skeleton ){
     this.skeleton = skeleton;
     this.version = mathRandomInteger(55540, UInt32(this.skeleton.getVersion()));
@@ -418,16 +459,16 @@ function FFBIKPose( Skeleton skeleton ){
 
 }
 
+/// \internal
 function FFBIKPose.updateXfo!( Index id, Xfo xfo ){
     this.xfos[ id ] = xfo;
     this.valid[ id ] = true;
 }
 
+/// \internal
 function FFBIKPose.test!(){
-    //for (Index i=0; i< this.skeleton.bones.size; i++ ){
+    //for (Index i=0; i< this.skeleton.bones.size(); i++ ){
     //    this.updateXfo( i, Xfo( Vec3( 5, 0, 0) ));
     //}
     this.updateXfo( 0, Xfo( Vec3( 5, 0, 0) ));
 }
-
-

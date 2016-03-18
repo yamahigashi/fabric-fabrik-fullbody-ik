@@ -1,0 +1,24 @@
+// Created by kl2dfg (processStructConstant)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiAlwaysShowDaisyChainPorts" : "true"
+    },
+  "title" : "FABRIKResolver",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "value",
+      "execPortType" : "In",
+      "typeSpec" : "FABRIKResolver"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "F8E6D1955FC69EDA878105646B74EED5",
+  "code" : "dfgEntry {
+}
+"
+  }

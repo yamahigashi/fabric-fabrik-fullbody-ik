@@ -1,0 +1,98 @@
+// Created by kl2dfg (processDecomposeFunction)
+{
+  "objectType" : "Func",
+  "title" : "FABRIKResolver ->",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "value",
+      "execPortType" : "In",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "skeleton",
+      "execPortType" : "Out",
+      "typeSpec" : "Skeleton"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "solvers",
+      "execPortType" : "Out",
+      "typeSpec" : "IFABRIKSolver[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "graph",
+      "execPortType" : "Out",
+      "typeSpec" : "Ref<FFBIKGraph>"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "solverDepths",
+      "execPortType" : "Out",
+      "typeSpec" : "Size[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "maxDepth",
+      "execPortType" : "Out",
+      "typeSpec" : "Size"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "subBaseIndices",
+      "execPortType" : "Out",
+      "typeSpec" : "Index[]"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
+      "nodePortType" : "In",
+      "name" : "subBaseXfos",
+      "execPortType" : "Out",
+      "typeSpec" : "Xfo[Index][]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "max_iteration",
+      "execPortType" : "Out",
+      "typeSpec" : "Integer"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "effectorCounter",
+      "execPortType" : "Out",
+      "typeSpec" : "Index"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "EB84DAAA642D41263562BD91773BCC9B",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  skeleton = value.skeleton;
+  solvers = value.solvers;
+  graph = value.graph;
+  solverDepths = value.solverDepths;
+  maxDepth = value.maxDepth;
+  subBaseIndices = value.subBaseIndices;
+  subBaseXfos = value.subBaseXfos;
+  max_iteration = value.max_iteration;
+  effectorCounter = value.effectorCounter;
+}
+"
+  }

@@ -1,0 +1,35 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  skeleton: Ref<Skeleton>\n  result: FFBIKGraph\n"
+    },
+  "title" : "FFBIKGraph",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "skeleton",
+      "execPortType" : "In",
+      "typeSpec" : "Skeleton"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "FFBIKGraph"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "CCE5895ED27727523DAF60B856991C8A",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  Ref<Skeleton> skeleton_ref = skeleton;
+  result = FFBIKGraph(skeleton_ref);
+}
+"
+  }

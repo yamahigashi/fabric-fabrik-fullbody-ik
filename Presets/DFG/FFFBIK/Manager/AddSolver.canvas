@@ -1,0 +1,34 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: FABRIKResolver\n  solver: IFABRIKSolver\n"
+    },
+  "title" : "AddSolver",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "solver",
+      "execPortType" : "IO",
+      "typeSpec" : "IFABRIKSolver"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "72A7D3B4F835E7076355149F387E4832",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.addSolver(solver);
+}
+"
+  }

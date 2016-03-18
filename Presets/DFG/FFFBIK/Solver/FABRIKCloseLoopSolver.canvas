@@ -1,0 +1,57 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  skeleton: Ref<Skeleton>\n  graph: Ref<FFBIKGraph>\n  handle: DrawingHandle\n  boneNames: String[]\n  result: FABRIKCloseLoopSolver\n"
+    },
+  "title" : "FABRIKCloseLoopSolver",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "skeleton",
+      "execPortType" : "In",
+      "typeSpec" : "Skeleton"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "graph",
+      "execPortType" : "In",
+      "typeSpec" : "FFBIKGraph"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "handle",
+      "execPortType" : "IO",
+      "typeSpec" : "DrawingHandle"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "boneNames",
+      "execPortType" : "In",
+      "typeSpec" : "String[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "FABRIKCloseLoopSolver"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "7ECC4376041E9E13CBB24C386FDD9960",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  Ref<Skeleton> skeleton_ref = skeleton;
+  Ref<FFBIKGraph> graph_ref = graph;
+  result = FABRIKCloseLoopSolver(skeleton_ref, graph_ref, handle, boneNames);
+}
+"
+  }

@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  boneIndex: Index\n  bindMode: Index\n  result: BindInfo\n"
+    },
+  "title" : "BindInfo",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "boneIndex",
+      "execPortType" : "In",
+      "typeSpec" : "Index"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "bindMode",
+      "execPortType" : "In",
+      "typeSpec" : "Index"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "BindInfo"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "1A47DE97E5EB289EE82B84C5188C995B",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  result = BindInfo(boneIndex, bindMode);
+}
+"
+  }

@@ -1,0 +1,27 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "reset to reference pose, bones controled by this solver\n\nSupported types:\n  this: IFABRIKSolver\n"
+    },
+  "title" : "ResetToReferencePose",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "IFABRIKSolver"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "3140F7888D2F189826D9516276A62896",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.ResetToReferencePose();
+}
+"
+  }

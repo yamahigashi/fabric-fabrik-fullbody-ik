@@ -5,6 +5,7 @@ require FABRIK;
 
 
 
+/// \dfgPresetFolder Solver
 interface IFABRIKSolver {
     /// resolve bone
     Solve!( io IPose pose, in Vec3 effector_position );
@@ -44,7 +45,8 @@ struct SubBaseInfo{
 };
 */
 
-
+/*
+/// \internal
 inline Boolean IsValidToEvaluate( in Vec3 v ){
     if ( v.length == 0.0 || v.length.isNaN ){
         return false;
@@ -52,14 +54,17 @@ inline Boolean IsValidToEvaluate( in Vec3 v ){
     return true;
 }
 
+/// \dfgPresetFolder Solver
 inline Vec3 SolveJoint( in Xfo a, in Xfo b, Scalar length ){
     return SolveJoint( a.tr, b.tr, length );
 }
 
+/// \dfgPresetFolder Solver
 inline Vec3 SolveJoint( in Mat44 a, in Mat44 b, Scalar length ){
     return SolveJoint( a.translation(), b.translation(), length );
 }
 
+/// \dfgPresetFolder Solver
 inline Vec3 SolveJoint( in Vec3 a, in Vec3 b, Scalar length ){
     Vec3 diff = a - b;
     if ( diff.length == 0 ) {
@@ -69,9 +74,10 @@ inline Vec3 SolveJoint( in Vec3 a, in Vec3 b, Scalar length ){
     }
 }
 
+/// \dfgPresetFolder Solver
 inline Scalar distance( in Vec3 a, in Vec3 b ){
     Vec3 diff;
     diff = a - b;
     return abs( diff.length );
 }
-
+*/

@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n  boneName: String\n  isControlled: Boolean\n"
+    },
+  "title" : "AddNode",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "FFBIKGraph"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "boneName",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "isControlled",
+      "execPortType" : "In",
+      "typeSpec" : "Boolean"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "9E5D598C5D16C88907F38DE8CF7E3B75",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.addNode(boneName, isControlled);
+}
+"
+  }

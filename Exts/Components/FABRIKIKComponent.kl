@@ -5,10 +5,9 @@ require Characters;
 require InlineDrawing;
 
 
+/// \dfgPresetFolder Component
 function add3BoneIkSolver(
                 io FABRIKResolver resolver,
-                io FFBIKGraph fbg,
-                io Skeleton skeleton,
                 io DrawingHandle handle,
                 in String root,
                 in String bone1,
@@ -20,18 +19,17 @@ function add3BoneIkSolver(
     x.push( bone1 );
     x.push( bone2 );
     x.push( bone3 );
-    fbg.registerControllBone( bone1 );
-    fbg.registerControllBone( bone2 );
-    fbg.registerControllBone( bone3 );
-    FABRIKSolver solver = FABRIKSolver( skeleton, handle, x );
+    resolver.graph.registerControllBone( bone1 );
+    resolver.graph.registerControllBone( bone2 );
+    resolver.graph.registerControllBone( bone3 );
+    FABRIKSolver solver = FABRIKSolver( resolver.skeleton, handle, x );
     solver.SetSubBase( bone1 );
     resolver.addSolver( IFABRIKSolver(solver) );
 }
 
+/// \dfgPresetFolder Component
 function add3BoneIkSolver(
                 io FABRIKResolver resolver,
-                io FFBIKGraph fbg,
-                io Skeleton skeleton,
                 io DrawingHandle handle,
                 in String bone1,
                 in String bone2,
@@ -41,10 +39,10 @@ function add3BoneIkSolver(
     x.push( bone1 );
     x.push( bone2 );
     x.push( bone3 );
-    fbg.registerControllBone( bone1 );
-    fbg.registerControllBone( bone2 );
-    fbg.registerControllBone( bone3 );
-    FABRIKSolver solver = FABRIKSolver( skeleton, handle, x );
+    resolver.graph.registerControllBone( bone1 );
+    resolver.graph.registerControllBone( bone2 );
+    resolver.graph.registerControllBone( bone3 );
+    FABRIKSolver solver = FABRIKSolver( resolver.skeleton, handle, x );
     solver.SetSubBase( bone1 );
     resolver.addSolver( IFABRIKSolver(solver) );
 }

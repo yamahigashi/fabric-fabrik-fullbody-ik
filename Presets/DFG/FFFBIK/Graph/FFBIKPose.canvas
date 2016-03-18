@@ -1,0 +1,34 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  skeleton: Skeleton\n  result: FFBIKPose\n"
+    },
+  "title" : "FFBIKPose",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "skeleton",
+      "execPortType" : "In",
+      "typeSpec" : "Skeleton"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "FFBIKPose"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "C7819C1AC978B180DFF5AD7A91258968",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  result = FFBIKPose(skeleton);
+}
+"
+  }

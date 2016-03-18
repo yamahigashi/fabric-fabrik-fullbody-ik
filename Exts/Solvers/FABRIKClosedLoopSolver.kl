@@ -24,6 +24,7 @@ require Characters;
 require FABRIK;
 
 
+/// \dfgPresetFolder Solver
 object FABRIKCloseLoopSolver : IFABRIKSolver {
     Skeleton   skeleton;        // sleketon
     FFBIKGraph graph;         // graph
@@ -57,6 +58,7 @@ object FABRIKCloseLoopSolver : IFABRIKSolver {
 };
 
 
+/// \dfgPresetFolder Solver
 function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, io DrawingHandle handle, in String boneNames[] ){
 
     this.skeleton = skeleton;
@@ -135,6 +137,7 @@ function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, i
 
 }
 
+/// \internal
 function FABRIKCloseLoopSolver.EvaluateBoneTransforms!( io IPose pose ){
     for (Index i=0; i< this.numEdges; i++ ){
         report( this.edges[i] );
@@ -143,21 +146,26 @@ function FABRIKCloseLoopSolver.EvaluateBoneTransforms!( io IPose pose ){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+/// \internal
 function FABRIKCloseLoopSolver.SetSubBase!( in String nodeName ){
     this.subBaseIndex = this.skeleton.findBone( nodeName );
 }
 
+/// \internal
 function Index FABRIKCloseLoopSolver.GetRootNodeIndex(){
     return this.nodeIndices[0];
 }
+/// \internal
 function Index FABRIKCloseLoopSolver.GetSubBaseIndex(){
     return this.subBaseIndex;
 }
 
+/// \internal
 function Xfo FABRIKCloseLoopSolver.GetSubBaseXfo(){
     return this.xfos[0];
 }
 
+/// \internal
 function FABRIKCloseLoopSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
     Vec3 offset = xfo.tr - this.xfos[ this.subBaseIndexInternal ].tr;
     for ( Index i=this.subBaseIndexInternal; i < this.nodeIndices.size; i++ ){
@@ -169,13 +177,16 @@ function FABRIKCloseLoopSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /// Joint Control in Closed-loop chains
+/// \dfgPresetFolder Solver
 function FABRIKCloseLoopSolver.Solve!( io IPose pose, in Mat44 effectors[] ){
     this.Solve( pose );
 
 }
+/// \dfgPresetFolder Solver
 function FABRIKCloseLoopSolver.Solve!( io IPose pose, Vec3 effector_position ){
     this.Solve( pose );
 }
+/// \dfgPresetFolder Solver
 function FABRIKCloseLoopSolver.Solve!( io IPose pose ){
     this.ResetToReferencePose();
 
@@ -199,14 +210,17 @@ function FABRIKCloseLoopSolver.Solve!( io IPose pose ){
 }
 
 
+/// \internal
 function FABRIKCloseLoopSolver.SetEffectorIndex!( io Index id ){
     this.effectorIndex = id;
 }
 
+/// \internal
 function Index FABRIKCloseLoopSolver.GetEffectorCount(){
     return this.effectorCount;
 }
 
+/// \internal
 function FABRIKCloseLoopSolver.solveClosePart!( io IPose pose ){
     // phase 1. the FABRIK algorithm is applied in a circular form, attempting to
     // correct the noisy joints. Thus starting from joint p1' the alporithm re-positions
@@ -245,11 +259,13 @@ function FABRIKCloseLoopSolver.solveClosePart!( io IPose pose ){
     // */
 }
 
+
+// The third phase takes into consideration the positions of joints p2and p5;
+// this phase of the algorithm ensures that the distance between these joints and
+// the noisy joints remains constant. Steps 7–10 are cases of the simplest version
+// of a serial chain, where only two joints exist.
+/// \internal
 function FABRIKCloseLoopSolver.solveNoisyPart!( io IPose pose ){
-    // The third phase takes into consideration the positions of joints p2and p5;
-    // this phase of the algorithm ensures that the distance between these joints and
-    // the noisy joints remains constant. Steps 7–10 are cases of the simplest version
-    // of a serial chain, where only two joints exist.
 
     // solve positive order
     Xfo tmpXfos[] = this.xfos.clone();
@@ -290,6 +306,7 @@ function FABRIKCloseLoopSolver.solveNoisyPart!( io IPose pose ){
 }
 
 
+/// \internal
 function Xfo[] FABRIKCloseLoopSolver.storeTemporaryNodePose!( io IPose pose ){
     Xfo results[];
     for (Index i=0; i < this.nodeIndices.size; i++ ){
@@ -297,24 +314,9 @@ function Xfo[] FABRIKCloseLoopSolver.storeTemporaryNodePose!( io IPose pose ){
     }
     return results;
 }
-/*
- node:1:bicep_Lft_Bone
- node:2:forearm_Lft_Bone
- node:3:hand_Lft_Bone
- node:4:bicep_Rgt_Bone
- node:5:forearm_Rgt_Bone
- node:6:hand_Rgt_Bone
- node:14:cervical1_Mid_Bone
- node:17:lumbar1_Mid_Bone
- node:21:thigh_Rgt_Bone
- node:22:shin_Rgt_Bone
- node:23:foot_Rgt_Bone
- node:25:thigh_Lft_Bone
- node:26:shin_Lft_Bone
- node:27:foot_Lft_Bone
-*/
 
 /// adjust bones from root
+/// \internal
 function FABRIKCloseLoopSolver.BackwardReach!( io IPose pose, in Integer target_index, in Integer parent_index, in Scalar length ){
     this.xfos[ target_index ].tr = SolveJoint(
             this.xfos[ target_index ],
@@ -323,6 +325,7 @@ function FABRIKCloseLoopSolver.BackwardReach!( io IPose pose, in Integer target_
     );
 }
 
+/// \internal
 function FABRIKCloseLoopSolver.UpdatePose?( io IPose pose ){
     for (Index i=0; i < this.numEdges; i++ ){
         pose.setBoneXfo( this.nodeIndices[i], this.xfos[i] );
@@ -330,7 +333,8 @@ function FABRIKCloseLoopSolver.UpdatePose?( io IPose pose ){
 }
 
 
-function FABRIKCloseLoopSolver.searchNosyEdge!(){
+/// \internal
+function FABRIKCloseLoopSolver.searchNoisyEdge!(){
     Index noisy[];
     this.noisyEdges.resize(0);
     this.noisyNodeIndices.resize(0);
@@ -375,7 +379,7 @@ function FABRIKCloseLoopSolver.searchNosyEdge!(){
 
 }
 
-/// 
+/// \internal
 function Index[] FABRIKCloseLoopSolver.eliminateUnControlledNoisyNode!(){
     Index new[];
     Index res[];
@@ -391,26 +395,30 @@ function Index[] FABRIKCloseLoopSolver.eliminateUnControlledNoisyNode!(){
     return res;
 }
 
+/// \internal
 function FABRIKCloseLoopSolver.ResetToReferencePose!(){
     for ( Index i=0; i < this.numEdges; i++ ){
         this.xfos[i] = this.nodeReferencePoses[i];
     }
 }
 
+/// \internal
 function FABRIKCloseLoopSolver.DrawSolver!(){
     report( "implement later" );
 }
 
+/// \internal
 function String FABRIKCloseLoopSolver.GetName(){
     return this.name;
 }
 
+/// \internal
 function Boolean FABRIKCloseLoopSolver.IsReady(){
     return this.ready;
 }
 
 function FABRIKCloseLoopSolver.Finalize!(){
-    this.searchNosyEdge();
+    this.searchNoisyEdge();
     this.ready = true;
 }
 
@@ -419,9 +427,11 @@ function FABRIKCloseLoopSolver.Finalize!(){
 //         utility
 //
 ---------------------------------------------------------------------------------------*/
+/// \dfgPresetFolder Util
 inline function distinct(io Integer array[]) {
     distinct( array, array.size );
 }
+/// \dfgPresetFolder Util
 inline function distinct(io Integer array[], Size length) {
     Index i, j;
     Index newLength = 1;  // new length of modified array

@@ -11,20 +11,25 @@ require Characters;
 //         extension for built-in function
 //
 ---------------------------------------------------------------------------------------*/
+/// \dfgPresetFolder Util
 function Bone Skeleton.getBone( in String name ){
     Index i = this.findBone( name );
     return this.getBone( i );
 }
 
+/// \dfgPresetFolder Util
 function Skeleton.addBone!( in String name, in String parentName, Xfo xfo ){
     Scalar length = 0.0;
     this.addBone( name, parentName, xfo, length );
 }
+
+/// \dfgPresetFolder Util
 function Skeleton.addBone!( in String name, in String parentName, Xfo xfo, in Scalar length ){
     Bone bone = this.boneGenerator( name, parentName, xfo, length );
     this.addBone( bone );
 }
 
+/// \dfgPresetFolder Util
 function Bone Skeleton.boneGenerator( in String name, in String parentName, Xfo xfo, Scalar length ){
     Bone bone;
 
@@ -55,9 +60,11 @@ function Bone Skeleton.boneGenerator( in String name, in String parentName, Xfo 
 //
 ---------------------------------------------------------------------------------------*/
 // FIXME: O(n^2) need more efficient algorithm 
+/// \dfgPresetFolder Util
 function distinct(io Bone array[]) {
     distinct( array, array.size );
 }
+/// \dfgPresetFolder Util
 function distinct(io Bone array[], Size length) {
     Index i, j;
     Index newLength = 1;  // new length of modified array
@@ -78,6 +85,7 @@ function distinct(io Bone array[], Size length) {
     array.resize( newLength );
 }
 
+/// \dfgPresetFolder Util
 function UInt32 Bone.hash(){
     return this.name.hash() ^ this.parentIndex.hash();
 }
@@ -92,9 +100,11 @@ function Boolean ==(Bone lhs, Bone rhs) {
 }
 /*---------------------------------------------------------------------------------------
 */
+/// \dfgPresetFolder Util
 function distinct(io Index array[]) {
     distinct( array, array.size );
 }
+/// \dfgPresetFolder Util
 function distinct(io Index array[], Size length) {
     Index i, j;
     Index newLength = 1;  // new length of modified array
@@ -117,6 +127,7 @@ function distinct(io Index array[], Size length) {
 
 /*---------------------------------------------------------------------------------------
 */
+/// \dfgPresetFolder Util
 inline function Boolean isExistsIn( in Index id, in Index array[] ){
     for (Index i=0; i < array.size; i++ ){
         if (id == array[i] ){

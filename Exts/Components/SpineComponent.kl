@@ -4,10 +4,9 @@ require InlineDrawing;
 
 
 
+/// \dfgPresetFolder Component
 function addSpineSolver(
                 io FABRIKResolver resolver,
-                io FFBIKGraph fbg,
-                io Skeleton skeleton,
                 io DrawingHandle handle,
                 in String root,
                 in String bicepLft,
@@ -20,11 +19,11 @@ function addSpineSolver(
     x.push( root );
     x.push( bicepLft );
     x.push( bicepRgt );
-    resolver.addSolver( IFABRIKSolver(FABRIKCloseLoopSolver( skeleton, fbg, handle, x )) );
+    resolver.addSolver( IFABRIKSolver(FABRIKCloseLoopSolver( resolver.skeleton, resolver.graph, handle, x )) );
 
     x.resize(0);
     x.push( root );
     x.push( thighLft );
     x.push( thighRgt );
-    resolver.addSolver( IFABRIKSolver( FABRIKCloseLoopSolver( skeleton, fbg, handle, x )) );
+    resolver.addSolver( IFABRIKSolver( FABRIKCloseLoopSolver( resolver.skeleton, resolver.graph, handle, x )) );
 }

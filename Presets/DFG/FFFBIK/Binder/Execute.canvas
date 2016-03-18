@@ -1,0 +1,44 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: Binder\n  pose: IPose\n  output: Mat44[]\n"
+    },
+  "title" : "Execute",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "Binder"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "pose",
+      "execPortType" : "IO",
+      "typeSpec" : "IPose"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
+      "nodePortType" : "IO",
+      "name" : "output",
+      "execPortType" : "IO",
+      "typeSpec" : "Mat44[]"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "874412769BD955E91251885AD47F7791",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.Execute(pose, output);
+}
+"
+  }

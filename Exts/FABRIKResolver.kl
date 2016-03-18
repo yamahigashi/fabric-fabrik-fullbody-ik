@@ -14,6 +14,7 @@ require FABRIK;
 //
 ---------------------------------------------------------------------------------------*/
 /// store solvers, resolve these solver by that weight recursive
+/// \dfgPresetFolder Manager
 struct FABRIKResolver {
     Skeleton      skeleton;
     IFABRIKSolver solvers[];
@@ -31,6 +32,7 @@ struct FABRIKResolver {
 };
 
 
+/// \dfgPresetFolder Manager
 function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
     this.solvers.resize( 0 );
     this.solverDepths.resize( 0 );
@@ -44,6 +46,7 @@ function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
 }
 
 
+/// \dfgPresetFolder Manager
 function FABRIKResolver.addSolver!( io IFABRIKSolver solver ){
     this.solvers.push( solver );
     this.subBaseIndices.push( solver.GetSubBaseIndex() );
@@ -55,8 +58,9 @@ function FABRIKResolver.addSolver!( io IFABRIKSolver solver ){
 }
 
 
+/// \internal
 function Boolean FABRIKResolver.isReady(){
-    for (Index i=0; i < this.solvers.size; i++ ){
+    for (Index i=0; i < this.solvers.size(); i++ ){
         if ( this.solvers[i].IsReady() == false ){
             return false;
         }
@@ -65,22 +69,26 @@ function Boolean FABRIKResolver.isReady(){
 }
 
 
+/// \dfgPresetFolder Manager
+/// \internal
 function FABRIKResolver.finalize!(){
     IFABRIKSolver tmpSolvers[];
-    for ( Index i=0; i < this.solvers.size; i++ ){
+    for ( Index i=0; i < this.solvers.size(); i++ ){
         if ( !this.solvers[i].IsReady() ){
             tmpSolvers.push( this.solvers[i] );
         }
     }
     distinct( this.subBaseIndices );
 
-    finalizePEX<<<tmpSolvers.size>>>( tmpSolvers );
+    finalizePEX<<<tmpSolvers.size()>>>( tmpSolvers );
 }
 
 
+/// \dfgPresetFolder Manager
+/// \internal
 function FABRIKResolver.calculateSolverDepth!(){
-    this.solverDepths.resize( this.solvers.size );
-    for (Index i=0; i < this.solvers.size; i++ ){
+    this.solverDepths.resize( this.solvers.size() );
+    for (Index i=0; i < this.solvers.size(); i++ ){
         Size d = 0;
 
         //*
@@ -108,6 +116,7 @@ function FABRIKResolver.calculateSolverDepth!(){
 }
 
 
+/// \dfgPresetFolder Manager
 function FABRIKResolver.solve!( io IPose pose, Mat44 effectors[] ){
     // 
     if ( !this.isReady() ){
@@ -123,25 +132,25 @@ function FABRIKResolver.solve!( io IPose pose, Mat44 effectors[] ){
             IFABRIKSolver tmpSolvers[];
             SubBaseInfo   tmpSubBaseInfos[];
 
-            for ( Index i=0; i < this.solvers.size; i++ ){
+            for ( Index i=0; i < this.solvers.size(); i++ ){
                 if ( d == this.solverDepths[i] ){
                     tmpSolvers.push( this.solvers[i] );
                 }
             }
-            if ( tmpSolvers.size == 0 ){ continue; }
+            if ( tmpSolvers.size() == 0 ){ continue; }
 
-            tmpSubBaseInfos.resize( tmpSolvers.size );
+            tmpSubBaseInfos.resize( tmpSolvers.size() );
 
-            solvePEX<<<tmpSolvers.size>>>( pose, tmpSolvers, effectors, tmpSubBaseInfos );
+            solvePEX<<<tmpSolvers.size()>>>( pose, tmpSolvers, effectors, tmpSubBaseInfos );
 
             // gather sub-base xfos
-            for ( Index i=0; i < tmpSubBaseInfos.size; i++ ){
+            for ( Index i=0; i < tmpSubBaseInfos.size(); i++ ){
                 this.subBaseXfos[ tmpSubBaseInfos[i].index ].resize(i+1);
                 this.subBaseXfos[ tmpSubBaseInfos[i].index ][i] = tmpSubBaseInfos[i].xfo;
             }
 
             this.calcCeteroid( pose );
-            updatePosePEX<<<tmpSolvers.size>>>( pose, tmpSolvers );
+            updatePosePEX<<<tmpSolvers.size()>>>( pose, tmpSolvers );
 
             if (d == 0){ break; }
         }
@@ -149,14 +158,14 @@ function FABRIKResolver.solve!( io IPose pose, Mat44 effectors[] ){
         for ( Size d=0; d <= this.maxDepth; d++){
             IFABRIKSolver tmpSolvers[];
 
-            for ( Index i=0; i < this.solvers.size; i++ ){
+            for ( Index i=0; i < this.solvers.size(); i++ ){
                 if ( d == this.solverDepths[i] ){
                     tmpSolvers.push( this.solvers[i] );
                 }
             }
 
-            offestByCentroidPEX<<<tmpSolvers.size>>>( pose, tmpSolvers, this.subBaseXfos );
-            updatePosePEX<<<tmpSolvers.size>>>( pose, tmpSolvers );
+            offestByCentroidPEX<<<tmpSolvers.size()>>>( pose, tmpSolvers, this.subBaseXfos );
+            updatePosePEX<<<tmpSolvers.size()>>>( pose, tmpSolvers );
             if (d == this.maxDepth){ break; }
         }
 
@@ -164,9 +173,11 @@ function FABRIKResolver.solve!( io IPose pose, Mat44 effectors[] ){
     }
 }
 
+/// \internal
+/// \dfgPresetFolder Manager
 function FABRIKResolver.calcCeteroid!( io IPose pose ){
-    calcCenteroidPEX<<<this.subBaseIndices.size>>>( pose, this.subBaseIndices, this.subBaseXfos );
-    for (Index i=0; i < this.subBaseIndices.size; i++ ){
+    calcCenteroidPEX<<<this.subBaseIndices.size()>>>( pose, this.subBaseIndices, this.subBaseXfos );
+    for (Index i=0; i < this.subBaseIndices.size(); i++ ){
         pose.setBoneXfo( this.subBaseIndices[i], this.subBaseXfos[this.subBaseIndices[i]][0] );
     }
 }
@@ -175,10 +186,10 @@ function FABRIKResolver.calcCeteroid!( io IPose pose ){
 operator calcCenteroidPEX<<<index>>>( io IPose pose, in Index subBaseIndices[], io Xfo[Index] subBaseXfos[] ){
     Index k = subBaseIndices[index];
     Vec3 sum = Vec3();
-    for (Index i=0; i < subBaseXfos[k].size; i++ ){
+    for (Index i=0; i < subBaseXfos[k].size(); i++ ){
         sum += subBaseXfos[k][i].tr;
     }
-    sum = ( sum + pose.getBoneXfo( k ).tr ) / ( subBaseXfos[k].size + 1 );
+    sum = ( sum + pose.getBoneXfo( k ).tr ) / ( subBaseXfos[k].size() + 1 );
     subBaseXfos[k].resize( 1 );
     subBaseXfos[k][0].tr = sum;    // store result on first
 }
@@ -215,6 +226,7 @@ operator updatePosePEX<<<index>>>(
                             io IPose pose,
                             io IFABRIKSolver solvers[]){
     solvers[index].UpdatePose( pose );
+    solvers[index].DrawSolver();
 }
 
 

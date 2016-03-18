@@ -1,0 +1,69 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  resolver: FABRIKResolver\n  handle: DrawingHandle\n  root: String\n  bicepLft: String\n  bicepRgt: String\n  thighLft: String\n  thighRgt: String\n"
+    },
+  "title" : "AddSpineSolver",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "resolver",
+      "execPortType" : "IO",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "handle",
+      "execPortType" : "IO",
+      "typeSpec" : "DrawingHandle"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "root",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "bicepLft",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "bicepRgt",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "thighLft",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "thighRgt",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "A26F0BCC15347C62964F4C99F0C13D79",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  addSpineSolver(resolver, handle, root, bicepLft, bicepRgt, thighLft, thighRgt);
+}
+"
+  }

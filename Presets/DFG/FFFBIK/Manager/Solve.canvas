@@ -1,0 +1,44 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: FABRIKResolver\n  pose: IPose\n  effectors: Mat44[]\n"
+    },
+  "title" : "Solve",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "this",
+      "execPortType" : "IO",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "pose",
+      "execPortType" : "IO",
+      "typeSpec" : "IPose"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
+      "nodePortType" : "Out",
+      "name" : "effectors",
+      "execPortType" : "In",
+      "typeSpec" : "Mat44[]"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "A441257C5627A1F1DCE304876718E8B1",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  this.solve(pose, effectors);
+}
+"
+  }

@@ -1,0 +1,62 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  resolver: FABRIKResolver\n  handle: DrawingHandle\n  root: String\n  bone1: String\n  bone2: String\n  bone3: String\n"
+    },
+  "title" : "AddArmSolver",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "resolver",
+      "execPortType" : "IO",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "handle",
+      "execPortType" : "IO",
+      "typeSpec" : "DrawingHandle"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "root",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "bone1",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "bone2",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "bone3",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "3CFC783113E128CA8EDECA1AC045B1DB",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  addArmSolver(resolver, handle, root, bone1, bone2, bone3);
+}
+"
+  }

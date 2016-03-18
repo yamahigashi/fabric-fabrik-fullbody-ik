@@ -1,0 +1,35 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/Characters/Bone.html",
+    "uiTooltip" : "Supported types:\n  this: Bone\n  result: UInt32\n"
+    },
+  "title" : "Hash",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "this",
+      "execPortType" : "In",
+      "typeSpec" : "Bone"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "UInt32"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "DBF2CC96E7AE31F4426BBB5F8B5FA1E3",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  result = this.hash();
+}
+"
+  }

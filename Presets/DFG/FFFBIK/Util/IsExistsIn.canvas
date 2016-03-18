@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  id: Index\n  array: Index[]\n  result: Boolean\n"
+    },
+  "title" : "IsExistsIn",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "id",
+      "execPortType" : "In",
+      "typeSpec" : "Index"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "array",
+      "execPortType" : "In",
+      "typeSpec" : "Index[]"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "result",
+      "execPortType" : "Out",
+      "typeSpec" : "Boolean"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "81E890E3E9739F5AAE2B5025040B6A32",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  result = isExistsIn(id, array);
+}
+"
+  }
