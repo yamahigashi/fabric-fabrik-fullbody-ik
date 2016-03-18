@@ -126,7 +126,6 @@ function FABRIKSolver.Solve!( io IPose pose, in Mat44 effectors[] ){
 function FABRIKSolver.Solve!( io IPose pose, in Vec3 effector_position ){
     this.effectorPosition = effector_position;
     this.ResetToReferencePose();
-    this.alignByUpvector( pose, Vec3( 4, 16, -10 ) );
     this.EvaluateBoneTransforms( pose, effector_position, 0 );
     //drawXfoArray( this.handle.getRootTransform(), "debug-presolve"+this.name, this.xfos );
 }

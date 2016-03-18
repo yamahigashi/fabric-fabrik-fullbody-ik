@@ -1,0 +1,20 @@
+require Math;
+require Characters;
+//require FABRIK;
+
+require InlineDrawing;
+
+
+
+function addLegSolver(
+                io FABRIKResolver resolver,
+                io FFBIKGraph fbg,
+                io Skeleton skeleton,
+                io DrawingHandle handle,
+                in String root,
+                in String bone1,
+                in String bone2,
+                in String bone3 ){
+
+    add3BoneIkSolver( resolver, fbg, skeleton, handle, root, bone1, bone2, bone3);
+}

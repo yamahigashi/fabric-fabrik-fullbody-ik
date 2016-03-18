@@ -5,7 +5,8 @@
     "Solvers/IFABRIKSolver.kl",
     "Solvers/FABRIKMultiBoneIKSolver.kl",
     "Solvers/FABRIKClosedLoopSolver.kl",
-    "Solvers/SimStrandSpringSolver.kl",
+    //"Solvers/SimStrandSpringSolver.kl",
+    "Binder/Binder.kl",
 
     "FABRIKResolver.kl",
 

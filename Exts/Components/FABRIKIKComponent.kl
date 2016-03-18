@@ -1,0 +1,50 @@
+require Math;
+require Characters;
+//require FABRIK;
+
+require InlineDrawing;
+
+
+function add3BoneIkSolver(
+                io FABRIKResolver resolver,
+                io FFBIKGraph fbg,
+                io Skeleton skeleton,
+                io DrawingHandle handle,
+                in String root,
+                in String bone1,
+                in String bone2,
+                in String bone3 ){
+
+    String x[];
+    x.push( root );
+    x.push( bone1 );
+    x.push( bone2 );
+    x.push( bone3 );
+    fbg.registerControllBone( bone1 );
+    fbg.registerControllBone( bone2 );
+    fbg.registerControllBone( bone3 );
+    FABRIKSolver solver = FABRIKSolver( skeleton, handle, x );
+    solver.SetSubBase( bone1 );
+    resolver.addSolver( IFABRIKSolver(solver) );
+}
+
+function add3BoneIkSolver(
+                io FABRIKResolver resolver,
+                io FFBIKGraph fbg,
+                io Skeleton skeleton,
+                io DrawingHandle handle,
+                in String bone1,
+                in String bone2,
+                in String bone3 ){
+
+    String x[];
+    x.push( bone1 );
+    x.push( bone2 );
+    x.push( bone3 );
+    fbg.registerControllBone( bone1 );
+    fbg.registerControllBone( bone2 );
+    fbg.registerControllBone( bone3 );
+    FABRIKSolver solver = FABRIKSolver( skeleton, handle, x );
+    solver.SetSubBase( bone1 );
+    resolver.addSolver( IFABRIKSolver(solver) );
+}

@@ -1,0 +1,66 @@
+require Math;
+require Characters;
+require InlineDrawing;
+
+
+
+const Index BIND_MODE_SRT = 0;
+const Index BIND_MODE_T = 1;
+const Index BIND_MODE_R = 2;
+
+object BindInfo {
+    public Index boneIndex;
+    public Index bindMode;
+    public Xfo   offset;
+};
+
+function BindInfo( Index boneIndex, Index bindMode ){
+    this.boneIndex = boneIndex;
+    this.bindMode  = bindMode;
+    this.offset    = Xfo();
+}
+
+object Binder {
+
+    private Ref<Skeleton> skeleton;
+    private Mat44       output[];
+    private BindInfo bindEntries[];
+};
+
+
+public function Binder( in Ref<Skeleton> skeleton, in Mat44 output[] ){
+    this.skeleton = skeleton;
+    //this.output = output;
+}
+
+
+public function Binder.AddEntry!( in String boneName ){
+    Index boneIndex = this.skeleton.findBone( boneName );
+    BindInfo info( boneIndex, BIND_MODE_SRT );
+    this.bindEntries.push( info );
+}
+
+
+public function Binder.Execute!( io IPose pose ){
+
+    for (Index i=0; i < this.bindEntries.size; i++ ){
+        this.output[i] = pose.getBoneXfo( this.bindEntries[i].boneIndex ).toMat44();
+
+    }
+
+}
+
+
+public function Binder.Execute!( io IPose pose, io Mat44 output[] ){
+
+    if ( output.size < this.bindEntries.size ){
+        setError( "output size mismatch!! .... " + output.size +"   : "+ this.bindEntries.size);
+        return;
+    }
+
+    for (Index i=0; i < this.bindEntries.size; i++ ){
+        output[i] = pose.getBoneXfo( this.bindEntries[i].boneIndex ).toMat44();
+
+    }
+
+}
