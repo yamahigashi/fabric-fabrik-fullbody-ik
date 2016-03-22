@@ -2,7 +2,7 @@
   "objectType" : "Graph",
   "metadata" : {
     "timeline_timerFps" : "1000",
-    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -0.510655403137207,\n    \"y\" : 0.2380821406841278,\n    \"z\" : -0.8267427682876587,\n    \"t\" : -15.16577053070068\n    },\n  \"row1\" : {\n    \"x\" : -4.919878620057716e-07,\n    \"y\" : 0.9607697725296021,\n    \"z\" : 0.2770402133464813,\n    \"t\" : 14.08606719970703\n    },\n  \"row2\" : {\n    \"x\" : 0.8603756427764893,\n    \"y\" : 0.1413085013628006,\n    \"z\" : -0.4906932711601257,\n    \"t\" : -9.31639289855957\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -0.5106557607650757,\n    \"y\" : 0.2380821853876114,\n    \"z\" : -0.8267428874969482,\n    \"t\" : -15.16577053070068\n    },\n  \"row1\" : {\n    \"x\" : -4.84533529743203e-07,\n    \"y\" : 0.9607697725296021,\n    \"z\" : 0.2770402431488037,\n    \"t\" : 14.08606719970703\n    },\n  \"row2\" : {\n    \"x\" : 0.8603758215904236,\n    \"y\" : 0.1413085460662842,\n    \"z\" : -0.4906935691833496,\n    \"t\" : -9.31639289855957\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
     "uiGraphZoom" : "{\n  \"value\" : 1.020864129066467\n  }",
     "timeline_loopMode" : "1",
@@ -1032,8 +1032,8 @@
         "metadata" : {
           "uiTextColor" : "{\n  \"r\" : 20,\n  \"g\" : 20,\n  \"b\" : 20\n  }",
           "uiNodeColor" : "{\n  \"r\" : 121,\n  \"g\" : 134,\n  \"b\" : 143\n  }",
-          "uiGraphZoom" : "{\n  \"value\" : 0.847047746181488\n  }",
-          "uiGraphPan" : "{\n  \"x\" : 1204.441040039063,\n  \"y\" : 90.35723876953125\n  }"
+          "uiGraphZoom" : "{\n  \"value\" : 1.326946139335632\n  }",
+          "uiGraphPan" : "{\n  \"x\" : 1366.460811533931,\n  \"y\" : 123.1173643912135\n  }"
           },
         "title" : "graph",
         "ports" : [
@@ -1991,9 +1991,17 @@ dfgEntry {
         argValArr = JSONArrayValue( argVal );
 
         if( argValStr != null ){
-          rtVals[argKey] = argValStr;
+          rtVals[argKey] = argValStr.toString();
+          
         } else if ( argValArr != null ){
-          rtVals[argKey] = argValArr;
+          String arrStrings[];
+          arrStrings.resize( argValArr.size() );
+          for ( Index l=0; l < argValArr.size(); l++ ){
+            arrStrings[l] = argValArr.getString( l );
+          }
+
+          rtVals[argKey] = arrStrings;
+          
         } else {
           // TODO:
           //  setError
@@ -2002,7 +2010,7 @@ dfgEntry {
       }
 
       // report( rtVals );
-      // wrapper.executeWithArgs( rtVals, outputVals, errors );
+      wrapper.executeWithArgs( rtVals, outputVals, errors );
 
     }
   }
@@ -3601,7 +3609,7 @@ dfgEntry {
   "bindingLoadDiags" : [
     {
       "desc" : "Unable to decode value for argument 'this': KL compile failed: extension 'FABRIK' has been disabled",
-      "diagIndex" : 1
+      "diagIndex" : 0
       }
     ],
   "args" : [
