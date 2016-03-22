@@ -47,6 +47,20 @@ function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
 
 
 /// \dfgPresetFolder Manager
+function FABRIKResolver( Ref<FFBIKGraph> graph ){
+    this.solvers.resize( 0 );
+    this.solverDepths.resize( 0 );
+    this.subBaseIndices.resize( 0 );
+    this.graph    = graph;
+    this.maxDepth = 0;
+    this.skeleton = graph.getSkeleton();
+
+    this.max_iteration = 1;
+    this.effectorCounter = 0;
+}
+
+
+/// \dfgPresetFolder Manager
 function FABRIKResolver.addSolver!( io IFABRIKSolver solver ){
     this.solvers.push( solver );
     this.subBaseIndices.push( solver.GetSubBaseIndex() );

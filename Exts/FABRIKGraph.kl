@@ -96,6 +96,11 @@ function FFBIKGraph.addNode!( String boneName, Boolean isControlled ){
     this.markAsControlled( id );
 }
 
+/// \dfgPresetFolder Graph
+function Skeleton FFBIKGraph.getSkeleton(){
+    return this.skeleton;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////
 /// \dfgPresetFolder Graph
