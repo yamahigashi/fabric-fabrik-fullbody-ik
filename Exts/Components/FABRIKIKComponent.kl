@@ -5,7 +5,7 @@ require Characters;
 require InlineDrawing;
 
 
-/// \dfgPresetFolder Component
+/// \dfgPresetFolder Component/DFGBinding
 function add3BoneIkSolver(
                 io FABRIKResolver resolver,
                 io DrawingHandle handle,
@@ -27,7 +27,8 @@ function add3BoneIkSolver(
     resolver.addSolver( IFABRIKSolver(solver) );
 }
 
-/// \dfgPresetFolder Component
+
+/// \dfgPresetFolder Component/DFGBinding
 function add3BoneIkSolver(
                 io FABRIKResolver resolver,
                 io DrawingHandle handle,
@@ -45,4 +46,21 @@ function add3BoneIkSolver(
     FABRIKSolver solver = FABRIKSolver( resolver.skeleton, handle, x );
     solver.SetSubBase( bone1 );
     resolver.addSolver( IFABRIKSolver(solver) );
+}
+
+
+/// \dfgPresetFolder Component/DFGBinding
+function addCloseLoopSolver(
+                io FABRIKResolver resolver,
+                io DrawingHandle handle,
+                in String root,
+                in String bones[],
+                ){
+
+    String x[];
+    x.push( root );
+    for( Index i=0; i < bones.size(); i++ ){
+        x.push( bones[i] );
+    }
+    resolver.addSolver( IFABRIKSolver(FABRIKCloseLoopSolver( resolver.skeleton, resolver.graph, handle, x )) );
 }

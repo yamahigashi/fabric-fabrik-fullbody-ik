@@ -1,0 +1,48 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  resolver: FABRIKResolver\n  handle: DrawingHandle\n  root: String\n  bones: String[]\n"
+    },
+  "title" : "AddCloseLoopSolver",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "resolver",
+      "execPortType" : "IO",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "IO",
+      "name" : "handle",
+      "execPortType" : "IO",
+      "typeSpec" : "DrawingHandle"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "root",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "Out",
+      "name" : "bones",
+      "execPortType" : "In",
+      "typeSpec" : "String[]"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "presetGUID" : "10B42A229A6F6FB299691318F6D7717F",
+  "code" : "require FABRIK;
+
+dfgEntry {
+  addCloseLoopSolver(resolver, handle, root, bones);
+}
+"
+  }
