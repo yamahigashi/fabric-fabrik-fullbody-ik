@@ -67,7 +67,7 @@ function FABRIKSolver( Ref<Skeleton> skeleton, io DrawingHandle handle, in Strin
     this.bones.resize( this.num_bones );
     this.xfos.resize( this.num_bones );
     this.nodeIndices.resize( this.num_bones );
-    this.name = this.type() +":" + this.skeleton.name +":" + boneNames[boneNames.size-1];
+    this.name = this.type() +":" + this.skeleton.name +":" + boneNames[boneNames.size()-1];
 
     ////////////////////////////////////////////////////////////////////////////////////
     Xfo xfos[];
@@ -153,7 +153,7 @@ function FABRIKSolver.alignByUpvector!( io IPose pose, in Vec3 upvPosition ){
 
 /// \internal
 function FABRIKSolver.UpdatePose?( io IPose pose ){
-    for ( Index i=this.subBaseIndexInternal; i < this.nodeIndices.size; i++ ){
+    for ( Index i=this.subBaseIndexInternal; i < this.nodeIndices.size(); i++ ){
         pose.setBoneXfo( this.nodeIndices[i], this.xfos[i] );
     }
 }
@@ -169,7 +169,7 @@ function FABRIKSolver.SetSubBase!( in String nodeName ){
 
     // search index in this.xfos
     Boolean hit = false;
-    for( Index i=0; i < this.nodeIndices.size; i++ ){
+    for( Index i=0; i < this.nodeIndices.size(); i++ ){
 
         if( !hit && this.subBaseIndex == this.nodeIndices[i] ){
             this.subBaseIndexInternal = i;
@@ -221,7 +221,7 @@ function FABRIKSolver.EvaluateBoneTransforms!( io IPose pose, in Vec3 effector_p
     Xfo rootXfo = this.xfos[startIndex];
     Boolean is_bone_location_updated = false;
     Scalar root_to_target_distance = abs(
-        ( rootXfo.tr - effector_position ).length
+        ( rootXfo.tr - effector_position ).length()
     );
 
     if (( startIndex == 0 && root_to_target_distance*0.95 > this.chain_length ) 
@@ -266,7 +266,7 @@ function FABRIKSolver.reportBoneLength( in String mes ){
         report( mes +" bone length ["+i+"]: " + length +"    "+ this.xfos[i].tr );
         total += length;
     }
-    report( mes+" bone length total: " + total +"    "+ this.xfos[this.xfos.size-1].tr);
+    report( mes+" bone length total: " + total +"    "+ this.xfos[this.xfos.size()-1].tr);
 }
 
 
@@ -452,7 +452,7 @@ function FABRIKSolver.drawBones!( Xfo xfos[], Bone links[], io DrawingHandle han
     InlineShader shader = draw.registerShader(OGLSurfaceShader('surface'));
     InlineMaterial phong = shader.getOrCreateMaterial("phong");
 
-    for(Integer i=0; i<links.size; i++){
+    for(Integer i=0; i<links.size(); i++){
         InlineTransform boneTransform = handle.getRootTransform().getChild(
                                     this.GetName() +":" +i +":"+ links[i].name);
         if(boneTransform == null){

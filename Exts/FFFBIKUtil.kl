@@ -62,7 +62,7 @@ function Bone Skeleton.boneGenerator( in String name, in String parentName, Xfo 
 // FIXME: O(n^2) need more efficient algorithm 
 /// \dfgPresetFolder Util
 function distinct(io Bone array[]) {
-    distinct( array, array.size );
+    distinct( array, array.size() );
 }
 /// \dfgPresetFolder Util
 function distinct(io Bone array[], Size length) {
@@ -102,7 +102,7 @@ function Boolean ==(Bone lhs, Bone rhs) {
 */
 /// \dfgPresetFolder Util
 function distinct(io Index array[]) {
-    distinct( array, array.size );
+    distinct( array, array.size() );
 }
 /// \dfgPresetFolder Util
 function distinct(io Index array[], Size length) {
@@ -129,7 +129,7 @@ function distinct(io Index array[], Size length) {
 */
 /// \dfgPresetFolder Util
 inline function Boolean isExistsIn( in Index id, in Index array[] ){
-    for (Index i=0; i < array.size; i++ ){
+    for (Index i=0; i < array.size(); i++ ){
         if (id == array[i] ){
             return true;
         }

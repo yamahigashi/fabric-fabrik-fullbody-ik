@@ -63,7 +63,7 @@ struct SubBaseInfo{
 
 
 inline Boolean IsValidToEvaluate( in Vec3 v ){
-    if ( v.length == 0.0 || v.length.isNaN ){
+    if ( v.length() == 0.0 || v.length().isNaN() ){
         return false;
     }
     return true;
@@ -85,7 +85,7 @@ inline Vec3 SolveJoint( in Mat44 a, in Mat44 b, Scalar length ){
 /// \dfgPresetFolder Solver
 inline Vec3 SolveJoint( in Vec3 a, in Vec3 b, Scalar length ){
     Vec3 diff = a - b;
-    if ( diff.length == 0 ) {
+    if ( diff.length() == 0 ) {
         return b;
     } else {
         return b + diff.normalize() * length;
@@ -97,5 +97,5 @@ inline Vec3 SolveJoint( in Vec3 a, in Vec3 b, Scalar length ){
 inline Scalar distance( in Vec3 a, in Vec3 b ){
     Vec3 diff;
     diff = a - b;
-    return abs( diff.length );
+    return abs( diff.length() );
 }

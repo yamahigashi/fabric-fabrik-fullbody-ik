@@ -168,7 +168,7 @@ function Xfo FABRIKCloseLoopSolver.GetSubBaseXfo(){
 /// \internal
 function FABRIKCloseLoopSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
     Vec3 offset = xfo.tr - this.xfos[ this.subBaseIndexInternal ].tr;
-    for ( Index i=this.subBaseIndexInternal; i < this.nodeIndices.size; i++ ){
+    for ( Index i=this.subBaseIndexInternal; i < this.nodeIndices.size(); i++ ){
         this.xfos[i].tr += offset;
     }
     this.solveClosePart( pose );
@@ -192,7 +192,7 @@ function FABRIKCloseLoopSolver.Solve!( io IPose pose ){
 
     // update xfos
     //for (Index i=0; i < this.xfos.size; i++ ){
-    for (Index i=1; i < this.xfos.size; i++ ){
+    for (Index i=1; i < this.xfos.size(); i++ ){
         this.xfos[i] = pose.getBoneXfo( this.nodeIndices[i] );
     }
 
@@ -253,7 +253,7 @@ function FABRIKCloseLoopSolver.solveClosePart!( io IPose pose ){
     }
 
     // take average xfo
-    for (Index i=0; i < this.nodeIndices.size; i++ ){
+    for (Index i=0; i < this.nodeIndices.size(); i++ ){
         this.xfos[i].tr = ( tmpXfos[i].tr + this.xfos[i].tr ) / 2;
     }
     // */
@@ -269,7 +269,7 @@ function FABRIKCloseLoopSolver.solveNoisyPart!( io IPose pose ){
 
     // solve positive order
     Xfo tmpXfos[] = this.xfos.clone();
-    for (Index i=0; i < this.noisyEdges.size/2; i++ ){
+    for (Index i=0; i < this.noisyEdges.size()/2; i++ ){
         Index idx_a = i % this.numEdges;
         Index idx_b = (i+1) % this.numEdges;
         this.BackwardReach( pose, idx_b, idx_a, this.edgeLengths[idx_a] );
@@ -282,7 +282,7 @@ function FABRIKCloseLoopSolver.solveNoisyPart!( io IPose pose ){
 
     // solve negative order
     swap( tmpXfos, this.xfos );
-    for (Count i=this.numEdges-1; i > this.noisyEdges.size/2; i-- ){
+    for (Count i=this.numEdges-1; i > this.noisyEdges.size()/2; i-- ){
         Index idx_a = i % this.numEdges;
         Index idx_b; 
         if (i == 0 ){
@@ -300,7 +300,7 @@ function FABRIKCloseLoopSolver.solveNoisyPart!( io IPose pose ){
     }
 
     // take average xfo (positive + negative ) / 2
-    for (Index i=0; i < this.nodeIndices.size; i++ ){
+    for (Index i=0; i < this.nodeIndices.size(); i++ ){
         this.xfos[i].tr = ( tmpXfos[i].tr + this.xfos[i].tr ) / 2;
     }
 }
@@ -309,7 +309,7 @@ function FABRIKCloseLoopSolver.solveNoisyPart!( io IPose pose ){
 /// \internal
 function Xfo[] FABRIKCloseLoopSolver.storeTemporaryNodePose!( io IPose pose ){
     Xfo results[];
-    for (Index i=0; i < this.nodeIndices.size; i++ ){
+    for (Index i=0; i < this.nodeIndices.size(); i++ ){
         results.push( pose.getBoneXfo( this.nodeIndices[i] ) );
     }
     return results;
@@ -343,7 +343,7 @@ function FABRIKCloseLoopSolver.searchNoisyEdge!(){
     for (Index i=1; i < this.numEdges; i++ ){
         noisy = this.graph.searchNoisy( this.nodeIndices[i], this.nodeIndices );
 
-        for (Index j=0; j < noisy.size; j++ ){
+        for (Index j=0; j < noisy.size(); j++ ){
             if ( isExistsIn( noisy[j], this.noisyNodeIndices )){
                 continue;
             }
@@ -354,7 +354,7 @@ function FABRIKCloseLoopSolver.searchNoisyEdge!(){
             this.noisyXfos.push( xfo );
             // fil edge referencePose
             Vec3 sub = this.xfos[i].tr - xfo.tr;
-            this.noisyEdges[this.noisyEdges.size-1].referencePose = sub;
+            this.noisyEdges[this.noisyEdges.size()-1].referencePose = sub;
             this.noisyEdgeLengths.push( abs( sub.length() ) );
         }
     }
@@ -364,7 +364,7 @@ function FABRIKCloseLoopSolver.searchNoisyEdge!(){
     FFBIKEdge tmpEdges[];
     Scalar    tmpLengths[];
     Xfo       tmpXfos[];
-    for (Index i=0; i < this.noisyXfos.size; i++ ){
+    for (Index i=0; i < this.noisyXfos.size(); i++ ){
         if ( isExistsIn( i, eliminated ) ){
             continue;
         }
@@ -384,7 +384,7 @@ function Index[] FABRIKCloseLoopSolver.eliminateUnControlledNoisyNode!(){
     Index new[];
     Index res[];
 
-    for( Index i=0; i < this.noisyNodeIndices.size; i++ ){
+    for( Index i=0; i < this.noisyNodeIndices.size(); i++ ){
         if( this.graph.isControlledNode( this.noisyNodeIndices[i] )){
             new.push( this.noisyNodeIndices[i] );
         } else {
@@ -429,7 +429,7 @@ function FABRIKCloseLoopSolver.Finalize!(){
 ---------------------------------------------------------------------------------------*/
 /// \dfgPresetFolder Util
 inline function distinct(io Integer array[]) {
-    distinct( array, array.size );
+    distinct( array, array.size() );
 }
 /// \dfgPresetFolder Util
 inline function distinct(io Integer array[], Size length) {

@@ -50,7 +50,7 @@ public function Binder.AddEntry!( in String boneName ){
 /// \dfgPresetFolder Binder
 public function Binder.Execute!( io IPose pose ){
 
-    for (Index i=0; i < this.bindEntries.size; i++ ){
+    for (Index i=0; i < this.bindEntries.size(); i++ ){
         this.output[i] = pose.getBoneXfo( this.bindEntries[i].boneIndex ).toMat44();
 
     }
@@ -61,12 +61,12 @@ public function Binder.Execute!( io IPose pose ){
 /// \dfgPresetFolder Binder
 public function Binder.Execute!( io IPose pose, io Mat44 output[] ){
 
-    if ( output.size < this.bindEntries.size ){
-        setError( "output size mismatch!! .... " + output.size +"   : "+ this.bindEntries.size);
+    if ( output.size() < this.bindEntries.size() ){
+        setError( "output size mismatch!! .... " + output.size() +"   : "+ this.bindEntries.size());
         return;
     }
 
-    for (Index i=0; i < this.bindEntries.size; i++ ){
+    for (Index i=0; i < this.bindEntries.size(); i++ ){
         output[i] = pose.getBoneXfo( this.bindEntries[i].boneIndex ).toMat44();
 
     }
