@@ -29,6 +29,7 @@ object FABRIKCloseLoopSolver : IFABRIKSolver {
     Skeleton   skeleton;        // sleketon
     FFBIKGraph graph;         // graph
     DrawingHandle handle;
+
     Index      effectorIndex;
     Index      effectorCount;
 
@@ -406,14 +407,15 @@ function FABRIKCloseLoopSolver.ResetToReferencePose!(){
 /// \internal
 function FABRIKCloseLoopSolver.DrawSolver!(){
     DrawingHandle handle();
-    // this.drawEdges( this.xfos, this.edges, handle );
+    this.drawEdges( this.xfos, this.edges, handle );
 }
 /// \internal
-function FABRIKSolver.drawEdges!( Xfo xfos[], FFBIKEdge edges[], io DrawingHandle handle) {
-    report( "implement later" );
+function FABRIKCloseLoopSolver.drawEdges!( Xfo xfos[], FFBIKEdge edges[], io DrawingHandle handle) {
+    Lines lines();
 
-    /*
-    GeometryAttributes attributes = this.lines.getAttributes();
+    //*
+    //GeometryAttributes attributes = this.lines.getAttributes();
+    GeometryAttributes attributes = lines.getAttributes();
     Vec3Attribute positions       = attributes.getOrCreateAttribute('positions', Vec3Attribute);
     Vec3Attribute normals         = attributes.getOrCreateAttribute('normals', Vec3Attribute);
     Vec3Attribute velocities      = attributes.getOrCreateAttribute('velocities', Vec3Attribute);
@@ -432,28 +434,40 @@ function FABRIKSolver.drawEdges!( Xfo xfos[], FFBIKEdge edges[], io DrawingHandl
         mat.setUniform('u_rootColor', Color( 0, 255, 255));
         mat.setUniform('u_tipColor', Color( 0, 0, 0));
 
-        edgeTransform = StaticInlineTransform( this.getInlineEdgeName(), Xfo() );
+        edgeTransform = StaticInlineTransform( this.GetName(), Xfo() );
         handle.getRootTransform().addChild(edgeTransform);
 
-        for(Integer i=0; i < edges.size(); i++){
+        for(Integer i=0; i < xfos.size() - 1; i++){
 
-            this.lines.addLine(
-                xfos[ this.edges[i].a ].tr,
-                xfos[ this.edges[i].b ].tr
+            //this.lines.addLine(
+            lines.addLine(
+                xfos[ i ].tr,
+                xfos[ i + 1 ].tr
             );
+
         }
+        lines.addLine(
+            xfos[ xfos.size() - 1 ].tr,
+            xfos[ 0 ].tr
+        );
 
-        InlineShape shape = draw.registerShape( InlineLinesShape('lines', this.lines) );
-        mat.addInstance(SimpleInlineInstance(this.getInlineEdgeName(), edgeTransform, shape));
-
+        //InlineShape shape = draw.registerShape( InlineLinesShape('lines', this.lines) );
+        InlineShape shape = draw.registerShape( InlineLinesShape('lines', lines) );
+        mat.addInstance(SimpleInlineInstance(this.GetName(), edgeTransform, shape));
     } else {
-        for(Integer i=0; i< edges.size(); i++){
-            this.lines.setPosition( i*2,   xfo[ this.edges[i].a ].tr );
-            this.lines.setPosition( i*2+1, xfo[ this.edges[i].b ].tr );
+        for(Integer i=0; i< xfos.size(); i++){
+            // this.lines.setPosition( i*2,   xfo[ this.edges[i].a ].tr );
+            // this.lines.setPosition( i*2+1, xfo[ this.edges[i].b ].tr );
+            lines.setPosition( i,   xfos[ i ].tr );
+            lines.setPosition( i+1, xfos[ i + 1 ].tr );
         }
+        lines.setPosition( xfos.size() - 1,   xfos[ xfos.size() - 1 ].tr );
+        lines.setPosition( 0, xfos[ 0 ].tr );
     }
 
-    this.lines.incrementVersion();
+        report( lines );
+    lines.incrementVersion();
+    // this.lines.incrementVersion();
     positions.incrementVersion();
     // */
 }
