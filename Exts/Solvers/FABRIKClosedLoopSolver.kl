@@ -54,6 +54,7 @@ object FABRIKCloseLoopSolver : IFABRIKSolver {
     Scalar     noisyEdgeLengths[];   // length for root to end(tip) at full extension
     Integer    numnoisyEdges;       // number of bone count
 
+    Lines      lines;               // for debug draw
 
 };
 
@@ -404,7 +405,57 @@ function FABRIKCloseLoopSolver.ResetToReferencePose!(){
 
 /// \internal
 function FABRIKCloseLoopSolver.DrawSolver!(){
+    DrawingHandle handle();
+    // this.drawEdges( this.xfos, this.edges, handle );
+}
+/// \internal
+function FABRIKSolver.drawEdges!( Xfo xfos[], FFBIKEdge edges[], io DrawingHandle handle) {
     report( "implement later" );
+
+    /*
+    GeometryAttributes attributes = this.lines.getAttributes();
+    Vec3Attribute positions       = attributes.getOrCreateAttribute('positions', Vec3Attribute);
+    Vec3Attribute normals         = attributes.getOrCreateAttribute('normals', Vec3Attribute);
+    Vec3Attribute velocities      = attributes.getOrCreateAttribute('velocities', Vec3Attribute);
+    ColorAttribute vertexColors   = attributes.getOrCreateAttribute('vertexColors', ColorAttribute);
+    ScalarAttribute ratios        = attributes.getOrCreateAttribute('ratios', ScalarAttribute);
+  
+    InlineDrawing draw = handle.getDrawing();
+    InlineShader shader = draw.registerShader(OGLLinesShader());
+    Ref<InlineMaterial> mat  = shader.getOrCreateMaterial('mat');
+    InlineTransform edgeTransform = handle.getRootTransform().getChild( this.GetName() );
+
+    if ( edgeTransform == null ){
+        mat.setUniform('u_normalIsTangent',  0);
+        mat.setUniform('u_shadingAmount', 0.5);
+        mat.setUniform('u_vertexColorAmount', 0.5);
+        mat.setUniform('u_rootColor', Color( 0, 255, 255));
+        mat.setUniform('u_tipColor', Color( 0, 0, 0));
+
+        edgeTransform = StaticInlineTransform( this.getInlineEdgeName(), Xfo() );
+        handle.getRootTransform().addChild(edgeTransform);
+
+        for(Integer i=0; i < edges.size(); i++){
+
+            this.lines.addLine(
+                xfos[ this.edges[i].a ].tr,
+                xfos[ this.edges[i].b ].tr
+            );
+        }
+
+        InlineShape shape = draw.registerShape( InlineLinesShape('lines', this.lines) );
+        mat.addInstance(SimpleInlineInstance(this.getInlineEdgeName(), edgeTransform, shape));
+
+    } else {
+        for(Integer i=0; i< edges.size(); i++){
+            this.lines.setPosition( i*2,   xfo[ this.edges[i].a ].tr );
+            this.lines.setPosition( i*2+1, xfo[ this.edges[i].b ].tr );
+        }
+    }
+
+    this.lines.incrementVersion();
+    positions.incrementVersion();
+    // */
 }
 
 /// \internal

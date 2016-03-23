@@ -444,7 +444,9 @@ require InlineDrawing;
 
 /// \dfgPresetFolder DebugDraw
 function FABRIKSolver.DrawSolver!() {
+    DrawingHandle handle();
     this.drawBones( this.xfos, this.bones, this.handle );
+    // this.drawBones( this.xfos, this.bones, handle );
 }
 /// \internal
 function FABRIKSolver.drawBones!( Xfo xfos[], Bone links[], io DrawingHandle handle) {
@@ -463,7 +465,7 @@ function FABRIKSolver.drawBones!( Xfo xfos[], Bone links[], io DrawingHandle han
 
             InlineShape boneShape = constructBoneShape(i, links);
             GeometryAttributes attributes = boneShape.getAttributes();
-            Vec3Attribute  normals = attributes.getAttribute('normals', Vec3Attribute);
+            Vec3Attribute  normals = attributes.getOrCreateAttribute('normals', Vec3Attribute);
             InlineInstance boneInstance = SimpleInlineInstance( bone.name + 'Instance', boneTransform, boneShape, phong);
             boneInstance.setInstanceUniform(InlineUniform('u_diffuseColor', bone.color));
         }

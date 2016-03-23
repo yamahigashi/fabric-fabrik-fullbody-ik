@@ -37,6 +37,7 @@ function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
     this.solvers.resize( 0 );
     this.solverDepths.resize( 0 );
     this.subBaseIndices.resize( 0 );
+    this.subBaseXfos.clear();
     this.graph    = graph;
     this.maxDepth = 0;
     this.skeleton = skeleton;
@@ -48,15 +49,7 @@ function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
 
 /// \dfgPresetFolder Manager
 function FABRIKResolver( Ref<FFBIKGraph> graph ){
-    this.solvers.resize( 0 );
-    this.solverDepths.resize( 0 );
-    this.subBaseIndices.resize( 0 );
-    this.graph    = graph;
-    this.maxDepth = 0;
-    this.skeleton = graph.getSkeleton();
-
-    this.max_iteration = 1;
-    this.effectorCounter = 0;
+    this = FABRIKResolver( graph.getSkeleton(), graph );
 }
 
 
@@ -64,8 +57,6 @@ function FABRIKResolver( Ref<FFBIKGraph> graph ){
 function FABRIKResolver.addSolver!( io IFABRIKSolver solver ){
     this.solvers.push( solver );
     this.subBaseIndices.push( solver.GetSubBaseIndex() );
-    this.subBaseXfos[ solver.GetSubBaseIndex() ].resize(0);
-    this.calculateSolverDepth();
 
     solver.SetEffectorIndex( this.effectorCounter );
     this.effectorCounter += solver.GetEffectorCount();
@@ -93,6 +84,11 @@ function FABRIKResolver.finalize!(){
         }
     }
     distinct( this.subBaseIndices );
+
+    for ( Index i=0; i < this.subBaseIndices.size(); i++ ){
+        this.subBaseXfos[ this.subBaseIndices[i] ].resize(0);
+    }
+    this.calculateSolverDepth();
 
     finalizePEX<<<tmpSolvers.size()>>>( tmpSolvers );
 }
