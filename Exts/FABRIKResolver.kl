@@ -57,7 +57,6 @@ function FABRIKResolver( Ref<FFBIKGraph> graph ){
 function FABRIKResolver.addSolver!( io IFABRIKSolver solver ){
     this.solvers.push( solver );
     this.subBaseIndices.push( solver.GetSubBaseIndex() );
-
     solver.SetEffectorIndex( this.effectorCounter );
     this.effectorCounter += solver.GetEffectorCount();
 }
@@ -65,11 +64,16 @@ function FABRIKResolver.addSolver!( io IFABRIKSolver solver ){
 
 /// \internal
 function Boolean FABRIKResolver.isReady(){
+    if ( this.solvers.size() == 0 ){
+        return false;
+    }
+
     for (Index i=0; i < this.solvers.size(); i++ ){
         if ( this.solvers[i].IsReady() == false ){
             return false;
         }
     }
+
     return true;
 }
 

@@ -2,15 +2,15 @@
   "objectType" : "Graph",
   "metadata" : {
     "timeline_timerFps" : "1000",
-    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -1.000562071800232,\n    \"y\" : -3.409824057598598e-05,\n    \"z\" : 0.001669904449954629,\n    \"t\" : 0.03464844822883606\n    },\n  \"row1\" : {\n    \"x\" : 2.362450715054365e-07,\n    \"y\" : 0.9996516704559326,\n    \"z\" : 0.02058293111622334,\n    \"t\" : 11.96400451660156\n    },\n  \"row2\" : {\n    \"x\" : -0.001670227735303342,\n    \"y\" : 0.02056819200515747,\n    \"z\" : -1.000365495681763,\n    \"t\" : -21.07860565185547\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : -1.000563859939575,\n    \"y\" : -3.409825876588002e-05,\n    \"z\" : 0.001669906894676387,\n    \"t\" : 0.03464844822883606\n    },\n  \"row1\" : {\n    \"x\" : 2.362473026096268e-07,\n    \"y\" : 0.9996516704559326,\n    \"z\" : 0.02058298513293266,\n    \"t\" : 11.96400451660156\n    },\n  \"row2\" : {\n    \"x\" : -0.001670230180025101,\n    \"y\" : 0.02056821063160896,\n    \"z\" : -1.000367283821106,\n    \"t\" : -21.07860565185547\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
     "timeline_start" : "1",
-    "uiGraphZoom" : "{\n  \"value\" : 2.0\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 1.543477654457092\n  }",
     "timeline_loopMode" : "1",
     "timeline_simMode" : "0",
     "camera_focalDistance" : "31.77195930480957",
     "timeline_current" : "1",
     "timeline_end" : "50",
-    "uiGraphPan" : "{\n  \"x\" : -250.3056640625,\n  \"y\" : 406.4131774902344\n  }"
+    "uiGraphPan" : "{\n  \"x\" : -696.159912109375,\n  \"y\" : 347.5885620117188\n  }"
     },
   "title" : "",
   "ports" : [
@@ -97,6 +97,13 @@
     {
       "objectType" : "Port",
       "nodePortType" : "In",
+      "name" : "value",
+      "execPortType" : "Out",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
       "name" : "solver",
       "execPortType" : "Out",
       "typeSpec" : "FABRIKResolver"
@@ -116,7 +123,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":291.6414184570313,\"y\":73.99090576171875}"
+        "uiGraphPos" : "{\"x\":490.4475708007813,\"y\":81.21170806884766}"
         },
       "name" : "FFBIKPose_2",
       "ports" : [
@@ -138,8 +145,8 @@
       "objectType" : "User",
       "metadata" : {
         "uiTitle" : "AddSkeletonGraph",
-        "uiGraphPos" : "{\"x\":143.0285797119141,\"y\":-234.247802734375}",
-        "uiGraphSize" : "{\"w\":743.7450561523438,\"h\":434.4181518554688}"
+        "uiGraphPos" : "{\"x\":385.4544982910156,\"y\":-214.9477691650391}",
+        "uiGraphSize" : "{\"w\":1033.651123046875,\"h\":456.1863708496094}"
         },
       "name" : "backDrop",
       "ports" : []
@@ -172,7 +179,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-199.1972045898438,\"y\":-39.43463516235352}"
+        "uiGraphPos" : "{\"x\":-222.6845245361328,\"y\":-65.60635375976563}"
         },
       "name" : "GraphFromJSON",
       "ports" : [
@@ -363,7 +370,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":-216.0023193359375,\"y\":-437.7906494140625}"
+        "uiGraphPos" : "{\"x\":66.3695068359375,\"y\":-403.6326293945313}"
         },
       "name" : "DFGBindingManager_1",
       "ports" : [
@@ -379,7 +386,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":147.952880859375,\"y\":-436.6845397949219}"
+        "uiGraphPos" : "{\"x\":437.1566772460938,\"y\":-402.5264892578125}"
         },
       "name" : "RegisterAllFilesInFolder_2",
       "ports" : [
@@ -411,7 +418,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":625.3280639648438,\"y\":-178.1800231933594}"
+        "uiGraphPos" : "{\"x\":867.7542114257813,\"y\":-158.8799896240234}"
         },
       "name" : "addSolvers",
       "ports" : [
@@ -536,7 +543,9 @@ dfgEntry {
 
       // report( rtVals );
       wrapper.executeWithArgs( rtVals, outputVals, errors );
-      report( errors );
+
+      resolver = rtVals.get( \"resolver\", RTVal( FABRIKResolver() ) );
+
 
     }
   }
@@ -614,7 +623,7 @@ dfgEntry {
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":218.9716186523438,\"y\":-32.79275894165039}"
+        "uiGraphPos" : "{\"x\":461.3976745605469,\"y\":-13.49271392822266}"
         },
       "name" : "EmptyDrawingHandle_2",
       "ports" : [
@@ -630,7 +639,7 @@ dfgEntry {
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":214.4464111328125,\"y\":-175.3124084472656}"
+        "uiGraphPos" : "{\"x\":456.8724365234375,\"y\":-156.0123748779297}"
         },
       "name" : "FABRIKResolver_3",
       "ports" : [
@@ -683,7 +692,7 @@ dfgEntry {
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":1280.467407226563,\"y\":-162.2809753417969}"
+        "uiGraphPos" : "{\"x\":1773.138427734375,\"y\":403.3443298339844}"
         },
       "name" : "Solve_1",
       "ports" : [
@@ -709,7 +718,7 @@ dfgEntry {
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":632.7688598632813,\"y\":60.22734451293945}"
+        "uiGraphPos" : "{\"x\":775.6498413085938,\"y\":89.80405426025391}"
         },
       "name" : "CastIPose",
       "ports" : [
@@ -1389,32 +1398,106 @@ dfgEntry {
       "ports" : []
       },
     {
-      "objectType" : "Inst",
+      "objectType" : "Var",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":905.1994018554688,\"y\":-200.2792816162109}"
+        "uiGraphPos" : "{\"x\":198.9796142578125,\"y\":-204.8383483886719}"
         },
-      "name" : "Cache_1",
+      "name" : "resolver",
       "ports" : [
         {
-          "objectType" : "InstPort",
-          "nodePortType" : "In",
+          "objectType" : "VarPort",
+          "nodePortType" : "IO",
           "name" : "value"
           }
         ],
-      "executable" : "Fabric.Core.Data.Cache",
-      "presetGUID" : "D903AFD981FE9214C69943F542D5FD60"
+      "dataType" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Get",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":698.7355346679688,\"y\":314.6705627441406}"
+        },
+      "name" : "get",
+      "ports" : [
+        {
+          "objectType" : "GetPort",
+          "nodePortType" : "Out",
+          "name" : "value"
+          }
+        ],
+      "varPath" : "resolver"
+      },
+    {
+      "objectType" : "Var",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":198.7579345703125,\"y\":-88.56832122802734}"
+        },
+      "name" : "pose",
+      "ports" : [
+        {
+          "objectType" : "VarPort",
+          "nodePortType" : "IO",
+          "name" : "value"
+          }
+        ],
+      "dataType" : "IPose"
+      },
+    {
+      "objectType" : "Get",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":805.5462036132813,\"y\":537.11376953125}"
+        },
+      "name" : "get_2",
+      "ports" : [
+        {
+          "objectType" : "GetPort",
+          "nodePortType" : "Out",
+          "name" : "value"
+          }
+        ],
+      "varPath" : "pose"
+      },
+    {
+      "objectType" : "Set",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1127.139038085938,\"y\":-104.8033981323242}"
+        },
+      "name" : "set",
+      "ports" : [
+        {
+          "objectType" : "SetPort",
+          "nodePortType" : "IO",
+          "name" : "value"
+          }
+        ],
+      "varPath" : "resolver"
+      },
+    {
+      "objectType" : "Set",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1089.421020507813,\"y\":104.7744216918945}"
+        },
+      "name" : "set_2",
+      "ports" : [
+        {
+          "objectType" : "SetPort",
+          "nodePortType" : "IO",
+          "name" : "value"
+          }
+        ],
+      "varPath" : "pose"
       },
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":1076.65283203125,\"y\":-226.2065887451172}"
+        "uiGraphPos" : "{\"x\":1027.211669921875,\"y\":462.0130615234375}"
         },
-      "name" : "Copy_1",
+      "name" : "IsNull_2",
       "ports" : [
         {
           "objectType" : "InstPort",
           "nodePortType" : "In",
-          "name" : "value"
+          "name" : "obj"
           },
         {
           "objectType" : "InstPort",
@@ -1422,8 +1505,132 @@ dfgEntry {
           "name" : "result"
           }
         ],
-      "executable" : "Fabric.Core.Func.Copy",
-      "presetGUID" : "C3E84342DB046C048BABD41DF1B5E3ED"
+      "executable" : "Fabric.Core.Object.IsNull",
+      "presetGUID" : "84AEE2708BDEAAFDEBA207A1733A052F"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1461.86474609375,\"y\":191.1654052734375}"
+        },
+      "name" : "If_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "cond"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "if_true"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "if_false"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "Fabric.Core.Control.If",
+      "presetGUID" : "3182A478A21643455D549E483D35F831"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1454.202758789063,\"y\":462.5668334960938}"
+        },
+      "name" : "If_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "cond"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "if_true"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "if_false"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "result"
+          }
+        ],
+      "executable" : "Fabric.Core.Control.If",
+      "presetGUID" : "3182A478A21643455D549E483D35F831"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1040.867431640625,\"y\":291.5241088867188}"
+        },
+      "name" : "isReady",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "solver"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "IO",
+          "name" : "result"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Func",
+        "title" : "isReady",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "solver",
+            "execPortType" : "In",
+            "typeSpec" : "FABRIKResolver"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "IO",
+            "name" : "result",
+            "execPortType" : "IO",
+            "typeSpec" : "Boolean"
+            }
+          ],
+        "extDeps" : {
+          "FABRIK" : "*"
+          },
+        "code" : "dfgEntry {
+
+  result = solver.isReady();
+}
+"
+        }
+      },
+    {
+      "objectType" : "Set",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":2040.302978515625,\"y\":268.4918823242188}"
+        },
+      "name" : "set_3",
+      "ports" : [
+        {
+          "objectType" : "SetPort",
+          "nodePortType" : "IO",
+          "name" : "value"
+          }
+        ],
+      "varPath" : "resolver"
       }
     ],
   "connections" : {
@@ -1479,7 +1686,7 @@ dfgEntry {
       "addSolvers.manager"
       ],
     "addSolvers.resolver" : [
-      "Cache_1.value"
+      "set.value"
       ],
     "ExpandEnvVars_1.result" : [
       "String_1.this"
@@ -1497,10 +1704,10 @@ dfgEntry {
       "addSolvers.resolver"
       ],
     "Solve_1.this" : [
-      "solver"
+      "set_3.value"
       ],
     "CastIPose.pose" : [
-      "Solve_1.pose"
+      "set_2.value"
       ],
     "Push_1.array" : [
       "Push_10.array"
@@ -1574,11 +1781,34 @@ dfgEntry {
     "ToMat44_8.result" : [
       "Push_5.element"
       ],
-    "Cache_1.value" : [
-      "Copy_1.value"
+    "get.value" : [
+      "isReady.solver",
+      "If_1.if_true"
       ],
-    "Copy_1.result" : [
+    "get_2.value" : [
+      "IsNull_2.obj",
+      "If_2.if_false"
+      ],
+    "set.value" : [
+      "If_1.if_false"
+      ],
+    "set_2.value" : [
+      "If_2.if_true"
+      ],
+    "IsNull_2.result" : [
+      "If_2.cond"
+      ],
+    "If_1.result" : [
       "Solve_1.this"
+      ],
+    "If_2.result" : [
+      "Solve_1.pose"
+      ],
+    "isReady.result" : [
+      "If_1.cond"
+      ],
+    "set_3.value" : [
+      "solver"
       ]
     },
   "requiredPresets" : {
@@ -2185,27 +2415,71 @@ dfgEntry {
 }
 "
       },
-    "Fabric.Core.Data.Cache" : {
+    "Fabric.Core.Object.IsNull" : {
       "objectType" : "Func",
-      "metadata" : {
-        "uiNodeColor" : "{\n  \"r\" : 214,\n  \"g\" : 191,\n  \"b\" : 103\n  }",
-        "uiAlwaysShowDaisyChainPorts" : "true",
-        "uiHeaderColor" : "{\n  \"r\" : 188,\n  \"g\" : 129,\n  \"b\" : 83\n  }"
-        },
-      "title" : "Cache",
-      "cacheRule" : "always",
+      "title" : "IsNull",
       "ports" : [
         {
           "objectType" : "Port",
           "nodePortType" : "Out",
-          "name" : "value",
+          "name" : "obj",
           "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "Boolean"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "84AEE2708BDEAAFDEBA207A1733A052F",
+      "code" : "
+dfgEntry {
+  result = !obj;
+}
+"
+      },
+    "Fabric.Core.Control.If" : {
+      "objectType" : "Func",
+      "title" : "If",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "cond",
+          "execPortType" : "In",
+          "typeSpec" : "Boolean"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "if_true",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "if_false",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
           "typeSpec" : "$TYPE$"
           }
         ],
       "extDeps" : {},
-      "presetGUID" : "D903AFD981FE9214C69943F542D5FD60",
-      "code" : "dfgEntry {
+      "presetGUID" : "3182A478A21643455D549E483D35F831",
+      "code" : "
+dfgEntry {
+	result = cond ? if_true : if_false;
 }
 "
       }
@@ -2220,7 +2494,7 @@ dfgEntry {
     {
       "type" : "Vec3",
       "value" : {
-        "x" : 4,
+        "x" : 6.699999809265137,
         "y" : 12.69999980926514,
         "z" : 1.399999976158142
         },
@@ -2288,6 +2562,11 @@ dfgEntry {
         "z" : 0
         },
       "ext" : "Math"
+      },
+    {
+      "type" : "FABRIKResolver",
+      "value" : null,
+      "ext" : "FABRIK"
       },
     {
       "type" : "FABRIKResolver",
