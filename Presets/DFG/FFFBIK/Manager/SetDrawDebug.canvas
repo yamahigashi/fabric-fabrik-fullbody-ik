@@ -2,33 +2,33 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: Binder\n  boneName: String\n"
+    "uiTooltip" : "Supported types:\n  this: FABRIKResolver\n  flag: Boolean\n"
     },
-  "title" : "AddEntry",
+  "title" : "SetDrawDebug",
   "ports" : [
     {
       "objectType" : "Port",
       "nodePortType" : "IO",
       "name" : "this",
       "execPortType" : "IO",
-      "typeSpec" : "Binder"
+      "typeSpec" : "FABRIKResolver"
       },
     {
       "objectType" : "Port",
       "nodePortType" : "Out",
-      "name" : "boneName",
+      "name" : "flag",
       "execPortType" : "In",
-      "typeSpec" : "String"
+      "typeSpec" : "Boolean"
       }
     ],
   "extDeps" : {
     "FABRIK" : "*"
     },
-  "presetGUID" : "FE6C745C774DAFACFB1BA74020D0071A",
+  "presetGUID" : "7F0CFBC7E684761BE1D21BF808D912FA",
   "code" : "require FABRIK;
 
 dfgEntry {
-  this.AddEntry(boneName);
+  this.setDrawDebug(flag);
 }
 "
   }

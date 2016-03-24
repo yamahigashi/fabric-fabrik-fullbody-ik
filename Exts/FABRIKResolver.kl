@@ -16,24 +16,35 @@ require FABRIK;
 /// store solvers, resolve these solver by that weight recursive
 /// \dfgPresetFolder Manager
 struct FABRIKResolver {
-    Skeleton      skeleton;
-    IFABRIKSolver solvers[];
-    Ref<FFBIKGraph>    graph;
-    //FFBIKGraph    graph;
-    //Xfo           effectors<>[];
-    Size          solverDepths[];
-    Size          maxDepth;
-    Index         subBaseIndices[];
-    Xfo           subBaseXfos[Index][];
 
-    Integer       max_iteration;
+    Boolean         drawDebug;
 
-    Index         effectorCounter;
+    Skeleton        skeleton;
+    IFABRIKSolver   solvers[];
+    Ref<FFBIKGraph> graph;
+
+    Size            solverDepths[];
+    Size            maxDepth;
+    Index           subBaseIndices[];
+    Xfo             subBaseXfos[Index][];
+
+    Integer         max_iteration;
+
+    Index           effectorCounter;
 };
 
 
+/// constructor
+/// \dfgPresetFolder Manager
+function FABRIKResolver( Ref<FFBIKGraph> graph ){
+    this = FABRIKResolver( graph.getSkeleton(), graph );
+}
+
+
+/// constructor
 /// \dfgPresetFolder Manager
 function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
+    this.drawDebug = true;
     this.solvers.resize( 0 );
     this.solverDepths.resize( 0 );
     this.subBaseIndices.resize( 0 );
@@ -42,15 +53,16 @@ function FABRIKResolver( Skeleton skeleton, Ref<FFBIKGraph> graph ){
     this.maxDepth = 0;
     this.skeleton = skeleton;
 
-    this.max_iteration = 1;
+    this.max_iteration = 10;
     this.effectorCounter = 0;
 }
 
+// dummy
+/// \internal
+function FABRIKResolver.ComposeFABRIKResolver(){}
 
-/// \dfgPresetFolder Manager
-function FABRIKResolver( Ref<FFBIKGraph> graph ){
-    this = FABRIKResolver( graph.getSkeleton(), graph );
-}
+/// \internal
+function FABRIKResolver.DecomposeFABRIKResolver(){}
 
 
 /// \dfgPresetFolder Manager
@@ -79,7 +91,13 @@ function Boolean FABRIKResolver.isReady(){
 
 
 /// \dfgPresetFolder Manager
+function FABRIKResolver.setDrawDebug!( in Boolean flag ){
+    this.drawDebug = flag;
+}
+
+
 /// \internal
+/// \dfgPresetFolder Manager
 function FABRIKResolver.finalize!(){
     IFABRIKSolver tmpSolvers[];
     for ( Index i=0; i < this.solvers.size(); i++ ){
@@ -185,6 +203,10 @@ function FABRIKResolver.solve!( io IPose pose, Mat44 effectors[] ){
 
         iteration_count++;
     }
+
+    if ( this.drawDebug ){
+        drawSolverPEX<<< this.solvers.size() >>>( this.solvers );
+    }
 }
 
 /// \internal
@@ -240,10 +262,15 @@ operator updatePosePEX<<<index>>>(
                             io IPose pose,
                             io IFABRIKSolver solvers[]){
     solvers[index].UpdatePose( pose );
+}
+
+operator drawSolverPEX<<<index>>>(
+                            io IFABRIKSolver solvers[]){
     solvers[index].DrawSolver();
 }
 
 
+/// \internal
 struct SubBaseInfo{
     Index index;
     Xfo   xfo;

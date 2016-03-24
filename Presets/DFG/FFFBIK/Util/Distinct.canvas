@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  array: Bone[]\n  length: Size\n"
+    "uiTooltip" : "Supported types:\n  array: Bone[], Index[]\n  length: Size\n"
     },
   "title" : "Distinct",
   "ports" : [
@@ -11,7 +11,7 @@
       "nodePortType" : "IO",
       "name" : "array",
       "execPortType" : "IO",
-      "typeSpec" : "Bone[]"
+      "typeSpec" : "$TYPE_PARAM_1$"
       },
     {
       "objectType" : "Port",

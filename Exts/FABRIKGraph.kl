@@ -103,6 +103,7 @@ function Skeleton FFBIKGraph.getSkeleton(){
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
+/// \internal
 /// \dfgPresetFolder Graph
 function FFBIKGraph.registerControllBone!( String boneName ){
     Index id = this.skeleton.findBone( boneName );
@@ -110,12 +111,14 @@ function FFBIKGraph.registerControllBone!( String boneName ){
 }
 
 
+/// \internal
 /// \dfgPresetFolder Graph
 function FFBIKGraph.markAsControlled!( in Index id ){
     this.controlledNodes.push(id);
 }
 
 
+/// \internal
 /// \dfgPresetFolder Graph
 function Boolean FFBIKGraph.isControlledNode( in Index id ){
     return isExistsIn( id, this.controlledNodes );
@@ -140,8 +143,10 @@ function FFBIKGraph.setRootNode!( in Index id ){
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
+///
+/// \internal
 /// \dfgPresetFolder Graph
-function Index[] FFBIKGraph.searchNoisy( io Index id, io Index array[] ){
+function Index[] FFBIKGraph.searchNoisy( in Index id, in Index array[] ){
     Index results[];
     Index counter[] = this.nodes[ id ];
     for (Index i=0; i < counter.size(); i++ ){
@@ -160,11 +165,6 @@ function Index[] FFBIKGraph.searchNoisy( io Index id, io Index array[] ){
     //distinct( results );
     return results;
 }
-/*
-function FFBIKGraph.addNode( Bone bone ){
-    this.nodes[ bone ];
-}
-*/
 
 
 /*-------------------------------------------------------------------------------------*/
@@ -178,6 +178,7 @@ object OneNode {
     Index   to[];
 };
 
+/// \internal
 function OneNode( Index id, Index to[] ){
     this.index = id;
     this.done  = false;

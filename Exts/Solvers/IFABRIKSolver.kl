@@ -44,24 +44,18 @@ interface IFABRIKSolver {
     /// \internal
     SetSubBase!( in String nodeName );
     /// \internal
-    Index   GetSubBaseIndex();
+    Index GetSubBaseIndex();
     /// \internal
-    Index   GetRootNodeIndex();
+    Index GetRootNodeIndex();
     /// \internal
-    Xfo     GetSubBaseXfo();
+    Xfo GetSubBaseXfo();
 
     /// \internal
     OffsetByCentroid!( io IPose pose, Xfo xfo );
 };
 
-/*
-struct SubBaseInfo{
-    Index index;
-    Xfo   xfo;
-};
-*/
 
-
+/// \internal
 inline Boolean IsValidToEvaluate( in Vec3 v ){
     if ( v.length() == 0.0 || v.length().isNaN() ){
         return false;

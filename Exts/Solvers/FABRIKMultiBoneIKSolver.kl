@@ -391,6 +391,7 @@ function Boolean FABRIKSolver.IsReady(){
     return this.ready;
 }
 
+/// \internal
 /// \dfgPresetFolder Solver
 function FABRIKSolver.Finalize!(){
     this.ready = true;
@@ -444,6 +445,10 @@ operator solveRotationPEX<<<index>>>(
 
 /// \dfgPresetFolder DebugDraw
 function FABRIKSolver.DrawSolver!() {
+    if( !this.IsReady() ){
+        return;
+    }
+
     this.drawBones( this.xfos, this.bones, this.handle );
 }
 /// \internal

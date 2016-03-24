@@ -5,7 +5,7 @@ require Characters;
 require InlineDrawing;
 
 
-/// \dfgPresetFolder Component/DFGBinding
+/// \dfgPresetFolder Component
 function add3BoneIkSolver(
                 io FABRIKResolver resolver,
                 io DrawingHandle handle,
@@ -28,7 +28,7 @@ function add3BoneIkSolver(
 }
 
 
-/// \dfgPresetFolder Component/DFGBinding
+/// \dfgPresetFolder Component
 function add3BoneIkSolver(
                 io FABRIKResolver resolver,
                 io DrawingHandle handle,
@@ -49,7 +49,7 @@ function add3BoneIkSolver(
 }
 
 
-/// \dfgPresetFolder Component/DFGBinding
+/// \dfgPresetFolder Component
 function addCloseLoopSolver(
                 io FABRIKResolver resolver,
                 io DrawingHandle handle,

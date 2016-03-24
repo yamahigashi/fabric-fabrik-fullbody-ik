@@ -13,6 +13,13 @@
     {
       "objectType" : "Port",
       "nodePortType" : "In",
+      "name" : "drawDebug",
+      "execPortType" : "Out",
+      "typeSpec" : "Boolean"
+      },
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
       "name" : "skeleton",
       "execPortType" : "Out",
       "typeSpec" : "Skeleton"
@@ -84,6 +91,7 @@
   "code" : "require FABRIK;
 
 dfgEntry {
+  drawDebug = value.drawDebug;
   skeleton = value.skeleton;
   solvers = value.solvers;
   graph = value.graph;

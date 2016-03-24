@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  skeleton: Skeleton\n  graph: Ref<FFBIKGraph>\n  result: FABRIKResolver\n"
+    "uiTooltip" : "constructor\n\nSupported types:\n  skeleton: Skeleton\n  graph: Ref<FFBIKGraph>\n  result: FABRIKResolver\n"
     },
   "title" : "FABRIKResolver",
   "ports" : [

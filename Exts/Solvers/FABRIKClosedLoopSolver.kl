@@ -27,35 +27,37 @@ require InlineDrawing;
 
 /// \dfgPresetFolder Solver
 object FABRIKCloseLoopSolver : IFABRIKSolver {
-    Skeleton   skeleton;        // sleketon
-    FFBIKGraph graph;         // graph
+
+    Skeleton      skeleton;             // sleketon
+    FFBIKGraph    graph;                // graph
     DrawingHandle handle;
 
-    Index      effectorIndex;
-    Index      effectorCount;
+    Index         effectorIndex;
+    Index         effectorCount;
 
-    Scalar     precision;       // precision
-    Integer    max_iteration;   // max iteration
-    String     name;
-    Scalar     totalChainLength;
-    Boolean    ready;
+    Scalar        precision;            // precision
+    Integer       max_iteration;        // max iteration
+    String        name;
+    Scalar        totalChainLength;
+    Boolean       ready;
 
-    Xfo        xfos[];          // the xfo of bone
-    FFBIKEdge  edges[];          // the xfo of bone
-    Index      nodeIndices[];   // the bone index on the skeleton
-    Scalar     edgeLengths[];   // length for root to end(tip) at full extension
-    Vec3       edgeReferencePoses[];   // length for root to end(tip) at full extension
-    Xfo        nodeReferencePoses[];   // length for root to end(tip) at full extension
-    Integer    numEdges;       // number of bone count
-    Index      subBaseIndex;
-    Index      subBaseIndexInternal;
+    Xfo           xfos[];               // the xfo of bone
+    FFBIKEdge     edges[];              // the xfo of bone
+    Index         nodeIndices[];        // the bone index on the skeleton
+    Scalar        edgeLengths[];        // length for root to end(tip) at full extension
+    Vec3          edgeReferencePoses[]; // length for root to end(tip) at full extension
+    Xfo           nodeReferencePoses[]; // length for root to end(tip) at full extension
+    Integer       numEdges;             // number of bone count
+    Index         subBaseIndex;
+    Index         subBaseIndexInternal;
 
-    Xfo        noisyXfos[];          // the xfo of bone
-    FFBIKEdge  noisyEdges[];
-    Index      noisyNodeIndices[];   // the bone index on the skeleton
-    Scalar     noisyEdgeLengths[];   // length for root to end(tip) at full extension
+    Xfo           noisyXfos[];          // the xfo of bone
+    FFBIKEdge     noisyEdges[];
+    Index         noisyNodeIndices[];   // the bone index on the skeleton
+    Scalar        noisyEdgeLengths[];   // length for root to end(tip) at full extension
+    Index         noisyNumberInNode[];  // the noisy node index in this xfos(nodes)
 
-    Lines      lines;               // for debug draw
+    Lines         lines;               // for debug draw
 
 };
 
@@ -180,7 +182,6 @@ function FABRIKCloseLoopSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
         this.xfos[i].tr += offset;
     }
     this.solveClosePart( pose );
-    //this.UpdatePose( pose );
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -211,9 +212,6 @@ function FABRIKCloseLoopSolver.Solve!( io IPose pose ){
     // repeated (Steps7–16) until the positions of the noisy joints between two iterations
     // are identical or their difference is smaller than anacceptable error.
     this.solveClosePart( pose );
-
-
-    //this.UpdatePose( pose );
 
 }
 
@@ -268,36 +266,57 @@ function FABRIKCloseLoopSolver.solveClosePart!( io IPose pose ){
 }
 
 
-// The third phase takes into consideration the positions of joints p2and p5;
-// this phase of the algorithm ensures that the distance between these joints and
-// the noisy joints remains constant. Steps 7–10 are cases of the simplest version
-// of a serial chain, where only two joints exist.
+/// The third phase takes into consideration the positions of joints p2and p5;
+/// this phase of the algorithm ensures that the distance between these joints and
+/// the noisy joints remains constant. Steps 7–10 are cases of the simplest version
+/// of a serial chain, where only two joints exist.
 /// \internal
 function FABRIKCloseLoopSolver.solveNoisyPart!( io IPose pose ){
+    // report( this.GetName() );
+    // report( "<------------------------" );
+    // report( "nodeIndices:\t\t"    + this.nodeIndices       );
+    // report( "noisyXfos:\t\t\t"    + this.noisyXfos.size()  );
+    // report( "numEdges:\t\t\t"     + this.numEdges          );
+    // report( "noisyNumberInNode\t" + this.noisyNumberInNode );
+    // report( "noisyNodeIndices\t"  + this.noisyNodeIndices  );
+    // report( "noisyEdges\t\t"      + this.noisyEdges        );
+    // report( "noisyEdgeLengths\t"  + this.noisyEdgeLengths  );
 
     // solve positive order
     Xfo tmpXfos[] = this.xfos.clone();
-    for (Index i=0; i < this.noisyEdges.size()/2; i++ ){
-        Index idx_a = i % this.numEdges;
+    for ( Count i=0; i <= this.noisyEdges.size()/2; i++ ){
+
+        Index idx_a =  i    % this.numEdges;
         Index idx_b = (i+1) % this.numEdges;
+
         this.BackwardReach( pose, idx_b, idx_a, this.edgeLengths[idx_a] );
         this.xfos[ idx_b ].tr = SolveJoint(
             this.xfos[ idx_b ],
             this.noisyXfos[ idx_a ],
             this.noisyEdgeLengths[ idx_a ]
         );
+        // report( "idx_a: "     + idx_a );
+        // report( "idx_b: "     + idx_b );
+        // report( "pi: "         + i );
     }
 
     // solve negative order
     swap( tmpXfos, this.xfos );
-    for (Count i=this.numEdges-1; i > this.noisyEdges.size()/2; i-- ){
+
+    for ( Count i=this.noisyEdges.size(); i >= this.noisyEdges.size()/2; i-- ){
+
         Index idx_a = i % this.numEdges;
-        Index idx_b; 
+        Index idx_b;
+
         if (i == 0 ){
             idx_b = this.numEdges - 1;
         } else {
             idx_b = (i-1) % this.numEdges;
         }
+
+        // report( "idx_a: "     + idx_a );
+        // report( "idx_b: "     + idx_b );
+        // report( "ni: "         + i );
 
         this.BackwardReach( pose, idx_a, 0, this.edgeLengths[idx_a] );
         this.xfos[ idx_a ].tr = SolveJoint(
@@ -306,6 +325,7 @@ function FABRIKCloseLoopSolver.solveNoisyPart!( io IPose pose ){
             this.noisyEdgeLengths[ idx_b ]
         );
     }
+    // report( "------------------------>" );
 
     // take average xfo (positive + negative ) / 2
     for (Index i=0; i < this.nodeIndices.size(); i++ ){
@@ -325,7 +345,7 @@ function Xfo[] FABRIKCloseLoopSolver.storeTemporaryNodePose!( io IPose pose ){
 
 /// adjust bones from root
 /// \internal
-function FABRIKCloseLoopSolver.BackwardReach!( io IPose pose, in Integer target_index, in Integer parent_index, in Scalar length ){
+inline function FABRIKCloseLoopSolver.BackwardReach!( io IPose pose, in Integer target_index, in Integer parent_index, in Scalar length ){
     this.xfos[ target_index ].tr = SolveJoint(
             this.xfos[ target_index ],
             this.xfos[ parent_index ],
@@ -343,23 +363,36 @@ function FABRIKCloseLoopSolver.UpdatePose?( io IPose pose ){
 
 /// \internal
 function FABRIKCloseLoopSolver.searchNoisyEdge!(){
+
     Index noisy[];
     this.noisyEdges.resize(0);
     this.noisyNodeIndices.resize(0);
+    this.noisyNumberInNode.resize(0);
     this.noisyEdgeLengths.resize(0);
 
+    // report( "search noisy edge: " + this.GetName() );
     for (Index i=1; i < this.numEdges; i++ ){
+
         noisy = this.graph.searchNoisy( this.nodeIndices[i], this.nodeIndices );
+        // report( i + ":   " + this.nodeIndices[i] + "\t-------- " + noisy );
 
         for (Index j=0; j < noisy.size(); j++ ){
+
             if ( isExistsIn( noisy[j], this.noisyNodeIndices )){
                 continue;
             }
+
+            if ( !isExistsIn( i, this.noisyNumberInNode )){
+                this.noisyNumberInNode.push( i );
+            }
+
             this.noisyNodeIndices.push( noisy[j] );
             this.noisyEdges.push( this.graph.getEdge( this.nodeIndices[i], noisy[j] ) );
+
             // update xfos
             Xfo xfo = this.skeleton.getBone( noisy[j] ).referencePose;
             this.noisyXfos.push( xfo );
+
             // fil edge referencePose
             Vec3 sub = this.xfos[i].tr - xfo.tr;
             this.noisyEdges[this.noisyEdges.size()-1].referencePose = sub;
@@ -412,6 +445,10 @@ function FABRIKCloseLoopSolver.ResetToReferencePose!(){
 
 /// \dfgPresetFolder DebugDraw
 function FABRIKCloseLoopSolver.DrawSolver!(){
+    if( !this.IsReady() ){
+        return;
+    }
+
     this.drawEdges( this.xfos, this.edges, this.handle );
 }
 /// \internal
@@ -469,6 +506,7 @@ function Boolean FABRIKCloseLoopSolver.IsReady(){
     return this.ready;
 }
 
+/// \internal
 function FABRIKCloseLoopSolver.Finalize!(){
     this.searchNoisyEdge();
     this.lines.clear();
@@ -476,34 +514,3 @@ function FABRIKCloseLoopSolver.Finalize!(){
 
     this.ready = true;
 }
-
-/*---------------------------------------------------------------------------------------
-//
-//         utility
-//
----------------------------------------------------------------------------------------*/
-/// \dfgPresetFolder Util
-inline function distinct(io Integer array[]) {
-    distinct( array, array.size() );
-}
-/// \dfgPresetFolder Util
-inline function distinct(io Integer array[], Size length) {
-    Index i, j;
-    Index newLength = 1;  // new length of modified array
-
-    for( i=1; i< length; i++ ){
-
-        for( j=0; j< newLength ; j++){
-            if(array[i] == array[j])
-                break;
-        }
-
-        /* if none of the values in index[0..j] of array is not same as array[i],
-           then copy the current value to corresponding new position in array */
-        if( j == newLength ){
-            array[newLength++] = array[i];
-        }
-    }
-    array.resize( newLength );
-}
-

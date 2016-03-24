@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  skeleton: Ref<Skeleton>\n  graph: Ref<FFBIKGraph>\n  handle: DrawingHandle\n  boneNames: String[]\n  result: FABRIKCloseLoopSolver\n"
+    "uiTooltip" : "constructor\n\nSupported types:\n  skeleton: Ref<Skeleton>\n  graph: Ref<FFBIKGraph>\n  handle: DrawingHandle\n  boneNames: String[]\n  result: FABRIKCloseLoopSolver\n"
     },
   "title" : "FABRIKCloseLoopSolver",
   "ports" : [

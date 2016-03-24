@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n  id: Index\n"
+    "uiTooltip" : "Supported types:\n  this: FFBIKGraph\n  param1: Index, String\n"
     },
   "title" : "SetRootNode",
   "ports" : [
@@ -11,24 +11,28 @@
       "nodePortType" : "IO",
       "name" : "this",
       "execPortType" : "IO",
-      "typeSpec" : "FFBIKGraph"
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "Port",
       "nodePortType" : "Out",
-      "name" : "id",
+      "name" : "param1",
       "execPortType" : "In",
-      "typeSpec" : "Index"
+      "typeSpec" : "$TYPE_PARAM_1$"
       }
     ],
   "extDeps" : {
     "FABRIK" : "*"
     },
   "presetGUID" : "22CDF4964D738E2BD81735F2F3867D3B",
+  "priorPortNameMap" : {
+    "boneName" : 1,
+    "id" : 1
+    },
   "code" : "require FABRIK;
 
 dfgEntry {
-  this.setRootNode(id);
+  this.setRootNode(param1);
 }
 "
   }
