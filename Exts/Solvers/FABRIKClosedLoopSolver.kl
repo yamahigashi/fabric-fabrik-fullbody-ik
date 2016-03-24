@@ -22,6 +22,7 @@ Dr Andreas Aristidou
 require Math;
 require Characters;
 require FABRIK;
+require InlineDrawing;
 
 
 /// \dfgPresetFolder Solver
@@ -53,13 +54,12 @@ object FABRIKCloseLoopSolver : IFABRIKSolver {
     FFBIKEdge  noisyEdges[];
     Index      noisyNodeIndices[];   // the bone index on the skeleton
     Scalar     noisyEdgeLengths[];   // length for root to end(tip) at full extension
-    Integer    numnoisyEdges;       // number of bone count
 
     Lines      lines;               // for debug draw
 
 };
 
-
+/// constructor
 /// \dfgPresetFolder Solver
 function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, io DrawingHandle handle, in String boneNames[] ){
 
@@ -68,15 +68,21 @@ function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, i
     this.precision = 0.0001f;
     this.max_iteration = 15;
     this.effectorCount = 2;
+    this.lines = Lines();
 
     this.numEdges = boneNames.size();
     this.xfos.resize( this.numEdges );
-    //this.nodeIndices.resize( this.numEdges * 2 );  // dedupe later
     this.nodeIndices.resize( 0 );  // dedupe later
     this.edgeLengths.resize( this.numEdges );
     this.edgeReferencePoses.resize( this.numEdges );
     this.nodeReferencePoses.resize( this.numEdges );
+
+    // TODO: to Generate unique name
     this.name = this.type()+":" + this.skeleton.name +":" + boneNames[0];
+    for ( Index i=0; i < boneNames.size(); i++ ){
+        this.name += boneNames[i][0];
+    }
+
     this.graph = graph;
     this.subBaseIndexInternal = 0;
     this.SetSubBase( boneNames[0] );
@@ -135,7 +141,7 @@ function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, i
         //report( "chain length "+i+"("+this.nodeIndices[i]+")is :" + length);
     }
 
-    report( "total cloose loop length is :" + this.totalChainLength );
+    report( "total cloose loop length is :" + this.totalChainLength + "  : " + this.GetName() );
 
 }
 
@@ -404,72 +410,53 @@ function FABRIKCloseLoopSolver.ResetToReferencePose!(){
     }
 }
 
-/// \internal
+/// \dfgPresetFolder DebugDraw
 function FABRIKCloseLoopSolver.DrawSolver!(){
-    DrawingHandle handle();
-    this.drawEdges( this.xfos, this.edges, handle );
+    this.drawEdges( this.xfos, this.edges, this.handle );
 }
 /// \internal
 function FABRIKCloseLoopSolver.drawEdges!( Xfo xfos[], FFBIKEdge edges[], io DrawingHandle handle) {
-    Lines lines();
 
-    //*
-    //GeometryAttributes attributes = this.lines.getAttributes();
-    GeometryAttributes attributes = lines.getAttributes();
+    GeometryAttributes attributes = this.lines.getAttributes();
     Vec3Attribute positions       = attributes.getOrCreateAttribute('positions', Vec3Attribute);
-    Vec3Attribute normals         = attributes.getOrCreateAttribute('normals', Vec3Attribute);
-    Vec3Attribute velocities      = attributes.getOrCreateAttribute('velocities', Vec3Attribute);
-    ColorAttribute vertexColors   = attributes.getOrCreateAttribute('vertexColors', ColorAttribute);
-    ScalarAttribute ratios        = attributes.getOrCreateAttribute('ratios', ScalarAttribute);
   
     InlineDrawing draw = handle.getDrawing();
     InlineShader shader = draw.registerShader(OGLLinesShader());
-    Ref<InlineMaterial> mat  = shader.getOrCreateMaterial('mat');
+    InlineMaterial phong = shader.getOrCreateMaterial('phong');
     InlineTransform edgeTransform = handle.getRootTransform().getChild( this.GetName() );
 
     if ( edgeTransform == null ){
-        mat.setUniform('u_normalIsTangent',  0);
-        mat.setUniform('u_shadingAmount', 0.5);
-        mat.setUniform('u_vertexColorAmount', 0.5);
-        mat.setUniform('u_rootColor', Color( 0, 255, 255));
-        mat.setUniform('u_tipColor', Color( 0, 0, 0));
+
+        phong.setUniform('u_normalIsTangent',  0);
+        phong.setUniform('u_shadingAmount', 0.5);
+        phong.setUniform('u_vertexColorAmount', 0.5);
+        phong.setUniform('u_rootColor', Color( 122, 255, 255));
+        phong.setUniform('u_tipColor', Color( 255, 255, 255));
 
         edgeTransform = StaticInlineTransform( this.GetName(), Xfo() );
         handle.getRootTransform().addChild(edgeTransform);
 
-        for(Integer i=0; i < xfos.size() - 1; i++){
-
-            //this.lines.addLine(
-            lines.addLine(
-                xfos[ i ].tr,
-                xfos[ i + 1 ].tr
-            );
-
+        for(Integer i=0; i < xfos.size(); i++){
+            this.lines.setPosition( i, xfos[i].tr );
         }
-        lines.addLine(
-            xfos[ xfos.size() - 1 ].tr,
-            xfos[ 0 ].tr
-        );
+        this.lines.addClosedLine( 0, xfos.size() - 1 );
 
-        //InlineShape shape = draw.registerShape( InlineLinesShape('lines', this.lines) );
-        InlineShape shape = draw.registerShape( InlineLinesShape('lines', lines) );
-        mat.addInstance(SimpleInlineInstance(this.GetName(), edgeTransform, shape));
+        InlineShape shape = draw.registerShape( InlineLinesShape('lines', this.lines) );
+        InlineInstance edgesInstance = SimpleInlineInstance(this.GetName(), edgeTransform, shape, phong);
+
+        Vec3Attribute normals         = attributes.getOrCreateAttribute('normals', Vec3Attribute);
+        ColorAttribute vertexColors   = attributes.getOrCreateAttribute('vertexColors', ColorAttribute);
+        ScalarAttribute ratios        = attributes.getOrCreateAttribute('ratios', ScalarAttribute);
+
     } else {
-        for(Integer i=0; i< xfos.size(); i++){
-            // this.lines.setPosition( i*2,   xfo[ this.edges[i].a ].tr );
-            // this.lines.setPosition( i*2+1, xfo[ this.edges[i].b ].tr );
-            lines.setPosition( i,   xfos[ i ].tr );
-            lines.setPosition( i+1, xfos[ i + 1 ].tr );
+
+        for(Integer i=0; i < xfos.size(); i++){
+            this.lines.setPosition( i, xfos[i].tr );
         }
-        lines.setPosition( xfos.size() - 1,   xfos[ xfos.size() - 1 ].tr );
-        lines.setPosition( 0, xfos[ 0 ].tr );
+
     }
 
-        report( lines );
-    lines.incrementVersion();
-    // this.lines.incrementVersion();
-    positions.incrementVersion();
-    // */
+    this.lines.incrementPositionsVersion();
 }
 
 /// \internal
@@ -484,6 +471,9 @@ function Boolean FABRIKCloseLoopSolver.IsReady(){
 
 function FABRIKCloseLoopSolver.Finalize!(){
     this.searchNoisyEdge();
+    this.lines.clear();
+    this.lines.addPoints( this.xfos.size() );
+
     this.ready = true;
 }
 
