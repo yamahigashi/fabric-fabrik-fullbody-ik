@@ -30,26 +30,26 @@ require InlineDrawing;
 object FABRIKMultiBoneIKSolver : IFABRIKSolver {
     String        name;
     Boolean       ready;
-    Skeleton      skeleton;        // sleketon
+    Skeleton      skeleton;             // sleketon
     DrawingHandle handle;
 
-    Bone          bones[];         // the bones
-    Xfo           xfos[];          // the xfo of bone
-    Index         nodeIndices[];   // the bone index on the skeleton
-    Index         subBaseIndex;    // the index sub-base bone on skeleton
-    Index         subBaseIndexInternal;  // internally use
+    Bone          bones[];              // the bones
+    Xfo           xfos[];               // the xfo of bone
+    Index         nodeIndices[];        // the bone index on the skeleton
+    Index         subBaseIndex;         // the index sub-base bone on skeleton
+    Index         subBaseIndexInternal; // internally use
 
-    Integer       num_bones;       // number of bone count
-    Scalar        chain_length;    // length for root to end(tip) at full extension
-    Scalar        precision;       // precision
-    Integer       max_iteration;   // max iteration
+    Integer       num_bones;            // number of bone count
+    Scalar        chain_length;         // length for root to end(tip) at full extension
+    Scalar        precision;            // precision
+    Integer       max_iteration;        // max iteration
     Scalar        chain_length_from_subbase;    // length for sub-base to end(tip) at full extension
 
     Boolean       fullExtension;
     Vec3          effectorPosition;
     Index         effectorIndex;
     Index         upvectorIndex;
-    Index         effectorCount; // = 2; // ik effector + upvector
+    Index         effectorCount;        // = 2; // ik effector + upvector
 
 };
 
@@ -153,9 +153,13 @@ function FABRIKMultiBoneIKSolver.alignByUpvector!( io IPose pose, in Vec3 upvPos
 
 
 /// \internal
-function FABRIKMultiBoneIKSolver.UpdatePose?( io IPose pose ){
+function FABRIKMultiBoneIKSolver.UpdatePose!( io IPose pose ){
     for ( Index i=this.subBaseIndexInternal; i < this.nodeIndices.size(); i++ ){
         pose.setBoneXfo( this.nodeIndices[i], this.xfos[i] );
+    }
+
+    for ( Index i=0; i < this.subBaseIndexInternal; i++ ){
+        this.xfos[i].tr = pose.getBoneXfo( this.nodeIndices[i] ).tr;
     }
 }
 
@@ -456,10 +460,10 @@ function FABRIKMultiBoneIKSolver.drawBones!( Xfo xfos[], Bone links[], io Drawin
     InlineDrawing draw = handle.getDrawing();
     InlineShader shader = draw.registerShader(OGLSurfaceShader('surface'));
     InlineMaterial phong = shader.getOrCreateMaterial("phong");
+    InlineTransform rootTransform = handle.getRootTransform();
 
     for(Integer i=0; i<links.size(); i++){
-        InlineTransform boneTransform = handle.getRootTransform().getChild(
-                                    this.GetName() +":" +i +":"+ links[i].name);
+        InlineTransform boneTransform = rootTransform.getChild(this.GetName() +":" +i +":"+ links[i].name);
         if(boneTransform == null){
             Bone bone = links[i];
             boneTransform = StaticInlineTransform(
@@ -473,7 +477,11 @@ function FABRIKMultiBoneIKSolver.drawBones!( Xfo xfos[], Bone links[], io Drawin
             boneInstance.setInstanceUniform(InlineUniform('u_diffuseColor', bone.color));
         }
         else{
-            boneTransform.setLocalXfo(0, xfos[i]);
+            if ( i < this.subBaseIndexInternal ){
+                boneTransform.setLocalXfo(0, xfos[i]);
+            } else {
+                boneTransform.setLocalXfo(0, xfos[i]);
+            }
         }
     }
 }

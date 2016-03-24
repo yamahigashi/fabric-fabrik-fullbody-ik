@@ -354,7 +354,7 @@ inline function FABRIKCloseLoopSolver.BackwardReach!( io IPose pose, in Integer 
 }
 
 /// \internal
-function FABRIKCloseLoopSolver.UpdatePose?( io IPose pose ){
+function FABRIKCloseLoopSolver.UpdatePose!( io IPose pose ){
     for (Index i=0; i < this.numEdges; i++ ){
         pose.setBoneXfo( this.nodeIndices[i], this.xfos[i] );
     }

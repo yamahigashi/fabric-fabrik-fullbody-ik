@@ -21,7 +21,7 @@ interface IFABRIKSolver {
 
     /// update the pose
     /// \internal
-    UpdatePose?( io IPose pose );
+    UpdatePose!( io IPose pose );
 
     //EvaluateBoneTransforms!( io IPose pose, in Vec3 effector_position );
 
