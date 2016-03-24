@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: IFABRIKSolver, FABRIKSolver, FABRIKCloseLoopSolver\n  pose: IPose\n  param2: Mat44[], Vec3\n"
+    "uiTooltip" : "Supported types:\n  this: IFABRIKSolver, FABRIKMultiBoneIKSolver, FABRIKCloseLoopSolver\n  pose: IPose\n  param2: Mat44[], Vec3\n"
     },
   "title" : "Solve",
   "ports" : [

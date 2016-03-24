@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  skeleton: Ref<Skeleton>\n  handle: DrawingHandle\n  boneNames: String[]\n  result: FABRIKSolver\n"
+    "uiTooltip" : "Supported types:\n  skeleton: Ref<Skeleton>\n  handle: DrawingHandle\n  boneNames: String[]\n  result: FABRIKMultiBoneIKSolver\n"
     },
-  "title" : "FABRIKSolver",
+  "title" : "FABRIKMultiBoneIKSolver",
   "ports" : [
     {
       "objectType" : "Port",
@@ -32,18 +32,18 @@
       "nodePortType" : "In",
       "name" : "result",
       "execPortType" : "Out",
-      "typeSpec" : "FABRIKSolver"
+      "typeSpec" : "FABRIKMultiBoneIKSolver"
       }
     ],
   "extDeps" : {
     "FABRIK" : "*"
     },
-  "presetGUID" : "5C803DC30F99CEB379981BC7D377E549",
+  "presetGUID" : "397964930BB48E8DD2F20E4B9D040771",
   "code" : "require FABRIK;
 
 dfgEntry {
   Ref<Skeleton> skeleton_ref = skeleton;
-  result = FABRIKSolver(skeleton_ref, handle, boneNames);
+  result = FABRIKMultiBoneIKSolver(skeleton_ref, handle, boneNames);
 }
 "
   }

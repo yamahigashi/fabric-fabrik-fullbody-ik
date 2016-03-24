@@ -22,7 +22,7 @@ function add3BoneIkSolver(
     resolver.graph.registerControllBone( bone1 );
     resolver.graph.registerControllBone( bone2 );
     resolver.graph.registerControllBone( bone3 );
-    FABRIKSolver solver = FABRIKSolver( resolver.skeleton, handle, x );
+    FABRIKMultiBoneIKSolver solver = FABRIKMultiBoneIKSolver( resolver.skeleton, handle, x );
     solver.SetSubBase( bone1 );
     resolver.addSolver( IFABRIKSolver(solver) );
 }
@@ -43,7 +43,7 @@ function add3BoneIkSolver(
     resolver.graph.registerControllBone( bone1 );
     resolver.graph.registerControllBone( bone2 );
     resolver.graph.registerControllBone( bone3 );
-    FABRIKSolver solver = FABRIKSolver( resolver.skeleton, handle, x );
+    FABRIKMultiBoneIKSolver solver = FABRIKMultiBoneIKSolver( resolver.skeleton, handle, x );
     solver.SetSubBase( bone1 );
     resolver.addSolver( IFABRIKSolver(solver) );
 }

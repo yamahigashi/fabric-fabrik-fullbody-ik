@@ -9,7 +9,7 @@ operator entry(){
 
     Skeleton skeleton();
     DrawingHandle handle();
-    FABRIKSolver FABRIKSolvers[];
+    FABRIKMultiBoneIKSolver FABRIKMultiBoneIKSolvers[];
     Mat44        ik_handles[];
 
     ik_handles.push( Mat44() );

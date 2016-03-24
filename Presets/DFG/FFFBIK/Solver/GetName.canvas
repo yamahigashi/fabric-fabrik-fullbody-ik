@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: FABRIKSolver\n  result: String\n"
+    "uiTooltip" : "Supported types:\n  this: FABRIKMultiBoneIKSolver\n  result: String\n"
     },
   "title" : "GetName",
   "ports" : [
@@ -11,7 +11,7 @@
       "nodePortType" : "Out",
       "name" : "this",
       "execPortType" : "In",
-      "typeSpec" : "FABRIKSolver"
+      "typeSpec" : "FABRIKMultiBoneIKSolver"
       },
     {
       "objectType" : "Port",
@@ -24,7 +24,7 @@
   "extDeps" : {
     "FABRIK" : "*"
     },
-  "presetGUID" : "3DFC701017B703CB8DDC808E460A5B99",
+  "presetGUID" : "F3940CBB9D6BED428996623E230A73E0",
   "code" : "require FABRIK;
 
 dfgEntry {

@@ -27,7 +27,7 @@ require InlineDrawing;
 
 
 /// \dfgPresetFolder Solver
-object FABRIKSolver : IFABRIKSolver {
+object FABRIKMultiBoneIKSolver : IFABRIKSolver {
     String        name;
     Boolean       ready;
     Skeleton      skeleton;        // sleketon
@@ -55,7 +55,7 @@ object FABRIKSolver : IFABRIKSolver {
 
 
 /// \dfgPresetFolder Solver
-function FABRIKSolver( Ref<Skeleton> skeleton, io DrawingHandle handle, in String boneNames[] ){
+function FABRIKMultiBoneIKSolver( Ref<Skeleton> skeleton, io DrawingHandle handle, in String boneNames[] ){
 
     this.ready = false;
     this.skeleton = skeleton;
@@ -110,27 +110,27 @@ function FABRIKSolver( Ref<Skeleton> skeleton, io DrawingHandle handle, in Strin
 
 
 /// \internal
-function FABRIKSolver.SetEffectorIndex!( io Index id ){
+function FABRIKMultiBoneIKSolver.SetEffectorIndex!( io Index id ){
     this.effectorIndex = id;
     this.upvectorIndex = id+1;
 }
 
 /// \internal
-function Index FABRIKSolver.GetEffectorCount(){
+function Index FABRIKMultiBoneIKSolver.GetEffectorCount(){
     return this.effectorCount;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
 /// implement interface IFABRIKSolver
 /// \dfgPresetFolder Solver
-function FABRIKSolver.Solve!( io IPose pose, in Mat44 effectors[] ){
+function FABRIKMultiBoneIKSolver.Solve!( io IPose pose, in Mat44 effectors[] ){
     this.effectorPosition = effectors[this.effectorIndex].translation();
     this.ResetToReferencePose();
     this.alignByUpvector( pose, effectors[this.upvectorIndex].translation() );
     this.EvaluateBoneTransforms( pose, this.effectorPosition, 0 );
 }
 /// \dfgPresetFolder Solver
-function FABRIKSolver.Solve!( io IPose pose, in Vec3 effector_position ){
+function FABRIKMultiBoneIKSolver.Solve!( io IPose pose, in Vec3 effector_position ){
     this.effectorPosition = effector_position;
     this.ResetToReferencePose();
     this.alignByUpvector( pose, Vec3( 4, 16, -10 ) );
@@ -140,7 +140,7 @@ function FABRIKSolver.Solve!( io IPose pose, in Vec3 effector_position ){
 
 
 /// \internal
-function FABRIKSolver.alignByUpvector!( io IPose pose, in Vec3 upvPosition ){
+function FABRIKMultiBoneIKSolver.alignByUpvector!( io IPose pose, in Vec3 upvPosition ){
     Xfo subBasePosition = this.xfos[ this.subBaseIndexInternal ].tr;
 
     Xfo subbaseSpaceXfos[];
@@ -153,7 +153,7 @@ function FABRIKSolver.alignByUpvector!( io IPose pose, in Vec3 upvPosition ){
 
 
 /// \internal
-function FABRIKSolver.UpdatePose?( io IPose pose ){
+function FABRIKMultiBoneIKSolver.UpdatePose?( io IPose pose ){
     for ( Index i=this.subBaseIndexInternal; i < this.nodeIndices.size(); i++ ){
         pose.setBoneXfo( this.nodeIndices[i], this.xfos[i] );
     }
@@ -162,7 +162,7 @@ function FABRIKSolver.UpdatePose?( io IPose pose ){
 
 
 /// \internal
-function FABRIKSolver.SetSubBase!( in String nodeName ){
+function FABRIKMultiBoneIKSolver.SetSubBase!( in String nodeName ){
     this.subBaseIndex = this.skeleton.findBone( nodeName );
 
     Scalar length = 0.0;
@@ -190,22 +190,22 @@ function FABRIKSolver.SetSubBase!( in String nodeName ){
 }
 
 /// \internal
-function Index FABRIKSolver.GetRootNodeIndex(){
+function Index FABRIKMultiBoneIKSolver.GetRootNodeIndex(){
     return this.nodeIndices[0];
 }
 
 /// \internal
-function Index FABRIKSolver.GetSubBaseIndex(){
+function Index FABRIKMultiBoneIKSolver.GetSubBaseIndex(){
     return this.subBaseIndex;
 }
 
 /// \internal
-function Xfo FABRIKSolver.GetSubBaseXfo(){
+function Xfo FABRIKMultiBoneIKSolver.GetSubBaseXfo(){
     return this.xfos[ this.subBaseIndexInternal ];
 }
 
 /// \internal
-function FABRIKSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
+function FABRIKMultiBoneIKSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
     this.xfos[this.subBaseIndexInternal].tr = pose.getBoneXfo( this.subBaseIndex ).tr;
     this.EvaluateBoneTransforms( pose, this.effectorPosition, this.subBaseIndexInternal );
     //drawXfoArray( this.handle.getRootTransform(), "debug-postsolve"+this.name, this.xfos );
@@ -217,7 +217,7 @@ function FABRIKSolver.OffsetByCentroid!( io IPose pose, Xfo xfo ){
 /// \param effector_position, The position to reach
 /// \param startIndex,        Bone index, start evaluation range
 /// \internal
-function FABRIKSolver.EvaluateBoneTransforms!( io IPose pose, in Vec3 effector_position, in Index startIndex ){
+function FABRIKMultiBoneIKSolver.EvaluateBoneTransforms!( io IPose pose, in Vec3 effector_position, in Index startIndex ){
 
     Xfo rootXfo = this.xfos[startIndex];
     Boolean is_bone_location_updated = false;
@@ -260,7 +260,7 @@ function FABRIKSolver.EvaluateBoneTransforms!( io IPose pose, in Vec3 effector_p
 }
 
 /// \internal
-function FABRIKSolver.reportBoneLength( in String mes ){
+function FABRIKMultiBoneIKSolver.reportBoneLength( in String mes ){
     Scalar total = 0.0;
     for (Index i=0; i < this.num_bones - 1; i++) {
         Scalar length = abs( ( this.xfos[i+1].tr - this.xfos[i].tr).length() );
@@ -272,7 +272,7 @@ function FABRIKSolver.reportBoneLength( in String mes ){
 
 
 /// \internal
-function FABRIKSolver.ResetToReferencePose!() {
+function FABRIKMultiBoneIKSolver.ResetToReferencePose!() {
     for ( Index i=0; i < this.num_bones; i++ ){
         this.xfos[i] = this.bones[i].referencePose;
     }
@@ -281,7 +281,7 @@ function FABRIKSolver.ResetToReferencePose!() {
 /// if effector is within reach, calculate bone translations to position tip
 /// at  effector location.
 /// \internal
-function FABRIKSolver.SolvePosition!( Index startIndex, in Vec3 effector_position ) {
+function FABRIKMultiBoneIKSolver.SolvePosition!( Index startIndex, in Vec3 effector_position ) {
 
     Index tip_bone_index = this.num_bones - 1;
     Bone tip = this.bones[tip_bone_index];
@@ -313,7 +313,7 @@ function FABRIKSolver.SolvePosition!( Index startIndex, in Vec3 effector_positio
 
 /// check total length between each xfos and default length
 /// \internal
-function Boolean FABRIKSolver.isChainLengthInSafe(){
+function Boolean FABRIKMultiBoneIKSolver.isChainLengthInSafe(){
     Scalar total = 0.0;
     for (Index i=0; i < this.num_bones - 1; i++) {
         Scalar length = abs( ( this.xfos[i+1].tr - this.xfos[i].tr).length() );
@@ -325,7 +325,7 @@ function Boolean FABRIKSolver.isChainLengthInSafe(){
 
 /// re-orientation of bone local axes after translation calculation
 /// \internal
-function Boolean FABRIKSolver.SolveRotation!( io IPose pose, in Vec3 effector_position ) {
+function Boolean FABRIKMultiBoneIKSolver.SolveRotation!( io IPose pose, in Vec3 effector_position ) {
     solveRotationPEX<<<this.num_bones>>>( this.xfos, this.nodeIndices, this.num_bones, effector_position);
 
     //TODO:
@@ -337,7 +337,7 @@ function Boolean FABRIKSolver.SolveRotation!( io IPose pose, in Vec3 effector_po
 
 
 /// \internal
-function FABRIKSolver.ForwardReach!( in Integer target_index, in Integer child_index ){
+function FABRIKMultiBoneIKSolver.ForwardReach!( in Integer target_index, in Integer child_index ){
     if ( target_index > this.num_bones -1 || child_index > this.num_bones -1 ){
         setError( "index > bone count ---- target:" + target_index + "  limit: " + child_index + "bone count: " + this.num_bones);
     }
@@ -352,7 +352,7 @@ function FABRIKSolver.ForwardReach!( in Integer target_index, in Integer child_i
 
 /// adjust bones from root
 /// \internal
-function FABRIKSolver.BackwardReach!( in Integer target_index, in Integer parent_index ){
+function FABRIKMultiBoneIKSolver.BackwardReach!( in Integer target_index, in Integer parent_index ){
     if ( target_index > this.num_bones -1 || parent_index > this.num_bones -1 ){
         setError( "index > bone count ---- target:" + target_index + "  limit: " + parent_index + "bone count: " + this.num_bones);
     }
@@ -364,7 +364,7 @@ function FABRIKSolver.BackwardReach!( in Integer target_index, in Integer parent
 }
 
 /// \internal
-function FABRIKSolver.ForwardReachOnTail!( in Vec3 effector_position ){
+function FABRIKMultiBoneIKSolver.ForwardReachOnTail!( in Vec3 effector_position ){
     this.xfos[ this.num_bones -1 ].tr = SolveJoint(
             this.xfos[ this.num_bones -1 ].tr,
             effector_position,
@@ -373,7 +373,7 @@ function FABRIKSolver.ForwardReachOnTail!( in Vec3 effector_position ){
 }
 
 /// \internal
-function FABRIKSolver.BackwardReachOnTail!( in Vec3 effector_position ){
+function FABRIKMultiBoneIKSolver.BackwardReachOnTail!( in Vec3 effector_position ){
     this.xfos[ this.num_bones - 1 ].tr = SolveJoint(
             this.xfos[ this.num_bones - 1 ].tr,
             this.xfos[ this.num_bones - 1 -1 ].tr,
@@ -382,18 +382,18 @@ function FABRIKSolver.BackwardReachOnTail!( in Vec3 effector_position ){
 }
 
 /// \dfgPresetFolder Solver
-function String FABRIKSolver.GetName() {
+function String FABRIKMultiBoneIKSolver.GetName() {
     return this.name;
 }
 
 /// \dfgPresetFolder Solver
-function Boolean FABRIKSolver.IsReady(){
+function Boolean FABRIKMultiBoneIKSolver.IsReady(){
     return this.ready;
 }
 
 /// \internal
 /// \dfgPresetFolder Solver
-function FABRIKSolver.Finalize!(){
+function FABRIKMultiBoneIKSolver.Finalize!(){
     this.ready = true;
 }
 
@@ -444,7 +444,7 @@ operator solveRotationPEX<<<index>>>(
 
 
 /// \dfgPresetFolder DebugDraw
-function FABRIKSolver.DrawSolver!() {
+function FABRIKMultiBoneIKSolver.DrawSolver!() {
     if( !this.IsReady() ){
         return;
     }
@@ -452,7 +452,7 @@ function FABRIKSolver.DrawSolver!() {
     this.drawBones( this.xfos, this.bones, this.handle );
 }
 /// \internal
-function FABRIKSolver.drawBones!( Xfo xfos[], Bone links[], io DrawingHandle handle) {
+function FABRIKMultiBoneIKSolver.drawBones!( Xfo xfos[], Bone links[], io DrawingHandle handle) {
     InlineDrawing draw = handle.getDrawing();
     InlineShader shader = draw.registerShader(OGLSurfaceShader('surface'));
     InlineMaterial phong = shader.getOrCreateMaterial("phong");

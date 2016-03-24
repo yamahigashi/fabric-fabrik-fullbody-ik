@@ -10,7 +10,7 @@ operator entry(){
     Skeleton skeleton();
     DrawingHandle handle();
     FFBIKGraph fbg();
-    FABRIKSolver FABRIKSolvers[];
+    FABRIKMultiBoneIKSolver FABRIKMultiBoneIKSolvers[];
     Mat44        ik_handles[];
     FABRIKResolver resolver();
 
