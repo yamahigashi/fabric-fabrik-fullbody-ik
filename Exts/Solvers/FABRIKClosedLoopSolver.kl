@@ -82,7 +82,7 @@ function FABRIKCloseLoopSolver( Ref<Skeleton> skeleton, Ref<FFBIKGraph> graph, i
     // TODO: to Generate unique name
     this.name = this.type()+":" + this.skeleton.name +":" + boneNames[0];
     for ( Index i=0; i < boneNames.size(); i++ ){
-        this.name += boneNames[i][0];
+        this.name += boneNames[i];
     }
 
     this.graph = graph;
@@ -459,16 +459,9 @@ function FABRIKCloseLoopSolver.drawEdges!( Xfo xfos[], FFBIKEdge edges[], io Dra
   
     InlineDrawing draw = handle.getDrawing();
     InlineShader shader = draw.registerShader(OGLLinesShader());
-    InlineMaterial phong = shader.getOrCreateMaterial('phong');
     InlineTransform edgeTransform = handle.getRootTransform().getChild( this.GetName() );
 
     if ( edgeTransform == null ){
-
-        phong.setUniform('u_normalIsTangent',  0);
-        phong.setUniform('u_shadingAmount', 0.5);
-        phong.setUniform('u_vertexColorAmount', 0.5);
-        phong.setUniform('u_rootColor', Color( 122, 255, 255));
-        phong.setUniform('u_tipColor', Color( 255, 255, 255));
 
         edgeTransform = StaticInlineTransform( this.GetName(), Xfo() );
         handle.getRootTransform().addChild(edgeTransform);
@@ -478,12 +471,21 @@ function FABRIKCloseLoopSolver.drawEdges!( Xfo xfos[], FFBIKEdge edges[], io Dra
         }
         this.lines.addClosedLine( 0, xfos.size() - 1 );
 
-        InlineShape shape = draw.registerShape( InlineLinesShape('lines', this.lines) );
-        InlineInstance edgesInstance = SimpleInlineInstance(this.GetName(), edgeTransform, shape, phong);
+        Vec3Attribute   normals      = attributes.getOrCreateAttribute('normals',      Vec3Attribute);
+        ScalarAttribute ratios       = attributes.getOrCreateAttribute('ratios',       ScalarAttribute);
+        ColorAttribute  vertexColors = attributes.getOrCreateAttribute('vertexColors', ColorAttribute);
 
-        Vec3Attribute normals         = attributes.getOrCreateAttribute('normals', Vec3Attribute);
-        ColorAttribute vertexColors   = attributes.getOrCreateAttribute('vertexColors', ColorAttribute);
-        ScalarAttribute ratios        = attributes.getOrCreateAttribute('ratios', ScalarAttribute);
+        InlineMaterial phong = shader.getOrCreateMaterial('phong');
+        phong.setUniform('u_normalIsTangent',  0);
+        phong.setUniform('u_shadingAmount', 0.0);
+        phong.setUniform('u_vertexColorAmount', 0.5);
+        phong.setUniform('u_rootColor', Color( 122, 255, 255));
+        phong.setUniform('u_tipColor', Color( 255, 255, 255));
+
+        InlineLinesShape linesShape = InlineLinesShape( this.GetName() + ':DrawDebugShape:lines', this.lines);
+        linesShape.setLineWidth( 3.0 );
+        InlineShape shape = draw.registerShape( linesShape );
+        InlineInstance edgesInstance = SimpleInlineInstance(this.GetName(), edgeTransform, shape, phong);
 
     } else {
 
