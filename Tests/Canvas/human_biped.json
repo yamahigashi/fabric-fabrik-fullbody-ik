@@ -278,10 +278,6 @@
                             { "key": "bone3", "value": "hand_Lft_Bone" }
                         ]
                     }
-                ],
-                "edges": [
-                    [ "bicep_Lft_Bone",   "forearm_Lft_Bone" ],
-                    [ "forearm_Lft_Bone", "hand_Lft_Bone" ]
                 ]
             },
             {
@@ -296,10 +292,6 @@
                             { "key": "bone3", "value": "hand_Rgt_Bone" }
                         ]
                     }
-                ],
-                "edges": [
-                    [ "bicep_Rgt_Bone",   "forearm_Rgt_Bone" ],
-                    [ "forearm_Rgt_Bone", "hand_Rgt_Bone" ]
                 ]
             },
             {
@@ -314,10 +306,6 @@
                             { "key": "bone3", "value": "foot_Lft_Bone" }
                         ]
                     }
-                ],
-                "edges": [
-                    [ "thigh_Lft_Bone",   "shin_Lft_Bone" ],
-                    [ "shin_Lft_Bone",    "foot_Lft_Bone" ]
                 ]
             },
             {
@@ -332,10 +320,6 @@
                             { "key": "bone3",  "value": "foot_Rgt_Bone" }
                         ]
                     }
-                ],
-                "edges": [
-                    [ "thigh_Rgt_Bone",   "shin_Rgt_Bone" ],
-                    [ "shin_Rgt_Bone",    "foot_Rgt_Bone" ]
                 ]
             },
             {
@@ -364,28 +348,6 @@
                     }
                 ]
             }
-        ],
-        "edges": [
-            [ "lumbar2_Mid_Bone", "bicep_Lft_Bone" ],
-            [ "lumbar2_Mid_Bone", "bicep_Rgt_Bone" ],
-            [ "bicep_Lft_Bone",   "bicep_Rgt_Bone" ],
-            [ "bicep_Lft_Bone",   "cervical1_Mid_Bone" ],
-            [ "bicep_Rgt_Bone",   "cervical1_Mid_Bone" ],
-
-            [ "lumbar2_Mid_Bone", "thigh_Lft_Bone" ],
-            [ "lumbar2_Mid_Bone", "thigh_Rgt_Bone" ],
-            [ "thigh_Lft_Bone",   "thigh_Rgt_Bone" ],
-
-            [ "thigh_Lft_Bone",   "shin_Lft_Bone" ],
-            [ "shin_Lft_Bone",    "foot_Lft_Bone" ],
-            [ "thigh_Rgt_Bone",   "shin_Rgt_Bone" ],
-            [ "shin_Rgt_Bone",    "foot_Rgt_Bone" ],
-
-            [ "bicep_Lft_Bone",   "forearm_Lft_Bone" ],
-            [ "forearm_Lft_Bone", "hand_Lft_Bone" ],
-            [ "bicep_Rgt_Bone",   "forearm_Rgt_Bone" ],
-            [ "forearm_Rgt_Bone", "hand_Rgt_Bone" ],
-            [ "lumbar2_Mid_Bone", "cervical1_Mid_Bone" ]
         ]
     }
 }
