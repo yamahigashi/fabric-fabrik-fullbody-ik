@@ -47,6 +47,7 @@ object FABRIKMultiBoneIKSolver : IFABRIKSolver {
 
     Boolean       fullExtension;
     Vec3          effectorPosition;
+    Vec3          upvectorPosition;
     Index         effectorIndex;
     Index         upvectorIndex;
     Index         effectorCount;        // = 2; // ik effector + upvector
@@ -125,19 +126,18 @@ function Index FABRIKMultiBoneIKSolver.GetEffectorCount(){
 /// \dfgPresetFolder Solver
 function FABRIKMultiBoneIKSolver.Solve!( io IPose pose, in Mat44 effectors[] ){
     this.effectorPosition = effectors[this.effectorIndex].translation();
+    this.upvectorPosition = effectors[this.upvectorIndex].translation();
     this.ResetToReferencePose();
-    this.alignByUpvector( pose, effectors[this.upvectorIndex].translation() );
     this.EvaluateBoneTransforms( pose, this.effectorPosition, 0 );
 }
+
 /// \dfgPresetFolder Solver
 function FABRIKMultiBoneIKSolver.Solve!( io IPose pose, in Vec3 effector_position ){
     this.effectorPosition = effector_position;
     this.ResetToReferencePose();
-    this.alignByUpvector( pose, Vec3( 4, 16, -10 ) );
     this.EvaluateBoneTransforms( pose, effector_position, 0 );
     //drawXfoArray( this.handle.getRootTransform(), "debug-presolve"+this.name, this.xfos );
 }
-
 
 /// \internal
 function FABRIKMultiBoneIKSolver.alignByUpvector!( io IPose pose, in Vec3 upvPosition ){
@@ -225,27 +225,28 @@ function FABRIKMultiBoneIKSolver.EvaluateBoneTransforms!( io IPose pose, in Vec3
 
     Xfo rootXfo = this.xfos[startIndex];
     Boolean is_bone_location_updated = false;
-    Scalar root_to_target_distance = abs(
-        ( rootXfo.tr - effector_position ).length()
-    );
+    Scalar root_to_target_distance = abs( ( rootXfo.tr - effector_position ).length() );
 
-    if (( startIndex == 0 && root_to_target_distance*0.95 > this.chain_length ) 
-         || ( startIndex != 0 && root_to_target_distance*0.95 > this.chain_length_from_subbase )) {
+    if ((  startIndex == 0 && root_to_target_distance*0.97 > this.chain_length ) 
+      || ( startIndex != 0 && root_to_target_distance*0.97 > this.chain_length_from_subbase )) {
 
+        // if in full extension shortcut can work, each nodes align a line
         this.fullExtension = true;
         for (Integer link_id = (startIndex+1); link_id < this.num_bones; link_id++) {
             Bone parent = this.bones[ link_id - 1 ];
             Xfo  parentXfo = this.xfos[ link_id - 1 ];
             Vec3 diff = effector_position - parentXfo.tr;
             this.xfos[ link_id ].tr = parentXfo.tr + diff.normalize() * parent.length;
-
         }
         is_bone_location_updated = true;
 
     } else {
+
         this.fullExtension = false;
+        this.alignByUpvector( pose, this.upvectorPosition );
         this.SolvePosition( startIndex, effector_position );
         is_bone_location_updated = true;
+
     }
 
     if (is_bone_location_updated) {
