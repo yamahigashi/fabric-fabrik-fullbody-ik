@@ -22,6 +22,9 @@ function add3BoneIkSolver(
     resolver.graph.registerControllBone( bone1 );
     resolver.graph.registerControllBone( bone2 );
     resolver.graph.registerControllBone( bone3 );
+    resolver.graph.addEdge( root, bone1 );
+    resolver.graph.addEdge( bone1, bone2 );
+    resolver.graph.addEdge( bone2, bone3 );
     FABRIKMultiBoneIKSolver solver = FABRIKMultiBoneIKSolver( resolver.skeleton, handle, x );
     solver.SetSubBase( bone1 );
     resolver.addSolver( IFABRIKSolver(solver) );
@@ -43,6 +46,8 @@ function add3BoneIkSolver(
     resolver.graph.registerControllBone( bone1 );
     resolver.graph.registerControllBone( bone2 );
     resolver.graph.registerControllBone( bone3 );
+    resolver.graph.addEdge( bone1, bone2 );
+    resolver.graph.addEdge( bone2, bone3 );
     FABRIKMultiBoneIKSolver solver = FABRIKMultiBoneIKSolver( resolver.skeleton, handle, x );
     solver.SetSubBase( bone1 );
     resolver.addSolver( IFABRIKSolver(solver) );
@@ -61,6 +66,12 @@ function addCloseLoopSolver(
     x.push( root );
     for( Index i=0; i < bones.size(); i++ ){
         x.push( bones[i] );
+    }
+
+    resolver.graph.addEdge( root, bones[0] );
+    resolver.graph.addEdge( bones[bones.size()-1], root );
+    for( Index i=0; i < bones.size() - 1; i++ ){
+        resolver.graph.addEdge( bones[i], bones[i+1] );
     }
     resolver.addSolver( IFABRIKSolver(FABRIKCloseLoopSolver( resolver.skeleton, resolver.graph, handle, x )) );
 }
