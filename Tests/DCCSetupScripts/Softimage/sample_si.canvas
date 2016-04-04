@@ -1,0 +1,2832 @@
+{
+  "objectType" : "Graph",
+  "metadata" : {
+    "timeline_timerFps" : "1000",
+    "camera_mat44" : "{\n  \"row0\" : {\n    \"x\" : 0.7972900867462158,\n    \"y\" : -0.06269906461238861,\n    \"z\" : 0.602141797542572,\n    \"t\" : 17.31761360168457\n    },\n  \"row1\" : {\n    \"x\" : -7.458725193032478e-09,\n    \"y\" : 0.9944807887077332,\n    \"z\" : 0.1038052961230278,\n    \"t\" : 12.98240280151367\n    },\n  \"row2\" : {\n    \"x\" : -0.6054056882858276,\n    \"y\" : -0.08257166296243668,\n    \"z\" : 0.7929916977882385,\n    \"t\" : 28.1218147277832\n    },\n  \"row3\" : {\n    \"x\" : 0,\n    \"y\" : 0,\n    \"z\" : 0,\n    \"t\" : 1\n    }\n  }",
+    "timeline_start" : "1",
+    "uiGraphZoom" : "{\n  \"value\" : 1.677465915679932\n  }",
+    "timeline_loopMode" : "1",
+    "timeline_simMode" : "0",
+    "camera_focalDistance" : "27.41458702087402",
+    "timeline_current" : "1",
+    "timeline_end" : "50",
+    "uiGraphPan" : "{\n  \"x\" : -541.4539913968802,\n  \"y\" : -578.065362839297\n  }"
+    },
+  "title" : "",
+  "ports" : [
+    {
+      "objectType" : "Port",
+      "nodePortType" : "In",
+      "name" : "solver",
+      "execPortType" : "Out",
+      "typeSpec" : "FABRIKResolver"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "bindingDir",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "jsonPath",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "R_hand",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "R_elbow",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "L_hand",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "L_elbow",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "L_foot",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "L_knee",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "R_foot",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      },
+    {
+      "objectType" : "Port",
+      "metadata" : {
+        "uiPersistValue" : "true"
+        },
+      "nodePortType" : "Out",
+      "name" : "R_knee",
+      "execPortType" : "In",
+      "typeSpec" : "Xfo"
+      }
+    ],
+  "extDeps" : {
+    "FABRIK" : "*"
+    },
+  "nodes" : [
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":453.384033203125,\"y\":312.389404296875}"
+        },
+      "name" : "InitFABRIK",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "resolver"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "pose"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "bindingDir"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "jsonPath"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Graph",
+        "metadata" : {
+          "uiGraphZoom" : "{\n  \"value\" : 0.8048160076141357\n  }",
+          "uiGraphPan" : "{\n  \"x\" : 298.7928466796875,\n  \"y\" : 377.4748840332031\n  }"
+          },
+        "title" : "InitFABRIK",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "In",
+            "name" : "resolver",
+            "execPortType" : "Out"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "In",
+            "name" : "pose",
+            "execPortType" : "Out"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "String" : "${FFFBIK_BINDING_DIR}"
+              },
+            "name" : "bindingDir",
+            "execPortType" : "In",
+            "typeSpec" : "String"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "String" : "${FFFBIK_BINDING_DIR}\\..\\..\\..\\..\\..\\Tests\\Canvas\\human_biped.json"
+              },
+            "name" : "jsonPath",
+            "execPortType" : "In",
+            "typeSpec" : "String"
+            }
+          ],
+        "extDeps" : {
+          "FABRIK" : "*"
+          },
+        "nodes" : [
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":490.4475708007813,\"y\":81.21170806884766}"
+              },
+            "name" : "FFBIKPose_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "skeleton"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "FFFBIK.Graph.FFBIKPose",
+            "presetGUID" : "C7819C1AC978B180DFF5AD7A91258968"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-824.3998413085938,\"y\":-69.21868896484375}",
+              "uiCollapsedState" : "0"
+              },
+            "name" : "TextReader_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "String" : "D:/matsumoto/projects/fabric/Exts/FFFBIK/Tests/Canvas/human_biped.json"
+                  },
+                "name" : "filePath"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.FileIO.TextReader.TextReader",
+            "presetGUID" : "04A301215A054F4D8FC2B76E7D203372"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-222.6845245361328,\"y\":-63.4949951171875}"
+              },
+            "name" : "GraphFromJSON",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "jsonstring"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "graph"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "components"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "skeleton"
+                }
+              ],
+            "definition" : {
+              "objectType" : "Func",
+              "metadata" : {
+                "uiTextColor" : "{\n  \"r\" : 20,\n  \"g\" : 20,\n  \"b\" : 20\n  }",
+                "uiNodeColor" : "{\n  \"r\" : 121,\n  \"g\" : 134,\n  \"b\" : 143\n  }"
+                },
+              "title" : "func",
+              "ports" : [
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "Out",
+                  "name" : "jsonstring",
+                  "execPortType" : "In",
+                  "typeSpec" : "String"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "In",
+                  "name" : "graph",
+                  "execPortType" : "Out",
+                  "typeSpec" : "FFBIKGraph"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "In",
+                  "name" : "components",
+                  "execPortType" : "Out",
+                  "typeSpec" : "JSONArrayValue"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "In",
+                  "name" : "skeleton",
+                  "execPortType" : "Out",
+                  "typeSpec" : "Skeleton"
+                  }
+                ],
+              "extDeps" : {
+                "JSON" : "*",
+                "Characters" : "*",
+                "FABRIK" : "*"
+                },
+              "code" : "dfgEntry {
+  JSONDoc doc();
+  doc.parse( jsonstring );
+  JSONDictValue s = ( doc.root.get( \"skeleton\" )  );
+  JSONDictValue dic = JSONDictValue( s );
+  
+  String name = dic.getString( \"name\" );
+
+  Bone bones[];
+  skeleton = Skeleton( name, bones );
+  JSONArrayValue b = ( dic.get( \"bones\" )  );
+  // report( name );
+  // report( b.size() );
+ 
+  // -----------------------------------//
+  JSONDictValue entry = null;
+  String boneName = \"\";
+  String parentName = \"\";
+  JSONDictValue xfo = null;
+  JSONArrayValue tra = null;
+  JSONArrayValue rot = null;
+  Scalar length;
+  // -----------------------------------//
+
+  for ( Index i=0; i < b.size(); i++ ){
+
+    entry = b.get(i);
+    boneName = entry.getString( \"name\" );
+    parentName = entry.getString( \"parent\" );
+    xfo = entry.get( \"Xfo\" );
+    tra = xfo.get( \"Vec3\" );
+    rot = xfo.get( \"Quat\" );
+    length = entry.getScalar( \"length\" );
+    
+    skeleton.addBone(
+        boneName,
+        parentName,
+        Xfo(
+            Vec3( tra.getScalar(0), tra.getScalar(1), tra.getScalar(2) ),
+            Quat( rot.getScalar(0), rot.getScalar(1), rot.getScalar(2), rot.getScalar(3) )
+        ),
+        length
+    );
+  }
+
+  // ----------------------------------------//
+  // add graph
+  JSONArrayValue edgesArray = dic.get( \"edges\" );
+  String rootBone = dic.getString( \"root_bone\" );
+  graph = FFBIKGraph( skeleton );
+
+  /*
+  JSONArrayValue edgeEntry = null;
+  for( Index i=0; i < edgesArray.size(); i++ ){
+    edgeEntry = edgesArray.get( i );
+    graph.addEdge( edgeEntry.getString(0), edgeEntry.getString(1) );
+  }
+
+  graph.finalize();
+  */
+  graph.setRootNode( rootBone );
+  // report( graph.getSkeleton() );
+  
+  //-------------------------------------------//
+  components = dic.get( \"components\" );
+}
+"
+              }
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-437.3998718261719,\"y\":-67.10733032226563}",
+              "uiCollapsedState" : "0"
+              },
+            "name" : "Copy_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "value"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Core.Func.Copy",
+            "presetGUID" : "C3E84342DB046C048BABD41DF1B5E3ED"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-603.3998413085938,\"y\":-69.21868896484375}",
+              "uiCollapsedState" : "0"
+              },
+            "name" : "ReadAll_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.FileIO.TextReader.ReadAll",
+            "presetGUID" : "CBC88B0AD6C6DD7A8ED7616F54212A59"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-52.01161193847656,\"y\":-538.6290283203125}"
+              },
+            "name" : "DFGBindingManager_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.DFGWrapper.DFGBindingManager.DFGBindingManager",
+            "presetGUID" : "1A722A1E3659656E8766AB1A85339F31"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":437.1566772460938,\"y\":-402.5264892578125}"
+              },
+            "name" : "RegisterAllFilesInFolder_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "String" : "${FFFBIK_BINDING_DIR}"
+                  },
+                "name" : "folder"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "String" : "Add"
+                  },
+                "name" : "prefix"
+                }
+              ],
+            "executable" : "Fabric.Exts.DFGWrapper.DFGBindingManager.RegisterAllFilesInFolder",
+            "presetGUID" : "A39C9904A4C3C33DCCB84A406E142164"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":895.603271484375,\"y\":-239.8951416015625}"
+              },
+            "name" : "addSolvers",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "manager"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "resolver"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "components"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "handle"
+                }
+              ],
+            "definition" : {
+              "objectType" : "Func",
+              "title" : "addSolvers",
+              "ports" : [
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "IO",
+                  "name" : "manager",
+                  "execPortType" : "IO",
+                  "typeSpec" : "DFGBindingManager"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "IO",
+                  "name" : "resolver",
+                  "execPortType" : "IO",
+                  "typeSpec" : "FABRIKResolver"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "Out",
+                  "name" : "components",
+                  "execPortType" : "In",
+                  "typeSpec" : "JSONArrayValue"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "IO",
+                  "name" : "handle",
+                  "execPortType" : "IO",
+                  "typeSpec" : "DrawingHandle"
+                  }
+                ],
+              "extDeps" : {
+                "FABRIK" : "*",
+                "JSON" : "*"
+                },
+              "code" : "dfgEntry {
+
+  RTVal rtVals[String];
+  RTVal outputVals[String];
+  String errors;
+
+  DFGBindingWrapper wrapper = null;
+  JSONDictValue compEntry = null;
+  JSONArrayValue solvers = null;
+  JSONDictValue solverEntry = null;
+  String bindingName = \"\";
+  JSONArrayValue argsEntry = null;
+  JSONDictValue argEntry = null;
+  String argKey = \"\";
+  JSONValue argVal = null;
+  JSONStringValue argValStr = null;
+  JSONArrayValue argValArr = null;
+
+  Index i, j, k = 0;
+  for( i=0; i < components.size(); i++ ){
+    compEntry = components.get(i);
+    solvers = compEntry.get( \"solvers\" );
+
+    for( j=0; j < solvers.size(); j++ ){
+      solverEntry = solvers.get( j );
+      bindingName = solverEntry.getString( \"type\" );
+      wrapper = manager.getBinding( bindingName );
+
+      rtVals.clear();
+      rtVals[\"resolver\"] = RTVal( resolver );
+      rtVals[\"handle\"] = RTVal( handle );
+
+      argsEntry = solverEntry.get( \"args\" );
+      for( k=0; k < argsEntry.size(); k++ ){
+        argEntry = argsEntry.get(k);
+        argKey = argEntry.getString( \"key\" );
+        argVal = argEntry.get( \"value\" );
+
+        argValStr = JSONStringValue( argVal );
+        argValArr = JSONArrayValue( argVal );
+
+        if( argValStr != null ){
+          rtVals[argKey] = argValStr.toString();
+          
+        } else if ( argValArr != null ){
+          String arrStrings[];
+          arrStrings.resize( argValArr.size() );
+          for ( Index l=0; l < argValArr.size(); l++ ){
+            arrStrings[l] = argValArr.getString( l );
+          }
+
+          rtVals[argKey] = arrStrings;
+          
+        } else {
+          // TODO:
+          //  setError
+          report( \"hoge\" );
+        }
+      }
+
+      // report( rtVals );
+      wrapper.executeWithArgs( rtVals, outputVals, errors );
+
+      resolver = rtVals.get( \"resolver\", RTVal( FABRIKResolver() ) );
+      handle = rtVals.get( \"handle\", RTVal( DrawingHandle() ) );
+
+
+    }
+  }
+  resolver.graph.finalize();
+  //result = lhs + rhs;
+}
+"
+              }
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-1246.89990234375,\"y\":-69.21868896484375}"
+              },
+            "name" : "ExpandEnvVars_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.FileIO.FilePath.ExpandEnvVars",
+            "presetGUID" : "9283C176D52B33D143DF71F9F6625F33"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-1422.89990234375,\"y\":-69.21868896484375}"
+              },
+            "name" : "FilePath_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "defaultValues" : {
+                  "String" : "${FFFBIK_BINDING_DIR}\\..\\..\\..\\..\\..\\Tests\\Canvas\\human_biped.json"
+                  },
+                "name" : "value"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.FileIO.FilePath.FilePath",
+            "presetGUID" : "99F8F257D7FABE2353B3E7A635249DF8"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-975.8998413085938,\"y\":-69.21868896484375}"
+              },
+            "name" : "String_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.FileIO.Func.String",
+            "presetGUID" : "D9AB202CD74F2E03B3068BD64DFE55D1"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":461.3976745605469,\"y\":-13.49271392822266}"
+              },
+            "name" : "EmptyDrawingHandle_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "handle"
+                }
+              ],
+            "executable" : "Fabric.Exts.InlineDrawing.DrawingHandle.EmptyDrawingHandle",
+            "presetGUID" : "2440020BA6A1CAB1CEB690A198F99C70"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":450.5430603027344,\"y\":-207.9127197265625}"
+              },
+            "name" : "FABRIKResolver_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "graph"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "definition" : {
+              "objectType" : "Func",
+              "metadata" : {
+                "uiTooltip" : "Supported types:\n  skeleton: Skeleton\n  graph: Ref<FFBIKGraph>\n  result: FABRIKResolver\n"
+                },
+              "title" : "FABRIKResolver",
+              "ports" : [
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "Out",
+                  "name" : "graph",
+                  "execPortType" : "In",
+                  "typeSpec" : "Ref<FFBIKGraph>"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "In",
+                  "name" : "result",
+                  "execPortType" : "Out",
+                  "typeSpec" : "FABRIKResolver"
+                  }
+                ],
+              "extDeps" : {
+                "FABRIK" : "*"
+                },
+              "origPresetGUID" : "E52E0E0ABC4D7C331619FD24286408A2",
+              "code" : "require FABRIK;
+
+dfgEntry {
+  Ref<FFBIKGraph> graph_ref = graph;
+  result = FABRIKResolver( graph );
+}
+"
+              }
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":875.6498413085938,\"y\":93.80405426025391}"
+              },
+            "name" : "CastIPose",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "p"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "pose"
+                }
+              ],
+            "definition" : {
+              "objectType" : "Func",
+              "title" : "CastIPose",
+              "ports" : [
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "Out",
+                  "name" : "p",
+                  "execPortType" : "In",
+                  "typeSpec" : "FFBIKPose"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "In",
+                  "name" : "pose",
+                  "execPortType" : "Out",
+                  "typeSpec" : "IPose"
+                  }
+                ],
+              "extDeps" : {},
+              "code" : "dfgEntry {
+  pose = IPose( p );
+  //result = lhs + rhs;
+}
+"
+              }
+            },
+          {
+            "objectType" : "Var",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-342.1922302246094,\"y\":-628.1165161132813}"
+              },
+            "name" : "resolverVar",
+            "ports" : [
+              {
+                "objectType" : "VarPort",
+                "nodePortType" : "IO",
+                "name" : "value"
+                }
+              ],
+            "dataType" : "FABRIKResolver"
+            },
+          {
+            "objectType" : "Var",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-342.4139099121094,\"y\":-511.8465576171875}"
+              },
+            "name" : "poseVar",
+            "ports" : [
+              {
+                "objectType" : "VarPort",
+                "nodePortType" : "IO",
+                "name" : "value"
+                }
+              ],
+            "dataType" : "IPose"
+            },
+          {
+            "objectType" : "Set",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":1241.691162109375,\"y\":-337.8075256347656}"
+              },
+            "name" : "set_3",
+            "ports" : [
+              {
+                "objectType" : "SetPort",
+                "nodePortType" : "IO",
+                "name" : "value"
+                }
+              ],
+            "varPath" : "resolverVar"
+            },
+          {
+            "objectType" : "Set",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":1205.375366210938,\"y\":-61.53582000732422}"
+              },
+            "name" : "set",
+            "ports" : [
+              {
+                "objectType" : "SetPort",
+                "nodePortType" : "IO",
+                "name" : "value"
+                }
+              ],
+            "varPath" : "poseVar"
+            },
+          {
+            "objectType" : "User",
+            "metadata" : {
+              "uiTitle" : "LoadJSON",
+              "uiGraphPos" : "{\"x\":-1493.5986328125,\"y\":-282.9102783203125}",
+              "uiGraphSize" : "{\"w\":1182.554809570313,\"h\":601.4618530273438}"
+              },
+            "name" : "backDrop",
+            "ports" : []
+            },
+          {
+            "objectType" : "User",
+            "metadata" : {
+              "uiTitle" : "ConstructGraphAndAddSolvers",
+              "uiGraphPos" : "{\"x\":-254.572265625,\"y\":-438.2394104003906}",
+              "uiGraphSize" : "{\"w\":1446.11767578125,\"h\":853.5158081054688}"
+              },
+            "name" : "backDrop_2",
+            "ports" : []
+            }
+          ],
+        "connections" : {
+          "bindingDir" : [
+            "RegisterAllFilesInFolder_2.folder"
+            ],
+          "jsonPath" : [
+            "FilePath_1.value"
+            ],
+          "FFBIKPose_2.result" : [
+            "CastIPose.p"
+            ],
+          "TextReader_3.result" : [
+            "ReadAll_3.this"
+            ],
+          "GraphFromJSON.graph" : [
+            "FABRIKResolver_3.graph"
+            ],
+          "GraphFromJSON.components" : [
+            "addSolvers.components"
+            ],
+          "GraphFromJSON.skeleton" : [
+            "FFBIKPose_2.skeleton"
+            ],
+          "Copy_3.result" : [
+            "GraphFromJSON.jsonstring"
+            ],
+          "ReadAll_3.result" : [
+            "Copy_3.value"
+            ],
+          "DFGBindingManager_1.result" : [
+            "RegisterAllFilesInFolder_2.this"
+            ],
+          "RegisterAllFilesInFolder_2.this" : [
+            "addSolvers.manager"
+            ],
+          "addSolvers.resolver" : [
+            "set_3.value"
+            ],
+          "ExpandEnvVars_1.result" : [
+            "String_1.this"
+            ],
+          "FilePath_1.result" : [
+            "ExpandEnvVars_1.this"
+            ],
+          "String_1.result" : [
+            "TextReader_3.filePath"
+            ],
+          "EmptyDrawingHandle_2.handle" : [
+            "addSolvers.handle"
+            ],
+          "FABRIKResolver_3.result" : [
+            "addSolvers.resolver"
+            ],
+          "CastIPose.pose" : [
+            "set.value"
+            ],
+          "set_3.value" : [
+            "resolver"
+            ],
+          "set.value" : [
+            "pose"
+            ]
+          }
+        }
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":621.8535766601563,\"y\":313.4005126953125}"
+        },
+      "name" : "SolveFABRIK",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "this"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "resolver"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "pose"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "ikHandles"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Graph",
+        "metadata" : {
+          "uiGraphZoom" : "{\n  \"value\" : 0.8864291310310364\n  }",
+          "uiGraphPan" : "{\n  \"x\" : -700.9888305664063,\n  \"y\" : -193.2951354980469\n  }"
+          },
+        "title" : "SolveFABRIK",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "In",
+            "name" : "this",
+            "execPortType" : "Out"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "resolver",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "pose",
+            "execPortType" : "In"
+            },
+          {
+            "objectType" : "Port",
+            "nodePortType" : "Out",
+            "name" : "ikHandles",
+            "execPortType" : "In"
+            }
+          ],
+        "extDeps" : {},
+        "nodes" : [
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":1838.56884765625,\"y\":399.9598999023438}"
+              },
+            "name" : "Solve_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "pose"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "effectors"
+                }
+              ],
+            "executable" : "FFFBIK.Manager.Solve",
+            "presetGUID" : "A441257C5627A1F1DCE304876718E8B1"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":1330.039306640625,\"y\":543.9407958984375}"
+              },
+            "name" : "IsNull_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "obj"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Core.Object.IsNull",
+            "presetGUID" : "84AEE2708BDEAAFDEBA207A1733A052F"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":1593.856689453125,\"y\":304.8443298339844}"
+              },
+            "name" : "If_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "cond"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "if_true"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "if_false"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Core.Control.If",
+            "presetGUID" : "3182A478A21643455D549E483D35F831"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":1592.728515625,\"y\":505.2286987304688}"
+              },
+            "name" : "If_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "cond"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "if_true"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "if_false"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Core.Control.If",
+            "presetGUID" : "3182A478A21643455D549E483D35F831"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":1315.3759765625,\"y\":368.7911071777344}"
+              },
+            "name" : "isReady",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "solver"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "result"
+                }
+              ],
+            "definition" : {
+              "objectType" : "Func",
+              "title" : "isReady",
+              "ports" : [
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "Out",
+                  "name" : "solver",
+                  "execPortType" : "In",
+                  "typeSpec" : "FABRIKResolver"
+                  },
+                {
+                  "objectType" : "Port",
+                  "nodePortType" : "IO",
+                  "name" : "result",
+                  "execPortType" : "IO",
+                  "typeSpec" : "Boolean"
+                  }
+                ],
+              "extDeps" : {
+                "FABRIK" : "*"
+                },
+              "code" : "dfgEntry {
+
+  result = solver.isReady();
+}
+"
+              }
+            },
+          {
+            "objectType" : "Get",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":866.8136596679688,\"y\":362.9726257324219}"
+              },
+            "name" : "get_3",
+            "ports" : [
+              {
+                "objectType" : "GetPort",
+                "nodePortType" : "Out",
+                "name" : "value"
+                }
+              ],
+            "varPath" : "InitFABRIK.resolverVar"
+            },
+          {
+            "objectType" : "Get",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":863.4303588867188,\"y\":545.246826171875}"
+              },
+            "name" : "get",
+            "ports" : [
+              {
+                "objectType" : "GetPort",
+                "nodePortType" : "Out",
+                "name" : "value"
+                }
+              ],
+            "varPath" : "InitFABRIK.poseVar"
+            },
+          {
+            "objectType" : "Set",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":2082.5,\"y\":422.25048828125}"
+              },
+            "name" : "set",
+            "ports" : [
+              {
+                "objectType" : "SetPort",
+                "nodePortType" : "IO",
+                "name" : "value"
+                }
+              ],
+            "varPath" : "InitFABRIK.resolverVar"
+            }
+          ],
+        "connections" : {
+          "resolver" : [
+            "If_1.if_false"
+            ],
+          "pose" : [
+            "If_2.if_true"
+            ],
+          "ikHandles" : [
+            "Solve_1.effectors"
+            ],
+          "Solve_1.this" : [
+            "set.value"
+            ],
+          "IsNull_2.obj" : [
+            "If_2.if_false"
+            ],
+          "IsNull_2.result" : [
+            "If_2.cond"
+            ],
+          "If_1.result" : [
+            "Solve_1.this"
+            ],
+          "If_2.result" : [
+            "Solve_1.pose"
+            ],
+          "isReady.solver" : [
+            "If_1.if_true"
+            ],
+          "isReady.result" : [
+            "If_1.cond"
+            ],
+          "get_3.value" : [
+            "isReady.solver"
+            ],
+          "get.value" : [
+            "IsNull_2.obj"
+            ],
+          "set.value" : [
+            "this"
+            ]
+          }
+        }
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":445.1030883789063,\"y\":433.9407043457031}"
+        },
+      "name" : "IKHandles_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "Out",
+          "name" : "array"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "this"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "this_2"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "this_3"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "this_4"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "this_5"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "this_6"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "this_7"
+          },
+        {
+          "objectType" : "InstPort",
+          "nodePortType" : "In",
+          "name" : "this_8"
+          }
+        ],
+      "definition" : {
+        "objectType" : "Graph",
+        "metadata" : {
+          "uiGraphZoom" : "{\n  \"value\" : 0.5532251000404358\n  }",
+          "uiGraphPan" : "{\n  \"x\" : 871.02685546875,\n  \"y\" : -290.2033996582031\n  }"
+          },
+        "title" : "IKHandles",
+        "ports" : [
+          {
+            "objectType" : "Port",
+            "nodePortType" : "In",
+            "name" : "array",
+            "execPortType" : "Out"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "Xfo" : {
+                "ori" : {
+                  "v" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 0
+                    },
+                  "w" : 1
+                  },
+                "tr" : {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 0
+                  },
+                "sc" : {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : 1
+                  }
+                }
+              },
+            "name" : "this",
+            "execPortType" : "In",
+            "typeSpec" : "Xfo"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "Xfo" : {
+                "ori" : {
+                  "v" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 0
+                    },
+                  "w" : 1
+                  },
+                "tr" : {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 0
+                  },
+                "sc" : {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : 1
+                  }
+                }
+              },
+            "name" : "this_2",
+            "execPortType" : "In",
+            "typeSpec" : "Xfo"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "Xfo" : {
+                "ori" : {
+                  "v" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 0
+                    },
+                  "w" : 1
+                  },
+                "tr" : {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 0
+                  },
+                "sc" : {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : 1
+                  }
+                }
+              },
+            "name" : "this_3",
+            "execPortType" : "In",
+            "typeSpec" : "Xfo"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "Xfo" : {
+                "ori" : {
+                  "v" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 0
+                    },
+                  "w" : 1
+                  },
+                "tr" : {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 0
+                  },
+                "sc" : {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : 1
+                  }
+                }
+              },
+            "name" : "this_4",
+            "execPortType" : "In",
+            "typeSpec" : "Xfo"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "Xfo" : {
+                "ori" : {
+                  "v" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 0
+                    },
+                  "w" : 1
+                  },
+                "tr" : {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 0
+                  },
+                "sc" : {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : 1
+                  }
+                }
+              },
+            "name" : "this_5",
+            "execPortType" : "In",
+            "typeSpec" : "Xfo"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "Xfo" : {
+                "ori" : {
+                  "v" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 0
+                    },
+                  "w" : 1
+                  },
+                "tr" : {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 0
+                  },
+                "sc" : {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : 1
+                  }
+                }
+              },
+            "name" : "this_6",
+            "execPortType" : "In",
+            "typeSpec" : "Xfo"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "Xfo" : {
+                "ori" : {
+                  "v" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 0
+                    },
+                  "w" : 1
+                  },
+                "tr" : {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 0
+                  },
+                "sc" : {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : 1
+                  }
+                }
+              },
+            "name" : "this_7",
+            "execPortType" : "In",
+            "typeSpec" : "Xfo"
+            },
+          {
+            "objectType" : "Port",
+            "metadata" : {},
+            "nodePortType" : "Out",
+            "defaultValues" : {
+              "Xfo" : {
+                "ori" : {
+                  "v" : {
+                    "x" : 0,
+                    "y" : 0,
+                    "z" : 0
+                    },
+                  "w" : 1
+                  },
+                "tr" : {
+                  "x" : 0,
+                  "y" : 0,
+                  "z" : 0
+                  },
+                "sc" : {
+                  "x" : 1,
+                  "y" : 1,
+                  "z" : 1
+                  }
+                }
+              },
+            "name" : "this_8",
+            "execPortType" : "In",
+            "typeSpec" : "Xfo"
+            }
+          ],
+        "extDeps" : {},
+        "nodes" : [
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-193.4185943603516,\"y\":427.6429138183594}"
+              },
+            "name" : "Push_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-163.5270690917969,\"y\":1199.091552734375}"
+              },
+            "name" : "Push_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-161.4395904541016,\"y\":1068.03564453125}"
+              },
+            "name" : "Push_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-117.4729080200195,\"y\":1340.972778320313}"
+              },
+            "name" : "Push_5",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-160.2457427978516,\"y\":939.9566650390625}"
+              },
+            "name" : "Push_6",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-175.6546020507813,\"y\":797.6473388671875}"
+              },
+            "name" : "Push_7",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-186.3197937011719,\"y\":681.4281005859375}"
+              },
+            "name" : "Push_8",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-192.2412719726563,\"y\":555.7214965820313}"
+              },
+            "name" : "Push_10",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "IO",
+                "name" : "array"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "element"
+                }
+              ],
+            "executable" : "Fabric.Core.Array.Push",
+            "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-314.1951599121094,\"y\":427.6144104003906}"
+              },
+            "name" : "ToMat44_1",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\n  \"x\" : -324.7378234863281,\n  \"y\" : 562.010986328125\n  }"
+              },
+            "name" : "ToMat44_2",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-321.7336730957031,\"y\":678.10546875}"
+              },
+            "name" : "ToMat44_3",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-327.7832946777344,\"y\":816.4757080078125}"
+              },
+            "name" : "ToMat44_4",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-315.39404296875,\"y\":944.7220458984375}"
+              },
+            "name" : "ToMat44_5",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-306.6872863769531,\"y\":1059.764770507813}"
+              },
+            "name" : "ToMat44_6",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-298.2677917480469,\"y\":1194.139282226563}"
+              },
+            "name" : "ToMat44_7",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            },
+          {
+            "objectType" : "Inst",
+            "metadata" : {
+              "uiGraphPos" : "{\"x\":-296.0519714355469,\"y\":1318.703369140625}"
+              },
+            "name" : "ToMat44_8",
+            "ports" : [
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "In",
+                "name" : "this"
+                },
+              {
+                "objectType" : "InstPort",
+                "nodePortType" : "Out",
+                "name" : "result"
+                }
+              ],
+            "executable" : "Fabric.Exts.Math.Xfo.ToMat44",
+            "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A"
+            }
+          ],
+        "connections" : {
+          "this" : [
+            "ToMat44_1.this"
+            ],
+          "this_2" : [
+            "ToMat44_2.this"
+            ],
+          "this_3" : [
+            "ToMat44_3.this"
+            ],
+          "this_4" : [
+            "ToMat44_4.this"
+            ],
+          "this_5" : [
+            "ToMat44_5.this"
+            ],
+          "this_6" : [
+            "ToMat44_6.this"
+            ],
+          "this_7" : [
+            "ToMat44_7.this"
+            ],
+          "this_8" : [
+            "ToMat44_8.this"
+            ],
+          "Push_1.array" : [
+            "Push_10.array"
+            ],
+          "Push_2.array" : [
+            "Push_5.array"
+            ],
+          "Push_3.array" : [
+            "Push_2.array"
+            ],
+          "Push_5.array" : [
+            "array"
+            ],
+          "Push_6.array" : [
+            "Push_3.array"
+            ],
+          "Push_7.array" : [
+            "Push_6.array"
+            ],
+          "Push_8.array" : [
+            "Push_7.array"
+            ],
+          "Push_10.array" : [
+            "Push_8.array"
+            ],
+          "ToMat44_1.result" : [
+            "Push_1.element"
+            ],
+          "ToMat44_2.result" : [
+            "Push_10.element"
+            ],
+          "ToMat44_3.result" : [
+            "Push_8.element"
+            ],
+          "ToMat44_4.result" : [
+            "Push_7.element"
+            ],
+          "ToMat44_5.result" : [
+            "Push_6.element"
+            ],
+          "ToMat44_6.result" : [
+            "Push_3.element"
+            ],
+          "ToMat44_7.result" : [
+            "Push_2.element"
+            ],
+          "ToMat44_8.result" : [
+            "Push_5.element"
+            ]
+          }
+        }
+      }
+    ],
+  "connections" : {
+    "bindingDir" : [
+      "InitFABRIK.bindingDir"
+      ],
+    "jsonPath" : [
+      "InitFABRIK.jsonPath"
+      ],
+    "R_hand" : [
+      "IKHandles_2.this"
+      ],
+    "R_elbow" : [
+      "IKHandles_2.this_2"
+      ],
+    "L_hand" : [
+      "IKHandles_2.this_3"
+      ],
+    "L_elbow" : [
+      "IKHandles_2.this_4"
+      ],
+    "L_foot" : [
+      "IKHandles_2.this_5"
+      ],
+    "L_knee" : [
+      "IKHandles_2.this_6"
+      ],
+    "R_foot" : [
+      "IKHandles_2.this_7"
+      ],
+    "R_knee" : [
+      "IKHandles_2.this_8"
+      ],
+    "InitFABRIK.resolver" : [
+      "SolveFABRIK.resolver"
+      ],
+    "InitFABRIK.pose" : [
+      "SolveFABRIK.pose"
+      ],
+    "SolveFABRIK.this" : [
+      "solver"
+      ],
+    "IKHandles_2.array" : [
+      "SolveFABRIK.ikHandles"
+      ]
+    },
+  "requiredPresets" : {
+    "FFFBIK.Graph.FFBIKPose" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  skeleton: Skeleton\n  result: FFBIKPose\n"
+        },
+      "title" : "FFBIKPose",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "skeleton",
+          "execPortType" : "In",
+          "typeSpec" : "Skeleton"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "FFBIKPose"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "C7819C1AC978B180DFF5AD7A91258968",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  result = FFBIKPose(skeleton);
+}
+"
+      },
+    "Fabric.Exts.FileIO.TextReader.TextReader" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/FileIO/TextReader.html",
+        "uiTooltip" : "constructs a new reader object with a given filePath\n\n Supported by TextReader"
+        },
+      "title" : "TextReader",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "filePath",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "TextReader"
+          }
+        ],
+      "extDeps" : {
+        "FileIO" : "*"
+        },
+      "presetGUID" : "04A301215A054F4D8FC2B76E7D203372",
+      "code" : "require FileIO;
+
+dfgEntry {
+  result = TextReader(filePath);
+}
+"
+      },
+    "Fabric.Core.Func.Copy" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 214,\n  \"g\" : 191,\n  \"b\" : 103\n  }",
+        "uiHeaderColor" : "{\n  \"r\" : 188,\n  \"g\" : 129,\n  \"b\" : 83\n  }"
+        },
+      "title" : "Copy",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "value",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "C3E84342DB046C048BABD41DF1B5E3ED",
+      "code" : "
+dfgEntry {
+	result = value;
+}
+"
+      },
+    "Fabric.Exts.FileIO.TextReader.ReadAll" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/FileIO/TextReader.html",
+        "uiTooltip" : "reads the whole content out of the currently opened file\n\n Supported by TextReader"
+        },
+      "title" : "ReadAll",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "TextReader"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "String"
+          }
+        ],
+      "extDeps" : {
+        "FileIO" : "*"
+        },
+      "presetGUID" : "CBC88B0AD6C6DD7A8ED7616F54212A59",
+      "code" : "require FileIO;
+
+dfgEntry {
+  result = this.readAll();
+}
+"
+      },
+    "Fabric.Exts.DFGWrapper.DFGBindingManager.DFGBindingManager" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  result: DFGBindingManager\n"
+        },
+      "title" : "DFGBindingManager",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "DFGBindingManager"
+          }
+        ],
+      "extDeps" : {
+        "DFGWrapper" : "*"
+        },
+      "presetGUID" : "1A722A1E3659656E8766AB1A85339F31",
+      "code" : "require DFGWrapper;
+
+dfgEntry {
+  result = DFGBindingManager();
+}
+"
+      },
+    "Fabric.Exts.DFGWrapper.DFGBindingManager.RegisterAllFilesInFolder" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  this: DFGBindingManager\n  folder: String\n  prefix: String\n"
+        },
+      "title" : "RegisterAllFilesInFolder",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "DFGBindingManager"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "folder",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "prefix",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          }
+        ],
+      "extDeps" : {
+        "DFGWrapper" : "*"
+        },
+      "presetGUID" : "A39C9904A4C3C33DCCB84A406E142164",
+      "code" : "require DFGWrapper;
+
+dfgEntry {
+  this.registerAllFilesInFolder(folder, prefix);
+}
+"
+      },
+    "Fabric.Exts.FileIO.FilePath.ExpandEnvVars" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/FileIO/FilePath.html",
+        "uiTooltip" : "expands all contained env vars in the FilePath. Env vars have to be specified as ${VARIABLE}\n\n\n Supported by FilePath"
+        },
+      "title" : "ExpandEnvVars",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "this",
+          "execPortType" : "In",
+          "typeSpec" : "FilePath"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "FilePath"
+          }
+        ],
+      "extDeps" : {
+        "FileIO" : "*"
+        },
+      "presetGUID" : "9283C176D52B33D143DF71F9F6625F33",
+      "code" : "require FileIO;
+
+dfgEntry {
+  result = this.expandEnvVars();
+}
+"
+      },
+    "Fabric.Exts.FileIO.FilePath.FilePath" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/FileIO/FilePath.html",
+        "uiTooltip" : "standard constructor from string\n\n Supported by FilePath"
+        },
+      "title" : "FilePath",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "value",
+          "execPortType" : "In",
+          "typeSpec" : "String"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "FilePath"
+          }
+        ],
+      "extDeps" : {
+        "FileIO" : "*"
+        },
+      "presetGUID" : "99F8F257D7FABE2353B3E7A635249DF8",
+      "code" : "require FileIO;
+
+dfgEntry {
+  result = FilePath(value);
+}
+"
+      },
+    "Fabric.Exts.FileIO.Func.String" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/FileIO/FileTime.html",
+        "uiTooltip" : "returns the time as a string, in the format \"YYYY-MM-DD HH-MM-SS\"\n\n Supported by FileTime,FilePath"
+        },
+      "title" : "String",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "this",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "String"
+          }
+        ],
+      "extDeps" : {
+        "FileIO" : "*"
+        },
+      "presetGUID" : "D9AB202CD74F2E03B3068BD64DFE55D1",
+      "code" : "require FileIO;
+
+dfgEntry {
+  result = this.string();
+}
+"
+      },
+    "Fabric.Exts.InlineDrawing.DrawingHandle.EmptyDrawingHandle" : {
+      "objectType" : "Graph",
+      "title" : "EmptyDrawingHandle",
+      "cacheRule" : "never",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "handle",
+          "execPortType" : "Out",
+          "typeSpec" : "DrawingHandle"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "2440020BA6A1CAB1CEB690A198F99C70",
+      "nodes" : [
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\": 894, \"y\": 100}"
+            },
+          "name" : "Clear",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "IO",
+              "name" : "this"
+              }
+            ],
+          "executable" : "Fabric.Exts.InlineDrawing.DrawingHandle.Clear",
+          "presetGUID" : "39E8D81FA7C7C4A825877F16EFE3564F",
+          "cacheRule" : "never"
+          },
+        {
+          "objectType" : "Var",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\":567.0,\"y\":56.0}",
+            "uiCollapsedState" : "0"
+            },
+          "name" : "handleVar",
+          "ports" : [
+            {
+              "objectType" : "VarPort",
+              "nodePortType" : "IO",
+              "name" : "value"
+              }
+            ],
+          "dataType" : "DrawingHandle",
+          "extDep" : "InlineDrawing:*"
+          },
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\":287.0,\"y\":56.0}"
+            },
+          "name" : "CreateDrawingHandle",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "nodePortType" : "Out",
+              "name" : "handle"
+              }
+            ],
+          "definition" : {
+            "objectType" : "Func",
+            "title" : "Create DrawingHandle",
+            "ports" : [
+              {
+                "objectType" : "Port",
+                "nodePortType" : "In",
+                "name" : "handle",
+                "execPortType" : "Out",
+                "typeSpec" : "DrawingHandle"
+                }
+              ],
+            "extDeps" : {
+              "InlineDrawing" : "*"
+              },
+            "code" : "dfgEntry {
+  handle = DrawingHandle();
+}
+"
+            }
+          }
+        ],
+      "connections" : {
+        "Clear.this" : [
+          "handle"
+          ],
+        "handleVar.value" : [
+          "Clear.this"
+          ],
+        "CreateDrawingHandle.handle" : [
+          "handleVar.value"
+          ]
+        }
+      },
+    "Fabric.Exts.InlineDrawing.DrawingHandle.Clear" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/InlineDrawing/DrawingHandle.html",
+        "uiTooltip" : "removes all contents from the DrawingHandle\n\n Supported by DrawingHandle"
+        },
+      "title" : "Clear",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "DrawingHandle"
+          }
+        ],
+      "extDeps" : {
+        "InlineDrawing" : "*"
+        },
+      "presetGUID" : "39E8D81FA7C7C4A825877F16EFE3564F",
+      "code" : "require InlineDrawing;
+
+dfgEntry {
+  this.clear();
+}
+"
+      },
+    "FFFBIK.Manager.Solve" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Supported types:\n  this: FABRIKResolver\n  pose: IPose\n  effectors: Mat44[]\n"
+        },
+      "title" : "Solve",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "this",
+          "execPortType" : "IO",
+          "typeSpec" : "FABRIKResolver"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "pose",
+          "execPortType" : "IO",
+          "typeSpec" : "IPose"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+            },
+          "nodePortType" : "Out",
+          "name" : "effectors",
+          "execPortType" : "In",
+          "typeSpec" : "Mat44[]"
+          }
+        ],
+      "extDeps" : {
+        "FABRIK" : "*"
+        },
+      "presetGUID" : "A441257C5627A1F1DCE304876718E8B1",
+      "code" : "require FABRIK;
+
+dfgEntry {
+  this.solve(pose, effectors);
+}
+"
+      },
+    "Fabric.Core.Object.IsNull" : {
+      "objectType" : "Func",
+      "title" : "IsNull",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "obj",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "Boolean"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "84AEE2708BDEAAFDEBA207A1733A052F",
+      "code" : "
+dfgEntry {
+  result = !obj;
+}
+"
+      },
+    "Fabric.Core.Control.If" : {
+      "objectType" : "Func",
+      "title" : "If",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "cond",
+          "execPortType" : "In",
+          "typeSpec" : "Boolean"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "if_true",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "if_false",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "3182A478A21643455D549E483D35F831",
+      "code" : "
+dfgEntry {
+	result = cond ? if_true : if_false;
+}
+"
+      },
+    "Fabric.Core.Array.Push" : {
+      "objectType" : "Func",
+      "title" : "Push[]",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "nodePortType" : "IO",
+          "name" : "array",
+          "execPortType" : "IO",
+          "typeSpec" : "$TYPE$[]"
+          },
+        {
+          "objectType" : "Port",
+          "nodePortType" : "Out",
+          "name" : "element",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "572880BF96ACC34D6987BE3333715F52",
+      "code" : "
+dfgEntry {
+	array.push(element);
+}
+"
+      },
+    "Fabric.Exts.Math.Xfo.ToMat44" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 99,\n  \"g\" : 129,\n  \"b\" : 92\n  }",
+        "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.1.0/HTML/KLExtensionsGuide/Math/Xfo.html",
+        "uiTooltip" : "Returns this xfo as a Mat44\n\n Supported by Xfo"
+        },
+      "title" : "ToMat44",
+      "ports" : [
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+            },
+          "nodePortType" : "Out",
+          "name" : "this",
+          "execPortType" : "In",
+          "typeSpec" : "Xfo"
+          },
+        {
+          "objectType" : "Port",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+            },
+          "nodePortType" : "In",
+          "name" : "result",
+          "execPortType" : "Out",
+          "typeSpec" : "Mat44"
+          }
+        ],
+      "extDeps" : {
+        "Math" : "*"
+        },
+      "presetGUID" : "3EB232DB6FF4BEE162E1D62ABFBE8C3A",
+      "code" : "require Math;
+
+dfgEntry {
+  result = this.toMat44();
+}
+"
+      }
+    },
+  "args" : [
+    {
+      "type" : "FABRIKResolver",
+      "value" : null,
+      "ext" : "FABRIK"
+      },
+    {
+      "type" : "String",
+      "value" : "${FFFBIK_BINDING_DIR}"
+      },
+    {
+      "type" : "String",
+      "value" : "${FFFBIK_BINDING_DIR}\\..\\..\\..\\..\\Tests\\Canvas\\human_biped.json"
+      },
+    {
+      "type" : "Xfo",
+      "value" : {
+        "ori" : {
+          "v" : {
+            "x" : 0,
+            "y" : 0,
+            "z" : 0
+            },
+          "w" : 1
+          },
+        "tr" : {
+          "x" : 0,
+          "y" : 0,
+          "z" : 0
+          },
+        "sc" : {
+          "x" : 1,
+          "y" : 1,
+          "z" : 1
+          }
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Xfo",
+      "value" : {
+        "ori" : {
+          "v" : {
+            "x" : 0,
+            "y" : 0,
+            "z" : 0
+            },
+          "w" : 1
+          },
+        "tr" : {
+          "x" : 0,
+          "y" : 0,
+          "z" : 0
+          },
+        "sc" : {
+          "x" : 1,
+          "y" : 1,
+          "z" : 1
+          }
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Xfo",
+      "value" : {
+        "ori" : {
+          "v" : {
+            "x" : 0,
+            "y" : 0,
+            "z" : 0
+            },
+          "w" : 1
+          },
+        "tr" : {
+          "x" : 0,
+          "y" : 0,
+          "z" : 0
+          },
+        "sc" : {
+          "x" : 1,
+          "y" : 1,
+          "z" : 1
+          }
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Xfo",
+      "value" : {
+        "ori" : {
+          "v" : {
+            "x" : 0,
+            "y" : 0,
+            "z" : 0
+            },
+          "w" : 1
+          },
+        "tr" : {
+          "x" : 0,
+          "y" : 0,
+          "z" : 0
+          },
+        "sc" : {
+          "x" : 1,
+          "y" : 1,
+          "z" : 1
+          }
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Xfo",
+      "value" : {
+        "ori" : {
+          "v" : {
+            "x" : 0,
+            "y" : 0,
+            "z" : 0
+            },
+          "w" : 1
+          },
+        "tr" : {
+          "x" : 0,
+          "y" : 0,
+          "z" : 0
+          },
+        "sc" : {
+          "x" : 1,
+          "y" : 1,
+          "z" : 1
+          }
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Xfo",
+      "value" : {
+        "ori" : {
+          "v" : {
+            "x" : 0,
+            "y" : 0,
+            "z" : 0
+            },
+          "w" : 1
+          },
+        "tr" : {
+          "x" : 0,
+          "y" : 0,
+          "z" : 0
+          },
+        "sc" : {
+          "x" : 1,
+          "y" : 1,
+          "z" : 1
+          }
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Xfo",
+      "value" : {
+        "ori" : {
+          "v" : {
+            "x" : 0,
+            "y" : 0,
+            "z" : 0
+            },
+          "w" : 1
+          },
+        "tr" : {
+          "x" : 0,
+          "y" : 0,
+          "z" : 0
+          },
+        "sc" : {
+          "x" : 1,
+          "y" : 1,
+          "z" : 1
+          }
+        },
+      "ext" : "Math"
+      },
+    {
+      "type" : "Xfo",
+      "value" : {
+        "ori" : {
+          "v" : {
+            "x" : 0,
+            "y" : 0,
+            "z" : 0
+            },
+          "w" : 1
+          },
+        "tr" : {
+          "x" : 0,
+          "y" : 0,
+          "z" : 0
+          },
+        "sc" : {
+          "x" : 1,
+          "y" : 1,
+          "z" : 1
+          }
+        },
+      "ext" : "Math"
+      }
+    ]
+  }

@@ -9,7 +9,7 @@ The main purposes of this project is studying Fabric Engine's KL language with b
 ## Description
 Now implemented:
 - the Fabric operator.
-- Simple IK solver which has one end effector .
+- Simple IK solver which has one end effector.
 - Closed-loop chain solver that connects other solvers.
 - Resolver that manages solvers execution order.
 - Component that represent body parts. (arm, leg and ...)
