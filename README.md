@@ -1,3 +1,9 @@
+# Fabric Engine has been discontinued
+http://www.cgchannel.com/2017/10/fabric-software-discontinues-fabric-engine/
+Thank you for your attention but, you can no longer run this project anymore...
+
+
+
 # FFFBIK: Fabric canvas FABRIK FullBody IK
 FFFBIK is Fabric Engine Canvas tool for full-body IK system, using extended FABRIK 
 (Forward And Backward Reaching Inverse Kinematics), based-off a paper written by Andreas Aristidou(2014). Using Fabric Engine 2.1.0, works in many DCC's.
